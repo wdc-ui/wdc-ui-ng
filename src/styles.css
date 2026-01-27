@@ -23,6 +23,17 @@ code {
   font-family: 'JetBrains Mono', monospace;
 }
 
+.doc-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+.doc-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.doc-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+
 @layer base {
   /* Apply to the whole page */
   html {

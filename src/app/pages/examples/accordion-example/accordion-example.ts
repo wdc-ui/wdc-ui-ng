@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AppSetting } from '@shared/constants/app.constant';
 import { ReferenceItem, UiConfig } from '@shared/components/ui.config';
 import { dedent } from '@shared/utils/dedent';
 import { ACCORDION_COMPONENTS } from '@wdc-ui/ng/accordion/accordion.component';
+import { TocService } from 'src/app/core/services/toc.service';
 
 @Component({
   selector: 'app-accordion-example',
@@ -10,6 +11,18 @@ import { ACCORDION_COMPONENTS } from '@wdc-ui/ng/accordion/accordion.component';
   templateUrl: './accordion-example.html',
 })
 export class AccordionExample {
+  private tocService = inject(TocService);
+
+  ngOnInit() {
+    // Manually define the headings for this page
+    this.tocService.setToc([
+      { id: 'installation', title: 'Installation', level: 'h2' },
+      { id: 'usage', title: 'Usage', level: 'h2' },
+      { id: 'examples', title: 'Examples', level: 'h2' },
+      { id: 'api', title: 'API Reference', level: 'h2' },
+    ]);
+  }
+
   references: ReferenceItem[] = [
     {
       input: 'open',

@@ -1,9 +1,11 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, inject } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { Footer } from '@shared/components/footer/footer';
 import { Navbar } from '@shared/components/navbar/navbar';
 import { ScrollTopDirective } from '@shared/directives/scroll-to-top.directive';
 import { ToasterComponent } from '@wdc-ui/ng/toast/toaster.component';
+import { TocService } from 'src/app/core/services/toc.service';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-docs-layout',
@@ -20,7 +22,9 @@ import { ToasterComponent } from '@wdc-ui/ng/toast/toaster.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocsLayout {
+  tocService = inject(TocService);
   sidebarOpen = signal(false);
+  viewportScroller = inject(ViewportScroller);
 
   menuGroups = [
     {
@@ -55,7 +59,6 @@ export class DocsLayout {
     {
       label: 'Data Display',
       items: [
-        { label: 'Data List', route: '/docs/datalist', exact: false },
         { label: 'Table', route: '/docs/table', exact: false },
         { label: 'Pagination', route: '/docs/pagination', exact: false },
       ],
@@ -77,5 +80,22 @@ export class DocsLayout {
 
   closeSidebar() {
     this.sidebarOpen.set(false);
+  }
+
+  // Smooth scroll handler
+  scrollTo(id: string, event: Event) {
+    event.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      // Offset for sticky header (adjust 64px based on your header height)
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+    }
   }
 }

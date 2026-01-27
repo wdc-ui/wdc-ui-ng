@@ -1,0 +1,13 @@
+services:
+  wd-ui-ng: # Aapka project name
+    build: .
+    container_name: wdc-ui-app
+    restart: always
+    ports:
+      - '4203:4000'
+    networks:
+      - global-network
+
+networks:
+  global-network:
+    external: true

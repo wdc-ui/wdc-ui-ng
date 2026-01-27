@@ -12,8 +12,8 @@ import { execSync } from 'child_process';
 const program = new Command();
 
 // --- CONFIGURATION ---
-const GITHUB_USER = 'wd-ui';
-const REPO_NAME = 'wd-ui-ng';
+const GITHUB_USER = 'wdc-ui';
+const REPO_NAME = 'wdc-ui-ng';
 const BRANCH = 'main';
 
 const BASE_URL = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO_NAME}/refs/heads/${BRANCH}`;
