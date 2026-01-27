@@ -1,0 +1,160 @@
+import { CommonModule } from '@angular/common';
+import { Component, inject, signal } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { AppSetting } from '@shared/constants/app.constant';
+import { ReferenceItem, UiConfig } from '@shared/components/ui.config';
+import { dedent } from '@shared/utils/dedent';
+import { INPUT_COMPONENTS } from '@wdc-ui/ng/forms/input/input.component';
+import {
+  CardComponent,
+  CardContentComponent,
+  CardFooterComponent,
+  CardHeaderComponent,
+  CardTitleComponent,
+} from '@wdc-ui/ng/card/card.component';
+import { ButtonComponent } from '@wdc-ui/ng/button/button.component';
+import { IconComponent } from '@wdc-ui/ng/icon/icon.component';
+
+@Component({
+  selector: 'app-forms-example',
+  standalone: true,
+  imports: [
+    UiConfig,
+    FormsModule,
+    CommonModule,
+    CardComponent,
+    CardTitleComponent,
+    CardContentComponent,
+    CardHeaderComponent,
+    CardFooterComponent,
+    ButtonComponent,
+    ReactiveFormsModule,
+    IconComponent,
+    INPUT_COMPONENTS,
+  ],
+  templateUrl: './text-input-example.html',
+})
+export class TextInputExample {
+  private fb = inject(FormBuilder);
+
+  isLoading = signal(false);
+
+  // Form Definition with Validators
+  loginForm: FormGroup = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+  });
+
+  getErrorMessage(controlName: string): string | null {
+    const control = this.loginForm.get(controlName);
+
+    if (control?.touched && control?.errors) {
+      if (control.errors['required'])
+        return `${controlName.charAt(0).toUpperCase() + controlName.slice(1)} is required`;
+      if (control.errors['email']) return 'Please enter a valid email address';
+      if (control.errors['minlength']) return 'Password must be at least 6 characters';
+    }
+    return null;
+  }
+
+  onSubmit() {
+    if (this.loginForm.valid) {
+      this.isLoading.set(true);
+      console.log('Form Data:', this.loginForm.value);
+
+      // Simulate API Call
+      setTimeout(() => {
+        this.isLoading.set(false);
+        alert('Login Successful!');
+      }, 2000);
+    } else {
+      this.loginForm.markAllAsTouched(); // Trigger validation errors visually
+    }
+  }
+
+  references: ReferenceItem[] = [
+    {
+      input: 'label',
+      type: 'string',
+      default: 'undefined',
+      description: 'Label text for the input field.',
+    },
+    {
+      input: 'type',
+      type: `'text' | 'email' | 'password' | 'number' | 'tel' | 'url'`,
+      default: `'text'`,
+      description: 'Type of input field.',
+    },
+    {
+      input: 'placeholder',
+      type: 'string',
+      default: 'undefined',
+      description: 'Placeholder text for the input field.',
+    },
+    {
+      input: 'error',
+      type: 'string | null',
+      default: 'null',
+      description: 'Error message to display when input is invalid.',
+    },
+    {
+      input: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      description: 'Whether the input field is disabled.',
+    },
+    {
+      input: 'value',
+      type: 'string',
+      default: 'undefined',
+      description: 'Value of the input field.',
+    },
+  ];
+
+  snippets = {
+    install: dedent(`${AppSetting.addComponentCmd} input`),
+    html: dedent(`<wdc-text-input
+            [ngModel]="nameValue()"
+            (ngModelChange)="nameValue.set($event)"
+            label="Your Name"
+            placeholder="Your Name"
+          >
+          </wdc-text-input>
+          <wdc-text-input
+            [ngModel]="emailValue()"
+            (ngModelChange)="emailValue.set($event)"
+            label="Email Address"
+            type="email"
+            placeholder="Email Address"
+          >
+          </wdc-text-input>
+          <wdc-text-input
+            [ngModel]="passwordValue()"
+            (ngModelChange)="passwordValue.set($event)"
+            label="Password"
+            type="password"
+            placeholder="Password"
+          >
+          </wdc-text-input>`),
+    ts: dedent(`
+        import { Component } from '@angular/core';
+        import { FormsModule } from '@angular/forms';
+        import { TextInputComponent } from '${AppSetting.libName}';
+        @Component({
+            selector: 'app-example',
+            standalone: true,
+            imports: [TextInputComponent, FormsModule],
+        })
+        export class ExampleComponent {  
+          nameValue = signal('');
+          emailValue = signal('');
+          passwordValue = signal('');
+        }`),
+  };
+}

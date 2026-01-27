@@ -1,0 +1,77 @@
+<div class="space-y-12">
+  <div id="example">
+    <h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Dropdown Menu</h1>
+    <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">A dropdown menu component.</p>
+  </div>
+
+  <!-- Example Section -->
+  <section id="example" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Examples</h2>
+    <div class="flex flex-col gap-6">
+      <app-doc-preview
+        title="Dropdown Menu"
+        description="A dropdown menu component."
+        [showCode]="false"
+        [htmlCode]="snippets.html"
+      >
+        <div preview class="flex flex-wrap gap-4 items-center justify-center">
+          <wdc-dropdown>
+            <wdc-avatar-profile
+              wdcDropdownTrigger
+              name="Kamal Singh"
+              email="kamal@wdcoders.com"
+              status="online"
+              size="default"
+              shape="circle"
+            ></wdc-avatar-profile>
+
+            <wdc-dropdown-content class="w-56" align="end">
+              <wdc-dropdown-label>My Account</wdc-dropdown-label>
+              <wdc-dropdown-separator />
+
+              <wdc-dropdown-item icon="person" shortcut="⇧⌘P"> Profile </wdc-dropdown-item>
+              <wdc-dropdown-item icon="credit_card" shortcut="⌘B"> Billing </wdc-dropdown-item>
+              <wdc-dropdown-item icon="settings" shortcut="⌘S"> Settings </wdc-dropdown-item>
+
+              <wdc-dropdown-separator />
+
+              <wdc-dropdown-item icon="logout" class="text-destructive focus:text-destructive">
+                Log out
+              </wdc-dropdown-item>
+            </wdc-dropdown-content>
+          </wdc-dropdown>
+
+          <app-saparator></app-saparator>
+
+          <wdc-dropdown>
+            <wdc-button wdcDropdownTrigger variant="ghost" size="icon" class="rounded-full">
+              <wdc-icon name="more_vert" />
+            </wdc-button>
+
+            <wdc-dropdown-content align="end">
+              <wdc-dropdown-item (click)="edit()"> Edit </wdc-dropdown-item>
+              <wdc-dropdown-item (click)="duplicate()"> Duplicate </wdc-dropdown-item>
+              <wdc-dropdown-separator />
+              <wdc-dropdown-item (click)="delete()" class="text-red-600 hover:text-red-600">
+                Delete
+              </wdc-dropdown-item>
+            </wdc-dropdown-content>
+          </wdc-dropdown>
+        </div>
+      </app-doc-preview>
+    </div>
+  </section>
+
+  <section id="code" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Code</h2>
+    <app-code-viewer [htmlCode]="snippets.html" [tsCode]="snippets.ts"></app-code-viewer>
+  </section>
+
+  <!-- API Section -->
+  <section id="api" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">API Reference</h2>
+    <div class="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
+      <app-reference [data]="references"></app-reference>
+    </div>
+  </section>
+</div>

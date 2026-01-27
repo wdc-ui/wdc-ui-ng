@@ -1,0 +1,43 @@
+<div class="rounded-xl overflow-hidden bg-slate-900 border border-slate-700">
+  <div
+    class="bg-slate-800/75 px-4 py-2 flex justify-between items-center text-xs border-b border-slate-700"
+  >
+    <!-- TABS -->
+    <div class="flex gap-1">
+      <button
+        (click)="selectTab('html')"
+        [class.bg-slate-700]="activeTab() === 'html'"
+        [class.text-slate-100]="activeTab() === 'html'"
+        class="px-3 py-1.5 rounded-md text-slate-300 hover:bg-slate-700 hover:text-slate-100 transition-colors font-medium"
+      >
+        HTML
+      </button>
+      @if (tsCode()) {
+        <button
+          (click)="selectTab('ts')"
+          [class.bg-slate-700]="activeTab() === 'ts'"
+          [class.text-slate-100]="activeTab() === 'ts'"
+          class="px-3 py-1.5 rounded-md text-slate-300 hover:bg-slate-700 hover:text-slate-100 transition-colors font-medium"
+        >
+          TypeScript
+        </button>
+      }
+    </div>
+    <!-- COPY BUTTON -->
+    <button
+      (click)="copyCode()"
+      class="flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-slate-700 transition-colors"
+    >
+      @if (copied()) {
+        <span class="material-icons text-base text-green-400">done</span>
+        <span class="font-medium text-green-400">Copied!</span>
+      } @else {
+        <span class="material-icons text-base text-slate-400">content_copy</span>
+        <span class="font-medium text-slate-300">Copy</span>
+      }
+    </button>
+  </div>
+  <pre
+    class="overflow-x-auto"
+  ><code #codeElement [class]="activeTab() === 'html' ? 'language-xml' : 'language-typescript'"></code></pre>
+</div>

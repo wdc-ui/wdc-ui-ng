@@ -1,0 +1,70 @@
+<div class="overflow-hidden rounded-xl bg-slate-900 border border-slate-700 shadow-xl">
+  <div class="flex items-center justify-between border-b bg-slate-800/75 bg-slate-900/50 px-4 py-3">
+    <div class="flex gap-2">
+      @if (htmlCode) {
+        <button
+          (click)="activeTab.set('html')"
+          [class.text-indigo-400]="activeTab() === 'html'"
+          [class.bg-indigo-500/30]="activeTab() === 'html'"
+          class="rounded-md px-3 py-1 cursor-pointer uppercase text-xs font-medium text-slate-400 hover:text-slate-200 transition-colors"
+        >
+          HTML
+        </button>
+      }
+      @if (tsCode) {
+        <button
+          (click)="activeTab.set('ts')"
+          [class.text-indigo-400]="activeTab() === 'ts'"
+          [class.bg-indigo-500/30]="activeTab() === 'ts'"
+          class="rounded-md px-3 py-1 cursor-pointer uppercase text-xs font-medium text-slate-400 hover:text-slate-200 transition-colors"
+        >
+          TypeScript
+        </button>
+      }
+      @if (cssCode) {
+        <button
+          (click)="activeTab.set('css')"
+          [class.text-indigo-400]="activeTab() === 'css'"
+          [class.bg-indigo-500/10]="activeTab() === 'css'"
+          class="rounded-md px-3 py-1 cursor-pointer text-xs font-medium text-slate-400 hover:text-slate-200 transition-colors"
+        >
+          CSS
+        </button>
+      }
+      @if (bashCode) {
+        <button
+          (click)="activeTab.set('bash')"
+          [class.text-indigo-400]="activeTab() === 'bash'"
+          [class.bg-indigo-500/10]="activeTab() === 'bash'"
+          class="rounded-md px-3 py-1 cursor-pointer text-xs font-medium text-slate-400 hover:text-slate-200 transition-colors"
+        >
+          BASH
+        </button>
+      }
+    </div>
+    <button
+      (click)="copyCode()"
+      class="flex text-xs items-center cursor-pointer gap-1.5 font-medium text-slate-500 hover:text-slate-300 transition-colors"
+    >
+      @if (!copied()) {
+        <span class="inline-flex items-center">
+          <wdc-icon name="content_copy" size="16"></wdc-icon>
+          <span>Copy</span>
+        </span>
+      }
+      @if (copied()) {
+        <span class="inline-flex items-center text-green-500">
+          <wdc-icon name="done" size="16"></wdc-icon>
+          Copied!
+        </span>
+      }
+    </button>
+  </div>
+
+  <!-- Code Area -->
+  <div class="relative group">
+    <pre
+      class="overflow-x-auto p-4 text-sm leading-relaxed text-slate-300 scrollbar-thin scrollbar-track-slate-800 scrollbar-thumb-slate-600"
+    ><code #codeBlock class="font-mono bg-transparent"></code></pre>
+  </div>
+</div>

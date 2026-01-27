@@ -1,0 +1,67 @@
+<div class="space-y-12">
+  <div id="example">
+    <h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Drawer</h1>
+    <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">
+      A panel that slides in from the edge of the screen, commonly used for navigation, details, or
+      forms.
+    </p>
+  </div>
+
+  <!-- Example Section -->
+  <section id="example" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Examples</h2>
+    <div class="flex flex-col gap-6">
+      <app-doc-preview
+        title="Drawer"
+        description="Drawer with left and right positions"
+        [showCode]="false"
+        [htmlCode]="snippets.html"
+      >
+        <div preview class="flex flex-wrap gap-4 items-center justify-center">
+          <wdc-button (click)="openDrawer('right')">Open Right</wdc-button>
+          <wdc-button (click)="openDrawer('left')" variant="outline">Open Left</wdc-button>
+          <wdc-button (click)="openDrawer('top')" color="secondary">Open Top</wdc-button>
+          <wdc-button (click)="openDrawer('bottom')" variant="ghost">Open Bottom</wdc-button>
+        </div>
+      </app-doc-preview>
+    </div>
+  </section>
+
+  <section id="code" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Code</h2>
+    <app-code-viewer [htmlCode]="snippets.html" [tsCode]="snippets.ts"></app-code-viewer>
+  </section>
+
+  <!-- API Section -->
+  <section id="api" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">API Reference</h2>
+    <div class="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
+      <app-reference [data]="references"></app-reference>
+    </div>
+  </section>
+</div>
+
+<wdc-drawer [side]="activeSide()" [(open)]="isOpen" class="bg-white">
+  <wdc-drawer-header>
+    <wdc-drawer-title>Edit Profile</wdc-drawer-title>
+    <wdc-drawer-description>
+      Make changes to your profile here. Click save when you're done.
+    </wdc-drawer-description>
+  </wdc-drawer-header>
+
+  <div class="grid gap-4 py-4">
+    <div class="grid grid-cols-4 items-center gap-4">
+      <label class="text-right text-sm font-medium">Name</label>
+      <input wdcInput value="Pedro Duarte" class="col-span-3" />
+    </div>
+    <div class="grid grid-cols-4 items-center gap-4">
+      <label class="text-right text-sm font-medium">Username</label>
+      <input wdcInput value="@peduarte" class="col-span-3" />
+    </div>
+  </div>
+
+  <wdc-drawer-footer>
+    <wdc-button variant="outline" (click)="isOpen.set(false)">Cancel</wdc-button>
+    <wdc-button (click)="saveChanges()">Save changes</wdc-button>
+  </wdc-drawer-footer>
+</wdc-drawer>

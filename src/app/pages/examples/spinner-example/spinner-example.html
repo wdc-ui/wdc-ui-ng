@@ -1,0 +1,62 @@
+<div class="space-y-12">
+  <div id="example">
+    <h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+      Spinner & Page Loader
+    </h1>
+    <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">
+      Visual indicators for loading states.
+    </p>
+  </div>
+
+  <!-- Example Section -->
+  <section id="example" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Examples</h2>
+    <div class="flex flex-col gap-6">
+      <app-doc-preview
+        title="Sizes & Colors"
+        description="Spinner with different sizes and colors"
+        [showCode]="false"
+        [htmlCode]="snippets.html"
+      >
+        <div preview class="flex flex-wrap gap-4 items-center justify-center">
+          <wdc-spinner size="sm" />
+          <wdc-spinner color="primary" />
+          <wdc-spinner size="lg" color="secondary" />
+        </div>
+      </app-doc-preview>
+
+      <app-doc-preview
+        title="Page Loader"
+        description="A full-screen overlay with a spinner and optional message. Useful for initial page loads or blocking transitions."
+        [showCode]="false"
+        [htmlCode]="snippets.html"
+      >
+        <div preview class="w-full">
+          <wdc-button (click)="triggerLoader()" class="mr-2">Trigger Loader (3s)</wdc-button>
+          <wdc-button (click)="triggerPageLoader()">Trigger Full-Screen Loader (3s)</wdc-button>
+
+          <wdc-page-loader mode="fullscreen" text="Fetching Data..." />
+          <div
+            class="mt-8 relative h-64 border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden flex items-center justify-center"
+          >
+            <p class="text-slate-400">Container-level Loader Preview</p>
+            <wdc-page-loader mode="absolute" [loading]="showPageLoader()" text="Fetching Data..." />
+          </div>
+        </div>
+      </app-doc-preview>
+    </div>
+  </section>
+
+  <section id="code" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Code</h2>
+    <app-code-viewer [htmlCode]="snippets.html" [tsCode]="snippets.ts"></app-code-viewer>
+  </section>
+
+  <!-- API Section -->
+  <section id="api" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">API Reference</h2>
+    <div class="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
+      <app-reference [data]="references"></app-reference>
+    </div>
+  </section>
+</div>

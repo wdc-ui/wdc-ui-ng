@@ -1,0 +1,99 @@
+<app-navbar />
+<div class="min-h-screen flex flex-col">
+  <div class="flex-grow">
+    <div class="min-h-screen bg-gray-50 flex flex-col">
+      <div class="flex-1 flex max-w-7xl w-full mx-auto">
+        <!-- Sidebar (Desktop: Sticky) -->
+        <aside class="hidden lg:block w-64 border-r border-gray-200 shrink-0">
+          <div class="sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto py-8 px-6 scrollbar-slim">
+            <nav class="space-y-8">
+              @for (group of menuGroups; track group.label) {
+                <div>
+                  <h5 class="mb-3 text-xs font-bold text-gray-400 uppercase tracking-wider">
+                    {{ group.label }}
+                  </h5>
+                  <ul class="space-y-1">
+                    @for (item of group.items; track item.label) {
+                      <li>
+                        <a
+                          [routerLink]="item.route"
+                          [routerLinkActiveOptions]="{ exact: item.exact }"
+                          wdcScrollTop
+                          routerLinkActive="text-indigo-600 bg-indigo-50 font-medium"
+                          class="block px-3 py-2 rounded-lg text-gray-600 hover:text-indigo-600 hover:bg-gray-50 text-sm transition-colors cursor-pointer"
+                        >
+                          {{ item.label }}
+                        </a>
+                      </li>
+                    }
+                  </ul>
+                </div>
+              }
+            </nav>
+          </div>
+        </aside>
+
+        <!-- Mobile Sidebar (Fixed Overlay) -->
+        <div
+          [class.translate-x-0]="sidebarOpen()"
+          [class.-translate-x-full]="!sidebarOpen()"
+          class="fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-200 transform lg:hidden transition-transform duration-300 ease-in-out"
+        >
+          <div class="h-16 flex items-center px-6 border-b border-gray-200">
+            <span class="font-bold text-lg text-gray-900">Menu</span>
+            <button (click)="closeSidebar()" class="ml-auto text-gray-500">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                ></path>
+              </svg>
+            </button>
+          </div>
+          <nav class="p-6 space-y-8 h-full overflow-y-auto">
+            @for (group of menuGroups; track group.label) {
+              <div>
+                <h5 class="mb-3 text-xs font-bold text-gray-400 uppercase tracking-wider">
+                  {{ group.label }}
+                </h5>
+                <ul class="space-y-1">
+                  @for (item of group.items; track item.label) {
+                    <li>
+                      <a
+                        [routerLink]="item.route"
+                        [routerLinkActiveOptions]="{ exact: item.exact }"
+                        routerLinkActive="text-indigo-600 bg-indigo-50 font-medium"
+                        (click)="closeSidebar()"
+                        class="block px-3 py-2 rounded-lg text-gray-600 hover:text-indigo-600 hover:bg-gray-50 text-sm transition-colors cursor-pointer"
+                      >
+                        {{ item.label }}
+                      </a>
+                    </li>
+                  }
+                </ul>
+              </div>
+            }
+          </nav>
+        </div>
+
+        <!-- Overlay for mobile sidebar -->
+        @if (sidebarOpen()) {
+          <div
+            (click)="closeSidebar()"
+            class="fixed inset-0 z-40 bg-gray-900/20 lg:hidden backdrop-blur-sm"
+          ></div>
+        }
+
+        <!-- Content -->
+        <main class="flex-1 min-w-0 py-10 px-4 sm:px-6 lg:px-10">
+          <div class="mx-auto max-w-4xl px-6 py-12 lg:px-8"><router-outlet></router-outlet></div>
+        </main>
+      </div>
+    </div>
+  </div>
+  <app-footer />
+</div>
+
+<wdc-toaster></wdc-toaster>

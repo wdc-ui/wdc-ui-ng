@@ -1,0 +1,142 @@
+<div class="space-y-12">
+  <div id="example">
+    <h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Text Input</h1>
+    <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">
+      Commonly used text input component.
+    </p>
+  </div>
+
+  <!-- Example Section -->
+  <section id="example" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Examples</h2>
+    <div class="flex flex-col gap-6">
+      <app-doc-preview title="Input Fields" description="Basic form controls" [showCode]="false">
+        <div preview class="grid gap-6 w-full max-w-md">
+          <wdc-input
+            label="Email Address"
+            type="email"
+            placeholder="user@example.com"
+            error="Please enter a valid email address"
+            [required]="true"
+          ></wdc-input>
+
+          <wdc-input
+            label="Password"
+            type="password"
+            placeholder="*******"
+            hint="Must be at least 8 characters long"
+          ></wdc-input>
+
+          <wdc-input placeholder="Search...">
+            <svg
+              wdcPrefix
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+          </wdc-input>
+
+          <wdc-input label="Amount" type="number" size="lg" placeholder="0.00"></wdc-input>
+        </div>
+      </app-doc-preview>
+      <app-doc-preview
+        title="Login Form"
+        description="Login form with input fields"
+        [showCode]="false"
+      >
+        <!-- <div preview class="grid gap-6 w-full max-w-md"></div> -->
+        <div preview class="flex items-center justify-center">
+          <wdc-card class="w-full max-w-md">
+            <wdc-card-header>
+              <wdc-card-title>Welcome back</wdc-card-title>
+              <p class="text-center text-sm text-muted-foreground">
+                Enter your email to sign in to your account
+              </p>
+            </wdc-card-header>
+
+            <wdc-card-content>
+              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+                <wdc-input
+                  label="Email"
+                  type="email"
+                  placeholder="name@example.com"
+                  formControlName="email"
+                  [required]="true"
+                  [error]="getErrorMessage('email')"
+                  [success]="loginForm.get('email')?.valid && loginForm.get('email')?.dirty"
+                >
+                  <wdc-icon wdcPrefix name="mail" size="18"></wdc-icon>
+                </wdc-input>
+
+                <wdc-input
+                  label="Password"
+                  type="password"
+                  [required]="true"
+                  placeholder="Enter your password"
+                  formControlName="password"
+                  [error]="getErrorMessage('password')"
+                ></wdc-input>
+
+                <div class="flex justify-end">
+                  <a href="#" class="text-sm font-medium text-primary hover:underline">
+                    Forgot password?
+                  </a>
+                </div>
+
+                <wdc-button
+                  class="w-full"
+                  type="submit"
+                  [disabled]="loginForm.invalid || isLoading()"
+                >
+                  @if (isLoading()) {
+                    Logging in...
+                  } @else {
+                    Sign In
+                  }
+                </wdc-button>
+              </form>
+            </wdc-card-content>
+
+            <wdc-card-footer class="justify-center">
+              <p class="text-sm text-muted-foreground">
+                Don't have an account?
+                <a href="#" class="font-medium text-primary hover:underline">Sign up</a>
+              </p>
+            </wdc-card-footer>
+          </wdc-card>
+        </div>
+      </app-doc-preview>
+    </div>
+  </section>
+
+  <section id="bash" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Installation</h2>
+    <app-code-viewer
+      title="Bash"
+      [bashCode]="snippets.install"
+      activeTabCode="bash"
+    ></app-code-viewer>
+  </section>
+
+  <section id="code" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Code</h2>
+    <app-code-viewer [htmlCode]="snippets.html" [tsCode]="snippets.ts"></app-code-viewer>
+  </section>
+
+  <!-- API Section -->
+  <section id="api" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">API Reference</h2>
+    <div class="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
+      <app-reference [data]="references"></app-reference>
+    </div>
+  </section>
+</div>

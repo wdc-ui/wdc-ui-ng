@@ -1,0 +1,83 @@
+<wdc-navbar class="bg-blue-900 text-white border-none dark">
+  <wdc-nav-brand>
+    <wdc-icon name="school" size="32" class="mr-2" />
+    <div class="flex flex-col leading-none">
+      <span class="text-lg">Delhi Public School</span>
+      <span class="text-xs font-normal opacity-80">Excellence in Education</span>
+    </div>
+  </wdc-nav-brand>
+
+  <ng-container wdcNavLinks>
+    <wdc-nav-link href="/home" class="text-white hover:bg-blue-800 focus:bg-blue-800"
+      >Home</wdc-nav-link
+    >
+
+    <wdc-nav-group label="Academics">
+      <div
+        class="flex flex-col min-w-[180px] bg-white text-black rounded shadow-lg overflow-hidden"
+      >
+        <wdc-nav-link href="/curriculum" class="justify-start hover:bg-gray-100"
+          >Curriculum</wdc-nav-link
+        >
+        <wdc-nav-link href="/faculty" class="justify-start hover:bg-gray-100">Faculty</wdc-nav-link>
+        <wdc-nav-link href="/calendar" class="justify-start hover:bg-gray-100"
+          >Calendar</wdc-nav-link
+        >
+      </div>
+    </wdc-nav-group>
+
+    <wdc-nav-group label="Admissions">
+      <div
+        class="flex flex-col min-w-[180px] bg-white text-black rounded shadow-lg overflow-hidden"
+      >
+        <wdc-nav-link href="/apply" class="justify-start hover:bg-gray-100">Apply Now</wdc-nav-link>
+        <wdc-nav-link href="/fees" class="justify-start hover:bg-gray-100"
+          >Fee Structure</wdc-nav-link
+        >
+      </div>
+    </wdc-nav-group>
+  </ng-container>
+
+  <wdc-nav-actions>
+    <wdc-button
+      color="secondary"
+      class="bg-yellow-400 text-blue-900 hover:bg-yellow-500 border-none"
+    >
+      Student Portal
+    </wdc-button>
+  </wdc-nav-actions>
+
+  <div wdcMobileLinks class="flex flex-col text-black">
+    <wdc-nav-link href="/home">Home</wdc-nav-link>
+    <wdc-nav-link href="/apply">Admissions</wdc-nav-link>
+    <wdc-nav-link href="/portal">Student Portal</wdc-nav-link>
+  </div>
+</wdc-navbar>
+<wdc-navbar variant="transparent" [sticky]="true">
+  <wdc-nav-brand>
+    <div
+      class="h-8 w-8 bg-black text-white rounded-full flex items-center justify-center font-serif"
+    >
+      K
+    </div>
+    <span class="font-serif">Kamal's Blog</span>
+  </wdc-nav-brand>
+
+  <ng-container wdcNavLinks>
+    <wdc-nav-link href="/">Articles</wdc-nav-link>
+    <wdc-nav-link href="/about">About Me</wdc-nav-link>
+    <wdc-nav-link href="/newsletter">Newsletter</wdc-nav-link>
+  </ng-container>
+
+  <wdc-nav-actions>
+    <a href="https://twitter.com" target="_blank">
+      <wdc-icon name="rss_feed" />
+    </a>
+    <wdc-button variant="outline" class="rounded-full">Subscribe</wdc-button>
+  </wdc-nav-actions>
+
+  <div wdcMobileLinks>
+    <wdc-nav-link href="/">Articles</wdc-nav-link>
+    <wdc-nav-link href="/about">About</wdc-nav-link>
+  </div>
+</wdc-navbar>

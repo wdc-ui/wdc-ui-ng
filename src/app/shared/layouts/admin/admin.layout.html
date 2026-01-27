@@ -1,0 +1,67 @@
+<wdc-sidebar-layout>
+  <wdc-sidebar>
+    <wdc-sidebar-header>
+      <div class="flex items-center gap-2">
+        <div class="h-6 w-6 rounded bg-primary"></div>
+        <span class="text-xl font-bold text-primary tracking-tight">AdminPanel</span>
+      </div>
+    </wdc-sidebar-header>
+
+    <div class="flex-1 overflow-y-auto px-3 py-4 space-y-1">
+      <wdc-sidebar-group-label>Dashboard</wdc-sidebar-group-label>
+
+      <wdc-sidebar-item href="/dashboard" [exact]="true">
+        <wdc-icon name="dashboard" size="18" />
+        Overview
+      </wdc-sidebar-item>
+
+      <wdc-sidebar-item href="/dashboard/analytics">
+        <wdc-icon name="analytics" size="18" />
+        Analytics
+      </wdc-sidebar-item>
+
+      <wdc-sidebar-collapsible label="Management">
+        <wdc-sidebar-item href="/management/users">All Users</wdc-sidebar-item>
+        <wdc-sidebar-item href="/management/roles">Roles & Permissions</wdc-sidebar-item>
+        <wdc-sidebar-item href="/management/settings">Settings</wdc-sidebar-item>
+      </wdc-sidebar-collapsible>
+
+      <wdc-sidebar-group-label>Reports</wdc-sidebar-group-label>
+
+      <wdc-sidebar-collapsible label="Sales Reports" [startOpen]="true">
+        <wdc-sidebar-item href="/reports/sales">Daily Sales</wdc-sidebar-item>
+        <wdc-sidebar-item href="/reports/traffic">Traffic Source</wdc-sidebar-item>
+      </wdc-sidebar-collapsible>
+    </div>
+
+    <wdc-sidebar-footer>
+      <div class="flex items-center gap-3">
+        <div
+          class="h-9 w-9 rounded-full bg-slate-200 border flex items-center justify-center text-xs font-bold"
+        >
+          KK
+        </div>
+        <div class="text-sm overflow-hidden">
+          <p class="font-medium truncate">Kamal Kumar</p>
+          <p class="text-xs text-muted-foreground truncate">admin@codeskamal.com</p>
+        </div>
+      </div>
+    </wdc-sidebar-footer>
+  </wdc-sidebar>
+
+  <header class="flex h-14 shrink-0 items-center gap-4 border-b bg-background px-6 shadow-sm z-10">
+    <wdc-sidebar-trigger />
+    <h1 class="text-lg font-semibold">Dashboard</h1>
+
+    <div class="ml-auto flex items-center gap-4">
+      <wdc-button variant="ghost" size="icon">
+        <wdc-icon name="notifications" size="20" />
+      </wdc-button>
+      <wdc-button variant="outline" size="sm">Logout</wdc-button>
+    </div>
+  </header>
+
+  <div class="flex-1 overflow-y-auto bg-muted/20 p-6 scrollbar-slim">
+    <router-outlet></router-outlet>
+  </div>
+</wdc-sidebar-layout>

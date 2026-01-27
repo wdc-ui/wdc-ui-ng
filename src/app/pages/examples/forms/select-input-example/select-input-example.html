@@ -1,0 +1,136 @@
+<div class="space-y-12">
+  <div id="example">
+    <h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Select Input</h1>
+    <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">
+      Commonly used select input component.
+    </p>
+  </div>
+
+  <!-- Example Section -->
+  <section id="example" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Examples</h2>
+    <div class="flex flex-col gap-6">
+      <app-doc-preview
+        title="Select Field"
+        description="Select and multi select input fields"
+        [showCode]="false"
+      >
+        <div preview class="grid gap-6 w-full max-w-md">
+          <section class="space-y-4">
+            <h2 class="font-bold text-xl border-b pb-2">2. Template Driven (Simple Strings)</h2>
+
+            <wdc-select
+              label="Favorite Fruit"
+              [options]="fruits"
+              [(ngModel)]="selectedFruit"
+              placeholder="Pick a fruit"
+            ></wdc-select>
+
+            <p class="text-sm">
+              Selected: <strong>{{ selectedFruit }}</strong>
+            </p>
+          </section>
+
+          <section class="space-y-4">
+            <h2 class="font-bold text-xl border-b pb-2">3. Signal Binding</h2>
+
+            <wdc-select
+              label="Signal Country"
+              [options]="countries"
+              bindLabel="label"
+              bindValue="code"
+              [ngModel]="countrySig()"
+              [searchable]="false"
+              (ngModelChange)="countrySig.set($event)"
+              hint="Binding directly to a WritableSignal"
+            ></wdc-select>
+
+            <p class="text-sm">
+              Signal Value: <strong>{{ countrySig() }}</strong>
+            </p>
+            <wdc-button (click)="countrySig.set('CA')" size="sm" variant="outline"
+              >Set Canada</wdc-button
+            >
+          </section>
+
+          <form [formGroup]="form" class="space-y-4">
+            <wdc-select
+              label="Assign To (Searchable)"
+              placeholder="Search for a user..."
+              [options]="users"
+              bindLabel="name"
+              bindValue="id"
+              formControlName="userId"
+              [searchable]="true"
+              [error]="
+                form.get('userId')?.invalid && form.get('userId')?.touched
+                  ? 'Please select a user'
+                  : null
+              "
+            ></wdc-select>
+
+            <wdc-select
+              label="Priority"
+              [options]="priorities"
+              formControlName="priority"
+              [searchable]="false"
+            ></wdc-select>
+
+            <wdc-button type="submit" class="w-full" (click)="onSubmit()">Submit</wdc-button>
+          </form>
+        </div>
+      </app-doc-preview>
+      <app-doc-preview
+        title="Multi Select Field"
+        description="Select and multi select input fields"
+        [showCode]="false"
+      >
+        <div preview class="grid gap-6 w-full max-w-md">
+          <form [formGroup]="multSelectform" class="space-y-6">
+            <wdc-multi-select
+              label="Add Team Members"
+              placeholder="Search members..."
+              [options]="members"
+              bindLabel="name"
+              bindValue="id"
+              formControlName="team"
+              [error]="
+                multSelectform.get('team')?.invalid && multSelectform.get('team')?.touched
+                  ? 'Select at least 2 members'
+                  : null
+              "
+            ></wdc-multi-select>
+
+            <wdc-multi-select
+              label="Skills Required"
+              [options]="skills"
+              formControlName="skills"
+              placeholder="Select skills"
+            ></wdc-multi-select>
+            <wdc-button type="submit" class="w-full" (click)="onTeamSubmit()"
+              >Create Team</wdc-button
+            >
+          </form>
+
+          <div class="bg-gray-100 p-4 rounded text-xs">
+            <strong>Form Value:</strong>
+            <pre>{{ multSelectform.value | json }}</pre>
+          </div>
+        </div>
+      </app-doc-preview>
+    </div>
+  </section>
+
+  <section id="code" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Code</h2>
+    <app-code-viewer [htmlCode]="snippets.html" [tsCode]="snippets.ts"></app-code-viewer>
+  </section>
+
+  <!-- API Section -->
+  <section id="api" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">API Reference</h2>
+    <div class="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
+      <app-reference [data]="references"></app-reference>
+    </div>
+  </section>
+</div>

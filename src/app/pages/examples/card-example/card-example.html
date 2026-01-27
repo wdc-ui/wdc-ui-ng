@@ -1,0 +1,159 @@
+<div class="space-y-12">
+  <div id="example">
+    <h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Card</h1>
+    <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">
+      A flexible container component for displaying content.
+    </p>
+  </div>
+
+  <!-- Example Section -->
+  <section id="example" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Examples</h2>
+    <div class="flex flex-col gap-6">
+      <app-doc-preview
+        title="Simple Card"
+        description="Simple Card with header, body, and footer."
+        [htmlCode]="snippets.simple.html"
+        [tsCode]="snippets.simple.ts"
+      >
+        <div preview class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <wdc-card>
+            <wdc-card-header>
+              <wdc-card-title>Simple Card</wdc-card-title>
+              <wdc-card-description>With a subheader</wdc-card-description>
+            </wdc-card-header>
+            <wdc-card-content>
+              <p class="text-sm text-slate-600 dark:text-slate-400">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur
+                error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam
+                nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
+              </p>
+            </wdc-card-content>
+          </wdc-card>
+          <wdc-card>
+            <wdc-card-header>
+              <wdc-card-title>Simple Card</wdc-card-title>
+              <wdc-card-description>With a subheader</wdc-card-description>
+            </wdc-card-header>
+            <wdc-card-content>
+              <p class="text-sm text-slate-600 dark:text-slate-400">
+                You can insert images or custom content into the header slot. This card also has a
+                footer with actions.
+              </p>
+            </wdc-card-content>
+            <wdc-card-footer>
+              <div card-footer class="flex gap-2 justify-end">
+                <wdc-button color="light" size="sm">Cancel</wdc-button>
+                <wdc-button size="sm">Save</wdc-button>
+              </div>
+            </wdc-card-footer>
+          </wdc-card>
+          <wdc-card>
+            <wdc-card-content>
+              <div class="flex flex-col items-center text-center space-y-4">
+                <div
+                  class="p-3 mt-3 bg-indigo-50 dark:bg-indigo-500/10 rounded-full text-indigo-600 dark:text-indigo-400"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-slate-900 dark:text-white">Task Completed</h3>
+                <p class="text-sm text-slate-500">You have successfully finished the task.</p>
+                <wdc-button>Dashboard</wdc-button>
+              </div>
+            </wdc-card-content>
+          </wdc-card>
+        </div>
+      </app-doc-preview>
+      <app-doc-preview
+        title="Image Card"
+        description="A card with an image in the header and footer actions."
+        [htmlCode]="snippets.image.html"
+        [tsCode]="snippets.image.ts"
+      >
+        <div preview class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <wdc-card>
+            <wdc-card-content class="p-0">
+              <img
+                src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                alt="Card Image"
+                class="w-full h-48 object-cover rounded-t-xl"
+              />
+              <div class="p-6">
+                <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                  Image Card
+                </h3>
+                <p class="text-slate-600 text-sm dark:text-slate-400">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed
+                  consequuntur error repudiandae numquam deserunt quisquam repellat libero
+                  asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
+                  quas!
+                </p>
+              </div>
+            </wdc-card-content>
+          </wdc-card>
+          <wdc-card>
+            <wdc-card-content class="p-0">
+              <img
+                src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                alt="Card Image"
+                class="w-full h-48 object-cover rounded-t-xl"
+              />
+              <div class="p-6">
+                <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                  Image Card
+                </h3>
+                <p class="text-slate-600 text-sm dark:text-slate-400">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed
+                  consequuntur error repudiandae numquam deserunt quisquam repellat libero
+                  asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
+                  quas!
+                </p>
+                <div class="flex gap-2 mt-4">
+                  <wdc-button size="sm" variant="link">Read More</wdc-button>
+                </div>
+              </div>
+            </wdc-card-content>
+          </wdc-card>
+        </div>
+      </app-doc-preview>
+      <app-doc-preview
+        title="Stat Cards"
+        description="Cards designed to display key statistics with trends."
+        [htmlCode]="snippets.stat.html"
+        [tsCode]="snippets.stat.ts"
+      >
+        <div preview class="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <wdc-card>
+            <wdc-card-content>
+              <p class="text-sm text-slate-600 dark:text-slate-400">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur
+                error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam
+                nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
+              </p>
+            </wdc-card-content>
+          </wdc-card>
+          <!-- <wdc-stat-card
+            label="Total Revenue"
+            value="$128,450"
+            [trend]="12.5"
+            trendLabel="vs last month"
+            iconName="money_bag"
+          ></wdc-stat-card> -->
+        </div>
+      </app-doc-preview>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,97 @@
+<div class="space-y-12">
+  <div id="example">
+    <h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Tabs</h1>
+    <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">
+      A tabbed interface component supporting horizontal and vertical orientations.
+    </p>
+  </div>
+
+  <!-- Example Section -->
+  <section id="example" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Examples</h2>
+    <div class="flex flex-col gap-6">
+      <app-doc-preview
+        title="Horizontal Tabs"
+        description="Tabs with horizontal orientation"
+        [showCode]="false"
+        [htmlCode]="snippets.html"
+      >
+        <div preview class="w-full">
+          <wdc-card>
+            <wdc-card-content>
+              <wdc-tabs defaultValue="account">
+                <wdc-tabs-list>
+                  <wdc-tabs-trigger value="account">Account</wdc-tabs-trigger>
+                  <wdc-tabs-trigger value="password">Password</wdc-tabs-trigger>
+                </wdc-tabs-list>
+
+                <wdc-tabs-content value="account" class="p-0">
+                  <div class="p-4 bg-gray-50 rounded-lg">
+                    <h4 class="font-medium text-gray-900">Account Content</h4>
+                    <p class="text-sm text-gray-500 mt-1">Manage your account details here.</p>
+                  </div>
+                </wdc-tabs-content>
+
+                <wdc-tabs-content value="password" class="p-0">
+                  <div class="p-4 bg-gray-50 rounded-lg">
+                    <p class="text-sm text-gray-500 mt-1">Change Password Here...</p>
+                  </div>
+                </wdc-tabs-content>
+              </wdc-tabs>
+            </wdc-card-content>
+          </wdc-card>
+        </div>
+      </app-doc-preview>
+      <app-doc-preview
+        title="Vertical Tabs"
+        description="Tabs with vertical orientation"
+        [showCode]="false"
+        [htmlCode]="snippets.html"
+      >
+        <div preview class="w-full">
+          <wdc-card>
+            <wdc-card-content>
+              <wdc-tabs defaultValue="music" orientation="vertical">
+                <wdc-tabs-list class="w-48">
+                  <wdc-tabs-trigger value="music">Music</wdc-tabs-trigger>
+                  <wdc-tabs-trigger value="podcasts">Podcasts</wdc-tabs-trigger>
+                  <wdc-tabs-trigger value="live">Live</wdc-tabs-trigger>
+                </wdc-tabs-list>
+                <div class="flex-1">
+                  <wdc-tabs-content value="music" class="p-0">
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                      <p class="text-sm text-gray-500 mt-1">Music List...</p>
+                    </div>
+                  </wdc-tabs-content>
+                  <wdc-tabs-content value="podcasts" class="p-0">
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                      <p class="text-sm text-gray-500 mt-1">Podcast Episodes...</p>
+                    </div>
+                  </wdc-tabs-content>
+                  <wdc-tabs-content value="live" class="p-0">
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                      <p class="text-sm text-gray-500 mt-1">Live Stream...</p>
+                    </div>
+                  </wdc-tabs-content>
+                </div>
+              </wdc-tabs>
+            </wdc-card-content>
+          </wdc-card>
+        </div>
+      </app-doc-preview>
+    </div>
+  </section>
+
+  <section id="code" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Code</h2>
+    <app-code-viewer [htmlCode]="snippets.html" [tsCode]="snippets.ts"></app-code-viewer>
+  </section>
+
+  <!-- API Section -->
+  <!-- <section id="api" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">API Reference</h2>
+    <div class="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
+      <app-reference [data]="references"></app-reference>
+    </div>
+  </section> -->
+</div>

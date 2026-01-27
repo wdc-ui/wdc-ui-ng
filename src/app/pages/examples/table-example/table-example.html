@@ -1,0 +1,116 @@
+<div class="space-y-12">
+  <div id="example">
+    <h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Table</h1>
+    <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">A table component.</p>
+  </div>
+
+  <!-- Example Section -->
+  <section id="example" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Examples</h2>
+    <div class="flex flex-col gap-6">
+      <app-doc-preview
+        title="Simple Table"
+        description="A simple table component."
+        [htmlCode]="snippets.simple.html"
+        [tsCode]="snippets.simple.ts"
+      >
+        <div preview class="w-full p-8 space-y-12">
+          <wdc-data-table [data]="simpleUsers" [columns]="simpleColumns"></wdc-data-table>
+        </div>
+      </app-doc-preview>
+      <app-doc-preview
+        title="Actions & Pagination"
+        description="A table with actions and pagination."
+        [htmlCode]="snippets.pagination.html"
+        [tsCode]="snippets.pagination.ts"
+      >
+        <div preview class="w-full p-8 space-y-12">
+          <wdc-data-table
+            title="Manage Users"
+            [data]="paginatedUsers"
+            [columns]="actionColumns"
+            [withPagination]="true"
+            [totalItems]="100"
+            [limit]="5"
+            [currentPage]="page()"
+            (pageChange)="onPageChange($event)"
+          >
+            <ng-template wdcCell="status" let-row>
+              <span
+                class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium"
+                [class.bg-green-100]="row.status === 'Active'"
+                [class.text-green-700]="row.status === 'Active'"
+                [class.bg-red-100]="row.status === 'Inactive'"
+                [class.text-red-700]="row.status === 'Inactive'"
+              >
+                {{ row.status }}
+              </span>
+            </ng-template>
+
+            <ng-template wdcCell="actions" let-row>
+              <div class="flex items-center gap-2">
+                <wdc-button variant="ghost" size="icon" (click)="onEdit(row)">
+                  <wdc-icon name="edit" size="16" class="text-blue-600" />
+                </wdc-button>
+                <wdc-button variant="ghost" size="icon" (click)="onDelete(row)">
+                  <wdc-icon name="delete" size="16" class="text-red-600" />
+                </wdc-button>
+              </div>
+            </ng-template>
+          </wdc-data-table>
+        </div>
+      </app-doc-preview>
+
+      <app-doc-preview
+        title="Full Features (Search + Sort)"
+        description="A full featured table component."
+        [htmlCode]="snippets.full.html"
+        [tsCode]="snippets.full.ts"
+      >
+        <div preview class="w-full p-8 space-y-12">
+          <wdc-data-table
+            title="All Employees"
+            [data]="filteredData()"
+            [columns]="fullColumns"
+            [searchable]="true"
+            [loading]="loading()"
+            [withPagination]="true"
+            [totalItems]="filteredData().length"
+            [currentPage]="currentPage()"
+            (searchChange)="onSearch($event)"
+            (sortChange)="onSort($event)"
+            (limitChange)="onLimitChange($event)"
+          >
+            <ng-template wdcCell="email" let-row>
+              <div class="flex items-center gap-2">
+                <wdc-icon name="mail" size="14" class="text-muted-foreground" />
+                <a href="mailto:{{ row.email }}" class="hover:underline">{{ row.email }}</a>
+              </div>
+            </ng-template>
+          </wdc-data-table>
+
+          <div class="bg-gray-100 p-2 rounded text-xs mt-2">
+            Last Sort Event: {{ sortEvent() | json }}
+          </div>
+        </div>
+      </app-doc-preview>
+    </div>
+  </section>
+
+  <section id="bash" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Installation</h2>
+    <app-code-viewer
+      title="Bash"
+      [bashCode]="snippets.install"
+      activeTabCode="bash"
+    ></app-code-viewer>
+  </section>
+
+  <!-- API Section -->
+  <section id="api" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">API Reference</h2>
+    <div class="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
+      <app-reference [data]="references"></app-reference>
+    </div>
+  </section>
+</div>

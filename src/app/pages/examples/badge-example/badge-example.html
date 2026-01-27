@@ -1,0 +1,79 @@
+<div class="space-y-8">
+  <div>
+    <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">Badge</h1>
+    <p class="text-slate-600 dark:text-slate-400 text-lg">
+      Badges are used to highlight status, numbers, or tags.
+    </p>
+  </div>
+
+  <!-- Example Section -->
+  <section id="example" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Examples</h2>
+
+    <div class="flex flex-col gap-6">
+      <app-doc-preview
+        title="Variants"
+        description="Badges with different variants"
+        [showCode]="false"
+        [htmlCode]="``"
+      >
+        <div preview class="flex flex-wrap gap-4 items-center justify-center">
+          <wdc-badge color="primary" variant="outline">Primary</wdc-badge>
+          <wdc-badge color="secondary" variant="outline">Secondary</wdc-badge>
+          <wdc-badge color="success" variant="outline">Success</wdc-badge>
+          <wdc-badge color="info" variant="outline">Info</wdc-badge>
+          <wdc-badge color="warning" variant="outline">Warning</wdc-badge>
+          <wdc-badge color="danger" variant="outline">Danger</wdc-badge>
+          <wdc-badge color="dark" variant="outline">Dark</wdc-badge>
+          <wdc-badge color="light" variant="outline">Light</wdc-badge>
+        </div>
+      </app-doc-preview>
+      <app-doc-preview
+        title="Sizes"
+        description="Badges with different sizes"
+        [showCode]="false"
+        [htmlCode]="``"
+      >
+        <div preview class="flex flex-wrap gap-4 items-center justify-center">
+          <wdc-badge size="sm" color="secondary">Small</wdc-badge>
+          <wdc-badge size="default" color="secondary">Default</wdc-badge>
+          <wdc-badge size="lg" color="secondary">Large</wdc-badge>
+
+          <wdc-badge rounded="md" color="info">Rounded Square</wdc-badge>
+          <wdc-badge rounded="sm" color="info">Sharp</wdc-badge>
+        </div>
+      </app-doc-preview>
+      <app-doc-preview
+        title="Badge with Count"
+        description="Badges with rounded corners"
+        [showCode]="false"
+        [htmlCode]="``"
+      >
+        <div preview class="flex flex-wrap gap-4 items-center justify-center">
+          <wdc-badge color="primary" [count]="5">Messages</wdc-badge>
+
+          <wdc-badge color="danger" [count]="150" [maxCount]="99">Emails</wdc-badge>
+
+          <wdc-button [gradient]="true" size="icon" color="danger" rounded="full" class="relative">
+            <wdc-icon name="notifications" size="16"></wdc-icon>
+            <wdc-badge class="absolute -top-2 -right-2" size="icon" color="primary" [count]="3">
+            </wdc-badge>
+          </wdc-button>
+        </div>
+      </app-doc-preview>
+    </div>
+  </section>
+
+  <section id="code" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Code</h2>
+    <app-code-viewer [htmlCode]="snippets.html" [tsCode]="snippets.ts"></app-code-viewer>
+  </section>
+
+  <!-- API Section -->
+  <section id="api" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">API Reference</h2>
+    <div class="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
+      <app-reference [data]="references"></app-reference>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,51 @@
+@import 'tailwindcss';
+
+@import './theme.css';
+
+:root {
+  /* Override Primary Color to Orange */
+  --primary: 247, 91%, 59%;
+  --secondary: 215, 16%, 47%;
+  /* --primary-foreground: 0 0% 100%; */
+
+  /* Override Radius to make everything super rounded */
+  /* --radius: 1rem; */
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+code {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+@layer base {
+  /* Apply to the whole page */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent;
+  }
+
+  /* Apply to all elements */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--muted-foreground) / 0.5);
+  }
+}

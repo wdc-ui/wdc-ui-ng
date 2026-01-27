@@ -1,0 +1,52 @@
+<div class="space-y-12">
+  <div id="example">
+    <h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Accordion</h1>
+    <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">
+      A vertically stacked set of interactive headings that each reveal a section of content.
+    </p>
+  </div>
+
+  <!-- Example Section -->
+  <section id="example" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Examples</h2>
+    <div class="flex flex-col gap-6">
+      <app-doc-preview
+        title="Accordion"
+        description="Accordion with multiple items."
+        [showCode]="false"
+        [htmlCode]="snippets.html"
+      >
+        <div preview class="w-full">
+          <wdc-accordion>
+            <wdc-accordion-item>
+              <wdc-accordion-trigger>Is it accessible?</wdc-accordion-trigger>
+              <wdc-accordion-content>
+                Yes. It adheres to the WAI-ARIA design pattern.
+              </wdc-accordion-content>
+            </wdc-accordion-item>
+
+            <wdc-accordion-item>
+              <wdc-accordion-trigger>Is it styled?</wdc-accordion-trigger>
+              <wdc-accordion-content>
+                Yes. It comes with default styles that matches the other components' aesthetic.
+              </wdc-accordion-content>
+            </wdc-accordion-item>
+          </wdc-accordion>
+        </div>
+      </app-doc-preview>
+    </div>
+  </section>
+
+  <section id="code" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Code</h2>
+    <app-code-viewer [htmlCode]="snippets.html" [tsCode]="snippets.ts"></app-code-viewer>
+  </section>
+
+  <!-- API Section -->
+  <section id="api" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">API Reference</h2>
+    <div class="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
+      <app-reference [data]="references"></app-reference>
+    </div>
+  </section>
+</div>

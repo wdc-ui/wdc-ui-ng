@@ -1,0 +1,47 @@
+<div class="prose prose-slate dark:prose-invert max-w-none">
+  <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+    Documentation
+  </h1>
+  <p class="lead text-xl text-slate-600 dark:text-slate-400 mt-4">
+    Everything you need to know about setting up and customizing WD UI Kit.
+  </p>
+
+  <div class="mt-12 space-y-12">
+    <!-- Installation -->
+    <section>
+      <h2 class="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+        Installation
+      </h2>
+      <div class="h-px w-full bg-slate-200 dark:bg-slate-800 my-4"></div>
+      <p class="text-slate-600 dark:text-slate-400 mb-4">
+        Install the library using npm. This will add the package to your dependencies.
+      </p>
+      <app-code-viewer
+        title="Bash"
+        [bashCode]="AppSetting.installCommand"
+        activeTabCode="bash"
+      ></app-code-viewer>
+    </section>
+
+    <!-- Configuration -->
+    <section>
+      <h2 class="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+        Configuration
+      </h2>
+      <div class="h-px w-full bg-slate-200 dark:bg-slate-800 my-4"></div>
+      <p class="text-slate-600 dark:text-slate-400 mb-4">
+        {{ AppSetting.title }} is designed to work seamlessly with Tailwind CSS. Ensure your project
+        is configured with Tailwind.
+      </p>
+
+      <h3 class="text-lg font-semibold text-slate-900 dark:text-white mt-8 mb-4">
+        Branding & Themes
+      </h3>
+      <p class="text-slate-600 dark:text-slate-400 mb-4">
+        You can customize the look and feel by extending your Tailwind configuration. WD UI Kit uses
+        CSS variables for colors, allowing for easy theming.
+      </p>
+      <app-code-viewer title="CSS" [cssCode]="cssCode" activeTabCode="css"></app-code-viewer>
+    </section>
+  </div>
+</div>

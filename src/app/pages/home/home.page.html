@@ -1,0 +1,343 @@
+<div class="relative min-h-screen overflow-hidden bg-white dark:bg-slate-950 isolate">
+  <!-- Dynamic Background Elements -->
+  <div
+    class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+    aria-hidden="true"
+  >
+    <div
+      class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#6366f1] to-[#a855f7] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+      style="
+        clip-path: polygon(
+          74.1% 44.1%,
+          100% 61.6%,
+          97.5% 26.9%,
+          85.5% 0.1%,
+          80.7% 2%,
+          72.5% 32.5%,
+          60.2% 62.4%,
+          52.4% 68.1%,
+          47.5% 58.3%,
+          45.2% 34.5%,
+          27.5% 76.7%,
+          0.1% 64.9%,
+          17.9% 100%,
+          27.6% 76.8%,
+          76.1% 97.7%,
+          74.1% 44.1%
+        );
+      "
+    ></div>
+  </div>
+
+  <div class="mx-auto max-w-3xl text-center px-6 lg:px-8 pt-24 pb-32 sm:pt-32">
+    <div class="mb-10 flex justify-center">
+      <div
+        class="relative rounded-full px-4 py-1.5 text-sm leading-6 text-slate-600 dark:text-slate-400 ring-1 ring-slate-900/10 dark:ring-white/10 hover:ring-slate-900/20 dark:hover:ring-white/20 transition-all bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm"
+      >
+        <span class="font-semibold text-indigo-600 dark:text-indigo-400">New:</span> Built for
+        Angular 19+ and Tailwind v4.
+        <a
+          routerLink="/docs"
+          class="ml-2 font-medium underline underline-offset-4 decoration-indigo-500/30 hover:decoration-indigo-500 transition-all"
+        >
+          See What's New <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </div>
+
+    <h1 class="text-5xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-7xl">
+      The Ultimate<br />
+      <span
+        class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 animate-gradient"
+      >
+        Angular Experience
+      </span>
+    </h1>
+
+    <div class="my-10 flex gap-2 justify-center items-center">
+      <span class="italic">By</span><span class="font-bold text-xl text-indigo-600">WDCODERS</span>
+    </div>
+
+    <p class="mt-8 text-xl leading-relaxed text-slate-600 dark:text-slate-400 max-w-xl mx-auto">
+      Craft stunning, enterprise-grade user interfaces in record time. A masterfully engineered
+      collection of components designed for performance and beauty.
+    </p>
+
+    <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">
+      <a
+        routerLink="/components"
+        class="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-200 bg-indigo-600 font-pj rounded-2xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900 shadow-xl shadow-indigo-500/25 hover:bg-indigo-500 hover:scale-[1.02] active:scale-95"
+      >
+        Explore Components
+        <svg
+          class="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M13 7l5 5m0 0l-5 5m5-5H6"
+          />
+        </svg>
+      </a>
+      <div class="relative group">
+        <div
+          class="absolute -inset-0.5 bg-gradient-to-r from-slate-200 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-2xl blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"
+        ></div>
+        <div
+          class="relative flex items-center gap-3 px-6 py-4 bg-white dark:bg-slate-900 ring-1 ring-slate-900/5 dark:ring-white/10 rounded-2xl"
+        >
+          <code class="font-mono text-sm font-bold text-slate-700 dark:text-slate-300">{{
+            installCommand
+          }}</code>
+          <button
+            class="text-slate-400 hover:text-indigo-500 transition-colors"
+            title="Copy"
+            (click)="copyCommand()"
+          >
+            @if (copied()) {
+              <wdc-icon class="text-green-400" name="done" size="20"></wdc-icon>
+            } @else {
+              <wdc-icon class="text-slate-400" name="content_copy" size="20"></wdc-icon>
+            }
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+    aria-hidden="true"
+  >
+    <div
+      class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+      style="
+        clip-path: polygon(
+          74.1% 44.1%,
+          100% 61.6%,
+          97.5% 26.9%,
+          85.5% 0.1%,
+          80.7% 2%,
+          72.5% 32.5%,
+          60.2% 62.4%,
+          52.4% 68.1%,
+          47.5% 58.3%,
+          45.2% 34.5%,
+          27.5% 76.7%,
+          0.1% 64.9%,
+          17.9% 100%,
+          27.6% 76.8%,
+          76.1% 97.7%,
+          74.1% 44.1%
+        );
+      "
+    ></div>
+  </div>
+</div>
+
+<!-- Component Showcase Preview -->
+<div class="relative mx-auto max-w-7xl px-6 lg:px-8 -mt-32">
+  <div
+    class="relative rounded-3xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-2xl bg-slate-50/50 dark:bg-slate-900/50 backdrop-blur-md p-2"
+  >
+    <div class="rounded-[22px] overflow-hidden bg-white dark:bg-slate-950 p-8 sm:p-12 lg:p-16">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
+        <div class="space-y-6">
+          <h3 class="text-2xl font-bold text-slate-900 dark:text-white">
+            Enterprise-Grade Components
+          </h3>
+          <p class="text-slate-600 dark:text-slate-400">
+            Everything you need—from advanced data tables to interactive charts. Built for speed,
+            accessibility, and developer experience.
+          </p>
+          <ul class="space-y-3">
+            <li class="flex items-center gap-3 text-slate-700 dark:text-slate-300 font-medium">
+              <div class="flex-none rounded-full bg-indigo-500/10 p-1">
+                <svg
+                  class="h-4 w-4 text-indigo-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+              Fully Accessible (ARIA Support)
+            </li>
+            <li class="flex items-center gap-3 text-slate-700 dark:text-slate-300 font-medium">
+              <div class="flex-none rounded-full bg-indigo-500/10 p-1">
+                <svg
+                  class="h-4 w-4 text-indigo-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+              Modular Design System
+            </li>
+            <li class="flex items-center gap-3 text-slate-700 dark:text-slate-300 font-medium">
+              <div class="flex-none rounded-full bg-indigo-500/10 p-1">
+                <svg
+                  class="h-4 w-4 text-indigo-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+              Type-Safe Inputs
+            </li>
+          </ul>
+        </div>
+        <div class="md:col-span-2 relative">
+          <!-- Placeholder for a beautiful UI composition -->
+          <div
+            class="aspect-[16/9] rounded-2xl bg-gradient-to-br from-indigo-50/50 to-purple-50/50 dark:from-indigo-500/5 dark:to-purple-500/5 border border-indigo-100 dark:border-indigo-500/20 flex items-center justify-center overflow-hidden"
+          >
+            <div class="grid grid-cols-2 gap-4 p-4 w-full">
+              <div class="space-y-4">
+                <div
+                  class="h-24 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-sm p-4"
+                >
+                  <div
+                    class="h-3 w-1/2 bg-indigo-100 dark:bg-indigo-500/20 rounded-full mb-3"
+                  ></div>
+                  <div class="h-3 w-3/4 bg-slate-100 dark:bg-slate-800 rounded-full mb-3"></div>
+                  <div class="flex gap-2">
+                    <div class="h-6 w-12 bg-indigo-500/10 rounded-md"></div>
+                    <div class="h-6 w-12 bg-purple-500/10 rounded-md"></div>
+                  </div>
+                </div>
+                <div
+                  class="h-48 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 shadow-sm p-4"
+                >
+                  <div class="flex items-center gap-4 mb-6">
+                    <div
+                      class="h-12 w-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500"
+                    ></div>
+                    <div class="space-y-2 flex-1">
+                      <div class="h-3 w-full bg-slate-100 dark:bg-slate-800 rounded-full"></div>
+                      <div class="h-3 w-2/3 bg-slate-100 dark:bg-slate-800 rounded-full"></div>
+                    </div>
+                  </div>
+                  <div class="space-y-3">
+                    <div class="h-2 w-full bg-slate-50 dark:bg-slate-800/50 rounded-full"></div>
+                    <div class="h-2 w-full bg-slate-50 dark:bg-slate-800/50 rounded-full"></div>
+                    <div class="h-2 w-3/4 bg-slate-50 dark:bg-slate-800/50 rounded-full"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="space-y-4 pt-8">
+                <div
+                  class="h-64 rounded-xl bg-slate-900 dark:bg-black border border-white/5 shadow-2xl p-6 relative overflow-hidden"
+                >
+                  <div class="absolute top-0 right-0 p-4 opacity-20">
+                    <svg class="w-24 h-24 text-indigo-500" fill="currentColor" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="h-4 w-1/3 bg-slate-700 rounded-full mb-6"></div>
+                  <div class="space-y-4">
+                    <div class="h-2 w-3/4 bg-slate-800 rounded-full"></div>
+                    <div class="h-2 w-1/2 bg-slate-800 rounded-full"></div>
+                    <div class="h-2 w-full bg-slate-800 rounded-full"></div>
+                  </div>
+                  <div class="mt-8 flex justify-end">
+                    <div
+                      class="h-10 w-24 bg-indigo-600 rounded-lg shadow-lg shadow-indigo-500/40"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Features Grid -->
+<div class="mx-auto max-w-7xl px-6 lg:px-8 py-32">
+  <div class="grid grid-cols-1 gap-y-16 lg:grid-cols-3 lg:gap-x-12">
+    <div class="group">
+      <div
+        class="flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-600 text-white shadow-lg shadow-indigo-500/30 mb-8 group-hover:scale-110 transition-transform"
+      >
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M13 10V3L4 14h7v7l9-11h-7z"
+          />
+        </svg>
+      </div>
+      <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Ultra-Fast Performance</h3>
+      <p class="text-slate-600 dark:text-slate-400">
+        Optimized bundles with lazy-loading support. Keep your app fast and lightweight.
+      </p>
+    </div>
+    <div class="group">
+      <div
+        class="flex h-12 w-12 items-center justify-center rounded-2xl bg-purple-600 text-white shadow-lg shadow-purple-500/30 mb-8 group-hover:scale-110 transition-transform"
+      >
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.172-1.172a4 4 0 015.656 0l1.172 1.172a4 4 0 010 5.656l-1.172 1.172a4 4 0 01-5.656 0l-1.172-1.172a4 4 0 010-5.656z"
+          />
+        </svg>
+      </div>
+      <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Infinite Customization</h3>
+      <p class="text-slate-600 dark:text-slate-400">
+        Every component is built with Tailwind CSS. Theme everything from colors to spacing via CSS
+        variables.
+      </p>
+    </div>
+    <div class="group">
+      <div
+        class="flex h-12 w-12 items-center justify-center rounded-2xl bg-pink-600 text-white shadow-lg shadow-pink-500/30 mb-8 group-hover:scale-110 transition-transform"
+      >
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+          />
+        </svg>
+      </div>
+      <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Great Documentation</h3>
+      <p class="text-slate-600 dark:text-slate-400">
+        Detailed examples, live playgrounds, and clear migration guides for every version release.
+      </p>
+    </div>
+  </div>
+</div>

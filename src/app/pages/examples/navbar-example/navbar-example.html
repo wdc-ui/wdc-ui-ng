@@ -1,0 +1,186 @@
+<div class="space-y-12">
+  <div id="example">
+    <h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Navbar</h1>
+    <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">A navigation bar component.</p>
+  </div>
+
+  <!-- Example Section -->
+  <section id="example" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Examples</h2>
+    <div class="flex flex-col gap-6">
+      <app-doc-preview
+        title="E-Commerce Navbar"
+        description="A navbar for an e-commerce website."
+        [showCode]="false"
+        [htmlCode]="snippets.html"
+      >
+        <wdc-navbar preview class="border-b-2 border-primary/10">
+          <wdc-nav-brand> <span class="text-primary">Shop</span>Cart </wdc-nav-brand>
+
+          <ng-container wdcNavLinks>
+            <wdc-nav-link href="/home">Home</wdc-nav-link>
+
+            <wdc-nav-group label="Categories">
+              <div class="flex flex-col min-w-[200px]">
+                <wdc-nav-link href="/mens" class="w-full justify-start">Men's Fashion</wdc-nav-link>
+                <wdc-nav-link href="/womens" class="w-full justify-start"
+                  >Women's Fashion</wdc-nav-link
+                >
+                <wdc-nav-link href="/electronics" class="w-full justify-start"
+                  >Electronics</wdc-nav-link
+                >
+              </div>
+            </wdc-nav-group>
+
+            <wdc-nav-link href="/deals" class="text-red-500 hover:text-red-600"
+              >Hot Deals</wdc-nav-link
+            >
+          </ng-container>
+
+          <wdc-nav-actions>
+            <div class="hidden lg:block relative mr-4">
+              <wdc-icon
+                name="search"
+                size="18"
+                class="absolute left-2.5 top-2.5 text-muted-foreground"
+              />
+              <input
+                type="text"
+                placeholder="Search products..."
+                class="h-9 w-64 rounded-md border border-input bg-muted pl-9 text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+              />
+            </div>
+
+            <wdc-button variant="ghost" size="icon">
+              <wdc-icon name="shopping_cart" />
+            </wdc-button>
+            <wdc-button>Login</wdc-button>
+          </wdc-nav-actions>
+
+          <div wdcMobileLinks class="flex flex-col gap-2">
+            <wdc-nav-link href="/home">Home</wdc-nav-link>
+            <p class="px-4 text-xs font-bold text-muted-foreground mt-2">CATEGORIES</p>
+            <wdc-nav-link href="/mens">Men</wdc-nav-link>
+            <wdc-nav-link href="/womens">Women</wdc-nav-link>
+          </div>
+        </wdc-navbar>
+      </app-doc-preview>
+
+      <app-doc-preview
+        title="Blog / Portfolio Navbar"
+        description="A navbar for a blog or portfolio website."
+        [showCode]="false"
+        [htmlCode]="snippets.html"
+      >
+        <wdc-navbar variant="transparent" [sticky]="true">
+          <wdc-nav-brand>
+            <div
+              class="h-8 w-8 bg-black text-white rounded-full flex items-center justify-center font-serif"
+            >
+              K
+            </div>
+            <span class="font-serif">Kamal's Blog</span>
+          </wdc-nav-brand>
+
+          <ng-container wdcNavLinks>
+            <wdc-nav-link href="/">Articles</wdc-nav-link>
+            <wdc-nav-link href="/about">About Me</wdc-nav-link>
+            <wdc-nav-link href="/newsletter">Newsletter</wdc-nav-link>
+          </ng-container>
+
+          <wdc-nav-actions>
+            <a href="https://twitter.com" target="_blank">
+              <wdc-icon name="rss_feed" />
+            </a>
+            <wdc-button variant="outline" class="rounded-full">Subscribe</wdc-button>
+          </wdc-nav-actions>
+
+          <div wdcMobileLinks>
+            <wdc-nav-link href="/">Articles</wdc-nav-link>
+            <wdc-nav-link href="/about">About</wdc-nav-link>
+          </div>
+        </wdc-navbar>
+      </app-doc-preview>
+
+      <app-doc-preview
+        title="School / Corporate Navbar"
+        description="A navbar for a school or corporate website."
+        [showCode]="false"
+        [htmlCode]="snippets.html"
+      >
+        <wdc-navbar class="bg-blue-900 text-white border-none dark">
+          <wdc-nav-brand>
+            <wdc-icon name="school" size="32" class="mr-2" />
+            <div class="flex flex-col leading-none">
+              <span class="text-lg">Delhi Public School</span>
+              <span class="text-xs font-normal opacity-80">Excellence in Education</span>
+            </div>
+          </wdc-nav-brand>
+
+          <ng-container wdcNavLinks>
+            <wdc-nav-link href="/home" class="text-white hover:bg-blue-800 focus:bg-blue-800"
+              >Home</wdc-nav-link
+            >
+
+            <wdc-nav-group label="Academics">
+              <div
+                class="flex flex-col min-w-[180px] bg-white text-black rounded shadow-lg overflow-hidden"
+              >
+                <wdc-nav-link href="/curriculum" class="justify-start hover:bg-gray-100"
+                  >Curriculum</wdc-nav-link
+                >
+                <wdc-nav-link href="/faculty" class="justify-start hover:bg-gray-100"
+                  >Faculty</wdc-nav-link
+                >
+                <wdc-nav-link href="/calendar" class="justify-start hover:bg-gray-100"
+                  >Calendar</wdc-nav-link
+                >
+              </div>
+            </wdc-nav-group>
+
+            <wdc-nav-group label="Admissions">
+              <div
+                class="flex flex-col min-w-[180px] bg-white text-black rounded shadow-lg overflow-hidden"
+              >
+                <wdc-nav-link href="/apply" class="justify-start hover:bg-gray-100"
+                  >Apply Now</wdc-nav-link
+                >
+                <wdc-nav-link href="/fees" class="justify-start hover:bg-gray-100"
+                  >Fee Structure</wdc-nav-link
+                >
+              </div>
+            </wdc-nav-group>
+          </ng-container>
+
+          <wdc-nav-actions>
+            <wdc-button
+              color="secondary"
+              class="bg-yellow-400 text-blue-900 hover:bg-yellow-500 border-none"
+            >
+              Student Portal
+            </wdc-button>
+          </wdc-nav-actions>
+
+          <div wdcMobileLinks class="flex flex-col text-black">
+            <wdc-nav-link href="/home">Home</wdc-nav-link>
+            <wdc-nav-link href="/apply">Admissions</wdc-nav-link>
+            <wdc-nav-link href="/portal">Student Portal</wdc-nav-link>
+          </div>
+        </wdc-navbar>
+      </app-doc-preview>
+    </div>
+  </section>
+
+  <section id="code" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Code</h2>
+    <app-code-viewer [htmlCode]="snippets.html" [tsCode]="snippets.ts"></app-code-viewer>
+  </section>
+
+  <!-- API Section -->
+  <section id="api" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">API Reference</h2>
+    <div class="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
+      <app-reference [data]="references"></app-reference>
+    </div>
+  </section>
+</div>

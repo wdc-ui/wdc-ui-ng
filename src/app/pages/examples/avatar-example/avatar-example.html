@@ -1,0 +1,89 @@
+<div class="space-y-12">
+  <div id="example">
+    <h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Avatar</h1>
+    <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">User profile images and initials</p>
+  </div>
+
+  <!-- Example Section -->
+  <section id="example" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Examples</h2>
+    <div class="flex flex-col gap-6">
+      <app-doc-preview
+        title="Avatars"
+        description="Avatars with different sizes and shapes"
+        [showCode]="false"
+        [htmlCode]="snippets.html"
+      >
+        <div preview class="flex flex-wrap gap-4 items-center justify-center">
+          <wdc-avatar shape="square">
+            <wdc-avatar-fallback class="bg-blue-100 text-blue-600">UI</wdc-avatar-fallback>
+            <wdc-avatar-indicator status="online" />
+          </wdc-avatar>
+
+          <wdc-avatar shape="rounded">
+            <wdc-avatar-fallback class="bg-red-100 text-red-600">UI</wdc-avatar-fallback>
+            <wdc-avatar-indicator status="busy" />
+          </wdc-avatar>
+
+          <wdc-avatar shape="circle">
+            <wdc-avatar-fallback class="bg-purple-100 text-purple-600">UI</wdc-avatar-fallback>
+            <wdc-avatar-indicator status="busy" />
+          </wdc-avatar>
+
+          <app-saparator></app-saparator>
+
+          <wdc-avatar shape="square">
+            <img src="https://github.com/shadcn.png" alt="User" wdcAvatarImage />
+            <wdc-avatar-indicator status="busy" />
+          </wdc-avatar>
+
+          <wdc-avatar>
+            <img src="https://github.com/shadcn.png" alt="User" wdcAvatarImage />
+            <wdc-avatar-indicator status="online" />
+          </wdc-avatar>
+        </div>
+      </app-doc-preview>
+
+      <app-doc-preview
+        title="Avatars with Profile"
+        description="Avatars with different sizes and shapes"
+        [showCode]="false"
+        [htmlCode]="snippets.html"
+      >
+        <div preview class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <wdc-avatar-profile
+            name="Kamal Singh"
+            email="kamal@wdcoders.com"
+            src="https://testingbot.com/free-online-tools/random-avatar/200"
+            status="online"
+            size="default"
+          ></wdc-avatar-profile>
+
+          <wdc-avatar-profile
+            name="Rahul Sharma"
+            email="rahul@gmail.com"
+            status="offline"
+            size="default"
+          ></wdc-avatar-profile>
+
+          <wdc-avatar-profile name="Admin User" email="admin@system.com" size="xl" status="busy">
+            <wdc-badge variant="outline" class="mt-1">Pro Plan</wdc-badge>
+          </wdc-avatar-profile>
+        </div>
+      </app-doc-preview>
+    </div>
+  </section>
+
+  <section id="code" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Code</h2>
+    <app-code-viewer [htmlCode]="snippets.html" [tsCode]="snippets.ts"></app-code-viewer>
+  </section>
+
+  <!-- API Section -->
+  <section id="api" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">API Reference</h2>
+    <div class="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
+      <app-reference [data]="references"></app-reference>
+    </div>
+  </section>
+</div>

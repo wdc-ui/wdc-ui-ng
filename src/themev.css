@@ -1,0 +1,184 @@
+@theme {
+  /* ...colors... */
+
+  /* TOAST ANIMATIONS */
+  --animate-toast-in-right: toast-slide-in-right 0.3s ease-out forwards;
+  --animate-toast-in-left: toast-slide-in-left 0.3s ease-out forwards;
+  --animate-toast-in-top: toast-slide-in-top 0.3s ease-out forwards;
+  --animate-toast-in-bottom: toast-slide-in-bottom 0.3s ease-out forwards;
+
+  --animate-toast-out: toast-fade-out 0.2s ease-in forwards;
+
+  /* ...existing... */
+  --color-sidebar: hsl(var(--sidebar));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar-border: hsl(var(--sidebar-border));
+  --color-sidebar-accent: hsl(var(--sidebar-accent));
+  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
+
+  /* DIALOG ANIMATIONS */
+  --animate-overlay-show: dialog-fade-in 0.3s ease-out;
+  --animate-content-show: dialog-zoom-in-95 0.3s ease-out;
+
+  --animate-overlay-hide: dialog-fade-out 0.2s ease-in;
+  --animate-content-hide: dialog-zoom-out-95 0.2s ease-in;
+
+  /* --- ACCORDION TOKENS --- */
+  --color-accordion-border: hsl(var(--accordion-border));
+  --color-accordion-item-open: hsl(var(--accordion-item-open));
+
+  /* --- TABS TOKENS --- */
+  --color-tabs-list-bg: hsl(var(--tabs-list-bg));
+  --color-tabs-trigger-active-bg: hsl(var(--tabs-trigger-active-bg));
+  --color-tabs-trigger-active-text: hsl(var(--tabs-trigger-active-text));
+}
+
+@utility ring-background {
+  --tw-ring-color: hsl(var(--background));
+}
+
+/* --- KEYFRAMES --- */
+@keyframes toast-slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes toast-slide-in-left {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes toast-slide-in-top {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes toast-slide-in-bottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes toast-fade-out {
+  from {
+    opacity: 1;
+    scale: 1;
+  }
+  to {
+    opacity: 0;
+    scale: 0.9;
+  }
+}
+
+/* Keyframes */
+@keyframes dialog-zoom-in-95 {
+  from {
+    opacity: 0;
+    transform: scale(0.95); /* Removed translate */
+  }
+  to {
+    opacity: 1;
+    transform: scale(1); /* Removed translate */
+  }
+}
+
+@keyframes dialog-zoom-out-95 {
+  from {
+    opacity: 1;
+    transform: scale(1); /* Removed translate */
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95); /* Removed translate */
+  }
+}
+
+@keyframes dialog-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes dialog-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Utility Classes for CDK States */
+@utility animate-in-dialog {
+  animation: var(--animate-content-show) forwards;
+}
+@utility animate-out-dialog {
+  animation: var(--animate-content-hide) forwards;
+}
+
+:root {
+  /* Default: Sidebar thoda light gray */
+  --sidebar: 210 40% 98%;
+  --sidebar-foreground: 222.2 84% 4.9%;
+  --sidebar-border: 214.3 31.8% 91.4%;
+  --sidebar-accent: 210 40% 96.1%; /* Hover state */
+  --sidebar-accent-foreground: 222.2 47.4% 11.2%;
+
+  /* ACCORDION DEFAULTS */
+  --accordion-border: 214.3 31.8% 91.4%; /* Same as border */
+  --accordion-item-open: 210 40% 98%; /* Light background when open (optional) */
+
+  /* TABS DEFAULTS */
+  --tabs-list-bg: 221.2 83.2% 53.3%; /* Blue background */
+  --tabs-trigger-active-bg: 255 100% 100%; /* White active */
+  --tabs-trigger-active-text: 222.2 84% 4.9%; /* Foreground */
+}
+
+.dark {
+  /* Dark Mode: Sidebar slightly darker/lighter than background */
+  --sidebar: 222.2 84% 4.9%;
+  --sidebar-foreground: 210 40% 98%;
+  --sidebar-border: 217.2 32.6% 17.5%;
+  --sidebar-accent: 217.2 32.6% 17.5%;
+  --sidebar-accent-foreground: 210 40% 98%;
+
+  /* ACCORDION DARK */
+  --accordion-border: 217.2 32.6% 17.5%;
+  --accordion-item-open: 222.2 47.4% 11.2%;
+
+  /* TABS DARK */
+  --tabs-list-bg: 217.2 32.6% 17.5%;
+  --tabs-trigger-active-bg: 222.2 84% 4.9%; /* Background */
+  --tabs-trigger-active-text: 210 40% 98%;
+}
+
+.cdk-global-overlay-wrapper {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
