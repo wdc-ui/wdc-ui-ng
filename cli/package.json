@@ -1,6 +1,6 @@
 {
   "name": "@wdc-ui/ng",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "CLI for WDC Angular Components",
   "main": "index.js",
   "publishConfig": {
