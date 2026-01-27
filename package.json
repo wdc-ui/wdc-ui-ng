@@ -8,7 +8,7 @@
     "registry:build": "node scripts/build-registry.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:wdc-ui-ng": "node dist/wdc-ui-ng/server/server.mjs"
+    "serve:ssr": "node dist/wdc-ui-ng/server/server.mjs"
   },
   "prettier": {
     "printWidth": 100,

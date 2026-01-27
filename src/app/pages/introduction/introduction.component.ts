@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { AppSetting } from '../../shared/constants/app.constant';
 import { UiConfig } from '@shared/components/ui.config';
 import { dedent } from '@shared/utils/dedent';
+import { TocService } from 'src/app/core/services/toc.service';
 
 @Component({
   selector: 'app-introduction',
@@ -9,7 +10,16 @@ import { dedent } from '@shared/utils/dedent';
   templateUrl: './introduction.component.html',
 })
 export class IntroductionComponent {
+  private tocService = inject(TocService);
   AppSetting = AppSetting;
+
+  ngOnInit() {
+    // Manually define the headings for this page
+    this.tocService.setToc([
+      { id: 'installation', title: 'Installation', level: 'h2' },
+      { id: 'configuration', title: 'Configuration', level: 'h2' },
+    ]);
+  }
 
   cssCode = dedent(`@theme {
       /* Base Colors */
