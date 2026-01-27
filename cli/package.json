@@ -1,31 +1,28 @@
 {
-    "name": "@wdc-ui/ng",
-    "version": "1.0.2",
-    "description": "CLI for WDC Angular Components",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "publishConfig": {
-        "access": "public"
-    },
-    "keywords": [
-        "angular",
-        "ui",
-        "wdc"
-    ],
-    "author": "codeskamal",
-    "license": "MIT",
-    "type": "module",
-    "bin": {
-        "wdc": "./index.js"
-    },
-    "dependencies": {
-        "chalk": "^5.6.2",
-        "commander": "^14.0.2",
-        "fs-extra": "^11.3.3",
-        "inquirer": "^13.2.0",
-        "node-fetch": "^3.3.2",
-        "ora": "^9.0.0"
-    }
+  "name": "@wdc-ui/ng",
+  "version": "1.0.2",
+  "description": "CLI for WDC Angular Components",
+  "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "angular",
+    "ui",
+    "wdc"
+  ],
+  "author": "wdcoders",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "wdc": "./index.js"
+  },
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "commander": "^14.0.2",
+    "fs-extra": "^11.3.3",
+    "inquirer": "^13.2.0",
+    "node-fetch": "^3.3.2",
+    "ora": "^9.0.0"
+  }
 }
