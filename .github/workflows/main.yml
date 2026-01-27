@@ -12,5 +12,5 @@ jobs:
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
-          repository: wdc-ui/wdc-ops
+          repository: devtechkamal/wdc-ops
           event-type: deploy_event
