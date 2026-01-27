@@ -1,9 +1,3 @@
-Here is a professional, comprehensive `README.md` designed for your NPM package **`@wdc-ui/ng`**.
-
-You can copy-paste this directly into your project's root folder.
-
----
-
 # @wdc-ui/ng
 
 **Beautifully designed components that you can copy and paste into your Angular applications.**
@@ -64,15 +58,15 @@ You can add any of the following components:
 - `button`
 - `input`
 - `card`
-- `dialog` (Modal)
-- `sheet` (Side Drawer)
+- `dialog`
+- `drawer`
 - `select`
 - `popover`
 - `tooltip`
 - `accordion`
 - `calendar`
 - `sidebar`
-- `table` (Data Table)
+- `data-table`
 - `image-gallery`
 
 ## 🎨 Theming
@@ -81,11 +75,11 @@ When you run `init`, a `theme.css` file is created. This uses CSS variables for 
 
 ```css
 :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    /* ... */
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  /* ... */
 }
 ```
 
@@ -97,39 +91,73 @@ The `wdc.json` file controls where components are placed.
 
 ```json
 {
-    "$schema": "https://ui.wdcoders.com/schema.json",
-    "style": "default",
-    "tailwind": {
-        "config": "tailwind.config.js",
-        "css": "src/styles.css",
-        "baseColor": "slate",
-        "cssVariables": true
-    },
-    "aliases": {
-        "utils": "@shared/utils",
-        "components": "@shared/components",
-        "ui": "@shared/components/ui"
-    },
-    "paths": {
-        "root": "./",
-        "components": "src/app/shared/components",
-        "ui": "src/app/shared/components/ui",
-        "utils": "src/app/shared/utils",
-        "directives": "src/app/shared/directives",
-        "theme": "src/styles.css"
-    }
+  "$schema": "https://ui.wdcoders.com/schema.json",
+  "style": "default",
+  "tailwind": {
+    "config": "tailwind.config.js",
+    "css": "src/styles.css",
+    "baseColor": "slate",
+    "cssVariables": true
+  },
+  "aliases": {
+    "utils": "@shared/utils",
+    "components": "@shared/components",
+    "ui": "@shared/components/ui"
+  },
+  "paths": {
+    "root": "./",
+    "components": "src/app/shared/components",
+    "ui": "src/app/shared/components/ui",
+    "utils": "src/app/shared/utils",
+    "directives": "src/app/shared/directives",
+    "theme": "src/styles.css"
+  }
 }
 ```
 
-## 🤝 Contributing
+## 🤝 How to Contribute
 
-We welcome contributions! Please see our [Contributing Guide](https://www.google.com/search?q=CONTRIBUTING.md) for details.
+We love contributions! Whether it's fixing a bug, adding a new component, or improving documentation, here is how you can help:
 
-1. Fork the repository.
-2. Create your feature branch (`git checkout -b feature/amazing-component`).
-3. Commit your changes.
-4. Push to the branch.
-5. Open a Pull Request.
+### 1. Fork and Clone
+
+1.  **Fork** the repository to your own GitHub account.
+2.  **Clone** the project to your local machine:
+
+    ```bash
+    git clone https://github.com/wdc-ui/wdc-ui-ng.git
+    ```
+
+### 2. Create a Branch
+
+Always create a new branch for your changes. Do not work on the `master` branch directly.
+
+```bash
+git checkout -b feature/amazing-new-component
+```
+
+### 3. Make Changes
+
+- Add your component in src/app/shared/components/ui.
+- Ensure the code follows the project style.
+- Test your changes locally.
+
+### 4. Push and Pull Request
+
+1. Push your branch to your forked repository:
+
+   ```
+   git push origin feature/amazing-new-component
+   ```
+
+2. Open a Pull Request (PR) on the main `wdc-ui-ng` repository.
+3. Describe your changes clearly.
+
+### 5. Review
+
+Once you submit a PR, the maintainers will review your code. We might ask for some changes. Once everything looks good, we will merge it into the main codebase!
+
+Thank you for helping us build the best Angular UI library! 🚀
 
 ## 📄 License
 

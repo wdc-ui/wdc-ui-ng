@@ -1,59 +1,168 @@
-# UiNgWd
+# @wdc-ui/ng
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0.
+**Beautifully designed components that you can copy and paste into your Angular applications.**
 
-## Development server
+`@wdc-ui/ng` is not a component library. It's a collection of re-usable components that you copy and paste into your apps. It is built on top of **Angular (Signals + Standalone)**, **Tailwind CSS**, and **Angular CDK**.
 
-To start a local development server, run:
+## 🚀 Why copy/paste?
 
-```bash
-ng serve
-```
+The idea behind this project is to give you full control over your code. Instead of installing a massive dependency like `@material/core` where styling is hard to override, `@wdc-ui/ng` delivers the source code directly to your project.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **100% Customizable:** The code is yours. Change the styles, logic, or structure.
+- **Modern Angular:** Built with **Signals**, **Control Flow** (`@if`, `@for`), and **Standalone Components**.
+- **Accessible:** Uses `@angular/cdk` for complex interactions (Dialogs, Popovers, etc.).
+- **Lightweight:** You only add the components you need.
 
-## Code scaffolding
+## 🛠️ Prerequisites
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Before you start, ensure you have an Angular project setup with Tailwind CSS.
 
-```bash
-ng generate component component-name
-```
+1. **Angular v17+** (Required for Signals support)
+2. **Tailwind CSS** installed and configured.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 📦 Installation & Setup
 
-```bash
-ng generate --help
-```
+You don't need to install this package as a dependency. You use the CLI to initialize and add components.
 
-## Building
+### 1. Initialize the project
 
-To build the project run:
+Run the `init` command to set up the base configuration, theme, and utility files.
 
 ```bash
-ng build
+npx @wdc-ui/ng@latest init
+
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+**What this does:**
 
-## Running unit tests
+1. Creates a `wdc.json` config file.
+2. Creates a `theme.css` file and imports it into your global styles.
+3. Installs required dependencies (`clsx`, `tailwind-merge`, `@angular/cdk`).
+4. Downloads base utility helpers (e.g., `cn.ts`) to `src/app/shared/utils`.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### 2. Add Components
+
+Once initialized, you can add components to your project.
 
 ```bash
-ng test
+npx @wdc-ui/ng@latest add button
+
 ```
 
-## Running end-to-end tests
+This will download the `ButtonComponent` source code into `src/app/shared/components/ui/button`.
 
-For end-to-end (e2e) testing, run:
+## 🧩 Available Components
+
+You can add any of the following components:
+
+- `button`
+- `input`
+- `card`
+- `dialog`
+- `drawer`
+- `select`
+- `popover`
+- `tooltip`
+- `accordion`
+- `calendar`
+- `sidebar`
+- `data-table`
+- `image-gallery`
+
+## 🎨 Theming
+
+When you run `init`, a `theme.css` file is created. This uses CSS variables for strict separation of concerns.
+
+```css
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  /* ... */
+}
+```
+
+To customize the look of your app, simply change these CSS variable values.
+
+## ⚙️ Configuration (`wdc.json`)
+
+The `wdc.json` file controls where components are placed.
+
+```json
+{
+  "$schema": "https://ui.wdcoders.com/schema.json",
+  "style": "default",
+  "tailwind": {
+    "config": "tailwind.config.js",
+    "css": "src/styles.css",
+    "baseColor": "slate",
+    "cssVariables": true
+  },
+  "aliases": {
+    "utils": "@shared/utils",
+    "components": "@shared/components",
+    "ui": "@shared/components/ui"
+  },
+  "paths": {
+    "root": "./",
+    "components": "src/app/shared/components",
+    "ui": "src/app/shared/components/ui",
+    "utils": "src/app/shared/utils",
+    "directives": "src/app/shared/directives",
+    "theme": "src/styles.css"
+  }
+}
+```
+
+## 🤝 How to Contribute
+
+We love contributions! Whether it's fixing a bug, adding a new component, or improving documentation, here is how you can help:
+
+### 1. Fork and Clone
+
+1.  **Fork** the repository to your own GitHub account.
+2.  **Clone** the project to your local machine:
+
+    ```bash
+    git clone https://github.com/wdc-ui/wdc-ui-ng.git
+    ```
+
+### 2. Create a Branch
+
+Always create a new branch for your changes. Do not work on the `master` branch directly.
 
 ```bash
-ng e2e
+git checkout -b feature/amazing-new-component
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### 3. Make Changes
 
-## Additional Resources
+- Add your component in src/app/shared/components/ui.
+- Ensure the code follows the project style.
+- Test your changes locally.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### 4. Push and Pull Request
+
+1. Push your branch to your forked repository:
+
+   ```
+   git push origin feature/amazing-new-component
+   ```
+
+2. Open a Pull Request (PR) on the main `wdc-ui-ng` repository.
+3. Describe your changes clearly.
+
+### 5. Review
+
+Once you submit a PR, the maintainers will review your code. We might ask for some changes. Once everything looks good, we will merge it into the main codebase!
+
+Thank you for helping us build the best Angular UI library! 🚀
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](https://www.google.com/search?q=LICENSE) file for details.
+
+---
+
+Built by [wdcoders](https://wdcoders.com/)
