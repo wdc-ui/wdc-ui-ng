@@ -1,53 +1,72 @@
 <div class="space-y-12">
-  <div id="example">
+  <div>
     <h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Text Input</h1>
     <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">
       Commonly used text input component.
     </p>
   </div>
 
+  <section id="installation" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Installation</h2>
+    <app-code-viewer
+      title="Bash"
+      [bashCode]="snippets.install"
+      activeTabCode="bash"
+    ></app-code-viewer>
+  </section>
+
   <!-- Example Section -->
-  <section id="example" class="scroll-mt-20">
+  <section id="examples" class="scroll-mt-20">
     <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Examples</h2>
     <div class="flex flex-col gap-6">
-      <app-doc-preview title="Input Fields" description="Basic form controls" [showCode]="false">
-        <div preview class="grid gap-6 w-full max-w-md">
-          <wdc-input
-            label="Email Address"
-            type="email"
-            placeholder="user@example.com"
-            error="Please enter a valid email address"
-            [required]="true"
-          ></wdc-input>
-
-          <wdc-input
-            label="Password"
-            type="password"
-            placeholder="*******"
-            hint="Must be at least 8 characters long"
-          ></wdc-input>
-
-          <wdc-input placeholder="Search...">
-            <svg
-              wdcPrefix
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <circle cx="11" cy="11" r="8" />
-              <path d="m21 21-4.3-4.3" />
-            </svg>
-          </wdc-input>
-
-          <wdc-input label="Amount" type="number" size="lg" placeholder="0.00"></wdc-input>
+      <app-doc-preview
+        title="Basic"
+        description="Standard input fields with labels."
+        [htmlCode]="snippets.basic.html"
+      >
+        <div preview class="w-full flex flex-col max-w-sm space-y-4">
+          <wdc-input label="Email" type="email" placeholder="name@example.com" />
+          <wdc-input label="Disabled" disabled="true" placeholder="Cannot type here" />
         </div>
       </app-doc-preview>
+
+      <app-doc-preview
+        title="With Icons"
+        description="Add icons or text as prefix/suffix. Padding adjusts automatically."
+        [htmlCode]="snippets.icons.html"
+      >
+        <div preview class="w-full flex flex-col max-w-sm space-y-4">
+          <wdc-input label="Username" placeholder="Enter username">
+            <wdc-icon wdcPrefix name="person" size="18" />
+          </wdc-input>
+
+          <wdc-input label="Amount" type="number" placeholder="0.00">
+            <span wdcSuffix class="text-xs font-bold">USD</span>
+          </wdc-input>
+        </div>
+      </app-doc-preview>
+
+      <app-doc-preview
+        title="Validation"
+        description="Visual feedback for error and success states."
+        [htmlCode]="snippets.validation.html"
+      >
+        <div preview class="w-full max-w-sm space-y-4">
+          <wdc-input label="Email" error="Please enter a valid email." [ngModel]="email" />
+          <wdc-input label="Username" [success]="true" [ngModel]="username" />
+        </div>
+      </app-doc-preview>
+
+      <app-doc-preview
+        title="Password"
+        description="Built-in visibility toggle for password fields."
+        [htmlCode]="snippets.password.html"
+      >
+        <div preview class="w-full max-w-sm">
+          <wdc-input label="Password" type="password" placeholder="••••••••" />
+        </div>
+      </app-doc-preview>
+
       <app-doc-preview
         title="Login Form"
         description="Login form with input fields"
@@ -118,25 +137,15 @@
     </div>
   </section>
 
-  <section id="bash" class="scroll-mt-20">
-    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Installation</h2>
-    <app-code-viewer
-      title="Bash"
-      [bashCode]="snippets.install"
-      activeTabCode="bash"
-    ></app-code-viewer>
-  </section>
-
-  <section id="code" class="scroll-mt-20">
-    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Code</h2>
-    <app-code-viewer [htmlCode]="snippets.html" [tsCode]="snippets.ts"></app-code-viewer>
-  </section>
-
   <!-- API Section -->
-  <section id="api" class="scroll-mt-20">
+  <section id="references" class="scroll-mt-20">
     <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">API Reference</h2>
     <div class="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
       <app-reference [data]="references"></app-reference>
     </div>
   </section>
+
+  <wdc-note-block type="success" title="SEO & Accessibility">
+    <wdc-markdown [content]="markdownData"></wdc-markdown>
+  </wdc-note-block>
 </div>

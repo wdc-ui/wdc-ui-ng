@@ -7,8 +7,6 @@ import {
   ElementRef,
   HostListener,
   inject,
-  contentChild,
-  TemplateRef,
   viewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -17,15 +15,15 @@ import { cva } from 'class-variance-authority';
 import { cn } from '@shared/utils/cn';
 import { IconComponent } from '../icon/icon.component';
 
-// --- STYLES (Matching Input) ---
+// --- STYLES (Exact match with Input: Border-2, No Ring) ---
 const selectTriggerVariants = cva(
-  'flex w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-0 focus:ring-ring focus:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200',
+  'flex w-full items-center justify-between rounded-md border-2 bg-background px-3 py-2 text-sm transition-colors placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
   {
     variants: {
       status: {
-        default: 'border-input focus:border-ring',
-        error: 'border-danger focus:ring-danger text-danger',
-        success: 'border-success focus:ring-success text-success',
+        default: 'border-input focus:border-primary', // Default gray -> Primary on focus
+        error: 'border-danger text-danger focus:border-danger',
+        success: 'border-success text-success focus:border-success',
       },
       size: {
         sm: 'h-8 text-xs',
@@ -62,7 +60,7 @@ const selectTriggerVariants = cva(
         >
           {{ label() }}
           @if (required()) {
-            <span class="text-danger">*</span>
+            <span class="text-danger ml-0.5">*</span>
           }
         </label>
       }
@@ -73,6 +71,7 @@ const selectTriggerVariants = cva(
         (click)="toggle()"
         [class]="computedTriggerClass()"
         [attr.aria-expanded]="isOpen()"
+        class="group"
       >
         <span [class.text-muted-foreground]="!value()" class="truncate">
           {{ displayLabel() || placeholder() }}
@@ -80,43 +79,38 @@ const selectTriggerVariants = cva(
 
         <wdc-icon
           name="keyboard_arrow_down"
-          size="20"
-          class="text-muted-foreground transition-transform duration-200"
+          size="18"
+          class="text-muted-foreground transition-transform duration-200 opacity-50 group-hover:opacity-100"
           [class.rotate-180]="isOpen()"
         />
       </button>
 
       @if (isOpen()) {
         <div
-          class="absolute z-50 max-h-60 w-full overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md animate-in fade-in zoom-in-95"
+          class="absolute z-50 mt-1 w-full overflow-hidden rounded-md border border-border bg-popover text-popover-foreground shadow-md animate-in fade-in zoom-in-95"
         >
           @if (searchable()) {
-            <div class="sticky top-0 z-10 bg-popover p-2 border-b">
-              <div class="relative">
-                <wdc-icon
-                  name="search"
-                  size="16"
-                  class="absolute left-2 top-1/2 -translate-y-1/2 text-muted-foreground"
-                />
-                <input
-                  #searchInput
-                  type="text"
-                  [ngModel]="searchQuery()"
-                  (ngModelChange)="onSearch($event)"
-                  placeholder="Search..."
-                  class="w-full rounded-sm border border-input bg-background py-1.5 pl-8 pr-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary"
-                  (click)="$event.stopPropagation()"
-                />
-              </div>
+            <div class="flex items-center border-b px-3 py-2 sticky top-0 bg-popover z-10">
+              <wdc-icon name="search" size="16" class="mr-2 opacity-50" />
+              <input
+                #searchInput
+                type="text"
+                [ngModel]="searchQuery()"
+                (ngModelChange)="onSearch($event)"
+                class="flex h-4 w-full rounded-md bg-transparent text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+                placeholder="Search..."
+                (click)="$event.stopPropagation()"
+              />
             </div>
           }
 
-          <div class="max-h-52 overflow-y-auto p-1 space-y-0.5">
+          <div class="max-h-60 overflow-y-auto p-1">
             @for (item of filteredOptions(); track $index) {
               <div
                 (click)="selectOption(item)"
-                class="relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground"
-                [attr.data-selected]="isSelected(item)"
+                class="relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                [class.bg-accent]="isSelected(item)"
+                [class.text-accent-foreground]="isSelected(item)"
               >
                 {{ getOptionLabel(item) }}
 
@@ -129,7 +123,7 @@ const selectTriggerVariants = cva(
             }
 
             @if (filteredOptions().length === 0) {
-              <div class="py-6 text-center text-sm text-muted-foreground">No results found.</div>
+              <div class="py-6 text-center text-sm text-muted-foreground">No options found.</div>
             }
           </div>
         </div>
@@ -138,6 +132,10 @@ const selectTriggerVariants = cva(
       @if (error()) {
         <p class="text-[0.8rem] font-medium text-danger animate-in slide-in-from-top-1">
           {{ error() }}
+        </p>
+      } @else if (success()) {
+        <p class="text-[0.8rem] font-medium text-success animate-in slide-in-from-top-1">
+          Looks good!
         </p>
       } @else if (hint()) {
         <p class="text-[0.8rem] text-muted-foreground">{{ hint() }}</p>
@@ -154,10 +152,10 @@ export class SelectComponent implements ControlValueAccessor {
   placeholder = input<string>('Select an option');
 
   options = input.required<any[]>();
-  bindLabel = input<string>('label'); // Key to display
-  bindValue = input<string>('value'); // Key to save
+  bindLabel = input<string>('label');
+  bindValue = input<string>('value');
 
-  searchable = input<boolean>(true); // Enable/Disable search
+  searchable = input<boolean>(true);
 
   error = input<string | null>(null);
   success = input<boolean>(false);
@@ -174,18 +172,13 @@ export class SelectComponent implements ControlValueAccessor {
   searchQuery = signal('');
 
   // --- COMPUTED ---
-
-  // Filter Options based on Search
   filteredOptions = computed(() => {
     const query = this.searchQuery().toLowerCase();
     const allOptions = this.options();
-
     if (!query) return allOptions;
-
     return allOptions.filter((item) => this.getOptionLabel(item).toLowerCase().includes(query));
   });
 
-  // Calculate Trigger Styles
   computedTriggerClass = computed(() =>
     cn(
       selectTriggerVariants({
@@ -196,23 +189,19 @@ export class SelectComponent implements ControlValueAccessor {
     ),
   );
 
-  // Find Label for the selected Value
   displayLabel = computed(() => {
     const val = this.value();
     if (val === null || val === undefined || val === '') return '';
 
-    // Find the full object from the original options
     const selectedOption = this.options().find((opt) => {
       const optVal = this.getOptionValue(opt);
-      // Loose equality check for number/string mismatch (e.g. "1" == 1)
       return optVal == val;
     });
 
     return selectedOption ? this.getOptionLabel(selectedOption) : val;
   });
 
-  // --- HELPER METHODS ---
-
+  // --- HELPERS ---
   getOptionLabel(item: any): string {
     if (item && typeof item === 'object') {
       return item[this.bindLabel()] || '';
@@ -222,7 +211,6 @@ export class SelectComponent implements ControlValueAccessor {
 
   getOptionValue(item: any): any {
     if (item && typeof item === 'object') {
-      // If bindValue is provided, return that property, else return whole object
       return this.bindValue() ? item[this.bindValue()] : item;
     }
     return item;
@@ -233,13 +221,11 @@ export class SelectComponent implements ControlValueAccessor {
   }
 
   // --- ACTIONS ---
-
   toggle() {
     if (this.isDisabled()) return;
     this.isOpen.update((v) => !v);
 
     if (this.isOpen() && this.searchable()) {
-      // Focus search input after animation frame
       setTimeout(() => this.searchInput()?.nativeElement.focus(), 50);
     } else {
       this.onTouched();
@@ -251,14 +237,13 @@ export class SelectComponent implements ControlValueAccessor {
     this.value.set(val);
     this.onChange(val);
     this.isOpen.set(false);
-    this.searchQuery.set(''); // Reset search
+    this.searchQuery.set('');
   }
 
   onSearch(query: string) {
     this.searchQuery.set(query);
   }
 
-  // Close on Click Outside
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event) {
     if (!this.elementRef.nativeElement.contains(event.target)) {
@@ -267,14 +252,12 @@ export class SelectComponent implements ControlValueAccessor {
     }
   }
 
-  // --- CVA BOILERPLATE ---
+  // --- CVA ---
   onChange = (val: any) => {};
   onTouched = () => {};
-
   writeValue(obj: any): void {
     this.value.set(obj);
   }
-
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }

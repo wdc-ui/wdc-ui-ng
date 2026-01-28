@@ -5,7 +5,9 @@ import {
   computed,
   forwardRef,
   contentChild,
+  booleanAttribute,
   Directive,
+  effect,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -14,21 +16,27 @@ import {
   ReactiveFormsModule,
   FormsModule,
 } from '@angular/forms';
-import { cva } from 'class-variance-authority';
+import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@shared/utils/cn';
-import { InputPrefixDirective, InputSuffixDirective } from './input.directives';
 import { IconComponent } from '../../icon/icon.component';
-export * from './input.directives';
 
-// --- 2. VARIANTS CONFIGURATION ---
+// --- DIRECTIVES (Keep these simple) ---
+@Directive({ selector: '[wdcPrefix]', standalone: true })
+export class InputPrefixDirective {}
+
+@Directive({ selector: '[wdcSuffix]', standalone: true })
+export class InputSuffixDirective {}
+
+// --- VARIANT CONFIGURATION ---
 const inputVariants = cva(
-  'flex w-full rounded-md border-2 border-input bg-background py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200',
+  // Base Styles: border-2, no focus ring, transition
+  'flex w-full rounded-md border-2 bg-background py-2 text-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
   {
     variants: {
       status: {
-        default: 'border-input focus-visible:border-ring',
-        error: 'border-danger focus-visible:ring-danger text-danger placeholder:text-danger/60',
-        success: 'border-success focus-visible:ring-success text-success', // Green Border & Text
+        default: 'border-input focus-visible:border-primary', // Default gray -> Primary on focus
+        error: 'border-danger focus-visible:border-danger',
+        success: 'border-success focus-visible:border-success',
       },
       size: {
         sm: 'h-8 text-xs px-2',
@@ -48,7 +56,6 @@ let nextId = 0;
 @Component({
   selector: 'wdc-input',
   standalone: true,
-  // Directives ko import karna zaroori hai
   imports: [
     CommonModule,
     FormsModule,
@@ -75,7 +82,7 @@ let nextId = 0;
         >
           {{ label() }}
           @if (required()) {
-            <span class="text-danger">*</span>
+            <span class="text-danger ml-0.5">*</span>
           }
         </label>
       }
@@ -93,13 +100,16 @@ let nextId = 0;
           [value]="value()"
           [placeholder]="placeholder()"
           [disabled]="isDisabled()"
+          [required]="required()"
+          [attr.aria-invalid]="!!error()"
+          [attr.aria-describedby]="hintId"
           (input)="onInput($event)"
           (blur)="onBlur()"
           [class]="computedClass()"
         />
 
         <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
-          <div class="text-muted-foreground pointer-events-none">
+          <div class="text-muted-foreground pointer-events-none flex items-center">
             <ng-content select="[wdcSuffix]"></ng-content>
           </div>
 
@@ -108,12 +118,14 @@ let nextId = 0;
               type="button"
               (click)="togglePassword()"
               [disabled]="isDisabled()"
-              class="text-muted-foreground hover:text-foreground focus:outline-none disabled:opacity-50 flex items-center"
+              tabindex="-1"
+              [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'"
+              class="text-muted-foreground hover:text-foreground focus:outline-none disabled:opacity-50 flex items-center cursor-pointer"
             >
               @if (showPassword()) {
-                <wdc-icon name="visibility_off" size="18"></wdc-icon>
+                <wdc-icon name="visibility_off" size="18" />
               } @else {
-                <wdc-icon name="visibility" size="18"></wdc-icon>
+                <wdc-icon name="visibility" size="18" />
               }
             </button>
           }
@@ -121,15 +133,21 @@ let nextId = 0;
       </div>
 
       @if (error()) {
-        <p class="text-[0.8rem] font-medium text-danger animate-in slide-in-from-top-1">
+        <p
+          [id]="hintId"
+          class="text-[0.8rem] font-medium text-danger animate-in slide-in-from-top-1"
+        >
           {{ error() }}
         </p>
       } @else if (success()) {
-        <p class="text-[0.8rem] font-medium text-success animate-in slide-in-from-top-1">
+        <p
+          [id]="hintId"
+          class="text-[0.8rem] font-medium text-success animate-in slide-in-from-top-1"
+        >
           {{ successMessage() }}
         </p>
       } @else if (hint()) {
-        <p class="text-[0.8rem] text-muted-foreground">
+        <p [id]="hintId" class="text-[0.8rem] text-muted-foreground">
           {{ hint() }}
         </p>
       }
@@ -138,28 +156,49 @@ let nextId = 0;
 })
 export class InputComponent implements ControlValueAccessor {
   inputId = `wdc-input-${nextId++}`;
+  hintId = `${this.inputId}-hint`;
 
-  // Detect projected content automatically
+  // Content Children Signals (Angular 17+)
   prefixContent = contentChild(InputPrefixDirective);
   suffixContent = contentChild(InputSuffixDirective);
 
+  // Inputs
   label = input<string>('');
   type = input<'text' | 'email' | 'password' | 'number'>('text');
   placeholder = input<string>('');
+  hint = input<string | null>(null);
 
-  // Validation Inputs
+  // Validation
   error = input<string | null>(null);
   success = input<boolean | undefined>(false);
   successMessage = input<string>('Looks good!');
+  required = input(false, { transform: booleanAttribute });
+  disabled = input(false, { transform: booleanAttribute });
 
-  hint = input<string | null>(null);
-  required = input<boolean>(false);
+  // Styling
   class = input<string>('');
   size = input<'sm' | 'default' | 'lg'>('default');
 
+  // Internal State
   value = signal<string>('');
   isDisabled = signal<boolean>(false);
   showPassword = signal<boolean>(false);
+
+  // 1. Rename internal signal to 'innerValue'
+  protected innerValue = signal<string>('');
+
+  // 2. Add an Input alias for 'value' so users can pass static values
+  inputValue = input<string>('', { alias: 'value' });
+
+  constructor() {
+    // 3. Sync the Input value to the Internal state
+    effect(() => {
+      // Agar user ne <wdc-input value="test"> diya hai, to usse update karo
+      if (this.inputValue() !== this.innerValue()) {
+        this.innerValue.set(this.inputValue());
+      }
+    });
+  }
 
   currentType = computed(() => {
     if (this.type() === 'password' && this.showPassword()) return 'text';
@@ -167,25 +206,22 @@ export class InputComponent implements ControlValueAccessor {
   });
 
   computedClass = computed(() => {
-    // 1. Determine Status
+    const hasPrefix = !!this.prefixContent();
+    const hasSuffix = !!this.suffixContent() || this.type() === 'password';
+
     let currentStatus: 'default' | 'error' | 'success' = 'default';
     if (this.error()) currentStatus = 'error';
     else if (this.success()) currentStatus = 'success';
 
-    // 2. Determine Padding Logic (Auto-Detect)
-    const hasPrefix = !!this.prefixContent();
-
-    const hasSuffix = !!this.suffixContent() || this.type() === 'password';
-
     return cn(
       inputVariants({ status: currentStatus, size: this.size() }),
-      hasPrefix ? 'pl-10' : '', // Auto Left Padding
-      hasSuffix ? 'pr-10' : '', // Auto Right Padding
+      hasPrefix ? 'pl-10' : '',
+      hasSuffix ? 'pr-10' : '',
       this.class(),
     );
   });
 
-  // --- CVA Boilerplate ---
+  // --- CVA ---
   onChange = (value: string) => {};
   onTouched = () => {};
 
@@ -200,6 +236,7 @@ export class InputComponent implements ControlValueAccessor {
   }
   writeValue(value: string): void {
     this.value.set(value || '');
+    // this.innerValue.set(value || '');
   }
   registerOnChange(fn: any): void {
     this.onChange = fn;

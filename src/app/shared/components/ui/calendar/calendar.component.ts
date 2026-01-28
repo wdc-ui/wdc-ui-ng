@@ -54,10 +54,10 @@ export class CalendarCellDirective {
         class="flex flex-col sm:flex-row items-center justify-between p-4 gap-4 border-b border-border bg-muted/20"
       >
         <div class="flex items-center gap-2 order-2 sm:order-1">
-          <wdc-button variant="ghost" size="icon" class="h-8 w-8" (click)="addMonths(-1)">
+          <wdc-button variant="ghost" [icon]="true" class="h-8 w-8" (click)="addMonths(-1)">
             <wdc-icon name="chevron_left" size="18" />
           </wdc-button>
-          <wdc-button variant="ghost" size="icon" class="h-8 w-8" (click)="addMonths(1)">
+          <wdc-button variant="ghost" [icon]="true" class="h-8 w-8" (click)="addMonths(1)">
             <wdc-icon name="chevron_right" size="18" />
           </wdc-button>
           <wdc-button variant="outline" size="sm" (click)="goToToday()">Today</wdc-button>

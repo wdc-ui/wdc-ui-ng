@@ -78,10 +78,10 @@ import { Category } from 'src/app/core/models/category.model';
 
         <ng-template wdcCell="actions" [dataType]="categories()" let-row>
           <div class="flex justify-end gap-2">
-            <wdc-button variant="ghost" size="icon" (click)="openEditDrawer(row)">
+            <wdc-button variant="ghost" [icon]="true" (click)="openEditDrawer(row)">
               <wdc-icon name="edit" size="16" class="text-blue-600" />
             </wdc-button>
-            <wdc-button variant="ghost" size="icon" (click)="deleteCategory(row)">
+            <wdc-button variant="ghost" [icon]="true" (click)="deleteCategory(row)">
               <wdc-icon name="delete" size="16" class="text-red-600" />
             </wdc-button>
           </div>

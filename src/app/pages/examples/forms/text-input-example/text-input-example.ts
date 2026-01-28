@@ -20,6 +20,9 @@ import {
 } from '@wdc-ui/ng/card/card.component';
 import { ButtonComponent } from '@wdc-ui/ng/button/button.component';
 import { IconComponent } from '@wdc-ui/ng/icon/icon.component';
+import { TocService } from 'src/app/core/services/toc.service';
+import { NoteBlockComponent } from '@shared/components/note-block/note-block.component';
+import { MarkdownViewerComponent } from '@shared/components/markdown-viewer/markdown-viewer.component';
 
 @Component({
   selector: 'app-forms-example',
@@ -37,11 +40,16 @@ import { IconComponent } from '@wdc-ui/ng/icon/icon.component';
     ReactiveFormsModule,
     IconComponent,
     INPUT_COMPONENTS,
+    NoteBlockComponent,
+    MarkdownViewerComponent,
   ],
   templateUrl: './text-input-example.html',
 })
 export class TextInputExample {
   private fb = inject(FormBuilder);
+  private tocService = inject(TocService);
+  email = 'input-value';
+  username = 'wdcoders';
 
   isLoading = signal(false);
 
@@ -50,6 +58,15 @@ export class TextInputExample {
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
+
+  ngOnInit() {
+    // Manually define the headings for this page
+    this.tocService.setToc([
+      { id: 'installation', title: 'Installation', level: 'h2' },
+      { id: 'examples', title: 'Examples', level: 'h2' },
+      { id: 'references', title: 'API References', level: 'h2' },
+    ]);
+  }
 
   getErrorMessage(controlName: string): string | null {
     const control = this.loginForm.get(controlName);
@@ -78,47 +95,95 @@ export class TextInputExample {
     }
   }
 
+  markdownData = `Using [id] on the input and [for] on the label ensures screen readers associate the label correctly. The aria-invalid and aria-describedby attributes help accessibility tools announce errors automatically.`;
+
   references: ReferenceItem[] = [
     {
       input: 'label',
       type: 'string',
-      default: 'undefined',
-      description: 'Label text for the input field.',
+      default: "''",
+      description: 'Text label displayed above the input.',
     },
     {
       input: 'type',
-      type: `'text' | 'email' | 'password' | 'number' | 'tel' | 'url'`,
-      default: `'text'`,
-      description: 'Type of input field.',
+      type: "'text' | 'email' | 'password' | 'number'",
+      default: "'text'",
+      description: 'HTML input type.',
     },
     {
       input: 'placeholder',
       type: 'string',
-      default: 'undefined',
-      description: 'Placeholder text for the input field.',
+      default: "''",
+      description: 'Placeholder text.',
     },
     {
       input: 'error',
       type: 'string | null',
       default: 'null',
-      description: 'Error message to display when input is invalid.',
+      description: 'Error message text. Changes border color to red.',
     },
     {
-      input: 'disabled',
+      input: 'success',
       type: 'boolean',
       default: 'false',
-      description: 'Whether the input field is disabled.',
+      description: 'If true, changes border color to green.',
     },
     {
-      input: 'value',
-      type: 'string',
-      default: 'undefined',
-      description: 'Value of the input field.',
+      input: 'hint',
+      type: 'string | null',
+      default: 'null',
+      description: 'Helper text displayed below the input.',
+    },
+    {
+      input: 'size',
+      type: "'sm' | 'default' | 'lg'",
+      default: "'default'",
+      description: 'Controls the height and font size.',
     },
   ];
 
   snippets = {
     install: dedent(`${AppSetting.addComponentCmd} input`),
+    basic: {
+      html: dedent(`
+      <div class="grid w-full max-w-sm items-center gap-4">
+        <wdc-input label="Email" type="email" placeholder="Email" />
+        <wdc-input label="Disabled" disabled placeholder="Disabled" />
+      </div>`),
+      ts: ``,
+    },
+    icons: {
+      html: dedent(`
+      <div class="grid w-full max-w-sm gap-4">
+        <wdc-input label="Username" placeholder="Enter username">
+          <wdc-icon wdcPrefix name="person" size="18" />
+        </wdc-input>
+
+        <wdc-input label="Amount" type="number" placeholder="0.00">
+           <span wdcSuffix class="text-xs font-bold">USD</span>
+        </wdc-input>
+      </div>`),
+      ts: dedent(`import { IconComponent } from '@wdc-ui/components';`),
+    },
+    validation: {
+      html: dedent(`
+      <div class="grid w-full max-w-sm gap-4">
+        <wdc-input label="Email" error="Please enter a valid email." value="invalid-email" />
+        <wdc-input label="Username" [success]="true" value="wdcoders" />
+      </div>
+    `),
+      ts: ``,
+    },
+    password: {
+      html: dedent(`
+      <wdc-input 
+        label="Password" 
+        type="password" 
+        placeholder="••••••••" 
+      />
+    `),
+      ts: ``,
+    },
     html: dedent(`<wdc-text-input
             [ngModel]="nameValue()"
             (ngModelChange)="nameValue.set($event)"

@@ -54,10 +54,15 @@
 
           <wdc-badge color="danger" [count]="150" [maxCount]="99">Emails</wdc-badge>
 
-          <wdc-button [gradient]="true" size="icon" color="danger" rounded="full" class="relative">
+          <wdc-button
+            [gradient]="true"
+            [icon]="true"
+            color="danger"
+            rounded="full"
+            class="relative"
+          >
             <wdc-icon name="notifications" size="16"></wdc-icon>
-            <wdc-badge class="absolute -top-2 -right-2" size="icon" color="primary" [count]="3">
-            </wdc-badge>
+            <wdc-badge class="absolute -top-2 -right-2" color="primary" [count]="3"> </wdc-badge>
           </wdc-button>
         </div>
       </app-doc-preview>

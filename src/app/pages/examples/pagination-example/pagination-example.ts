@@ -74,7 +74,7 @@ export class PaginationExample {
           </wdc-dropdown>
           
           <wdc-dropdown>
-            <wdc-button wdcDropdownTrigger variant="ghost" size="icon" class="rounded-full">
+            <wdc-button wdcDropdownTrigger variant="ghost" [icon]="true" class="rounded-full">
               <wdc-icon name="more_vert" />
             </wdc-button>
 

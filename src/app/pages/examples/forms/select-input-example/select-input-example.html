@@ -6,34 +6,52 @@
     </p>
   </div>
 
+  <section id="installation" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Installation</h2>
+    <app-code-viewer
+      title="Bash"
+      [bashCode]="singleSnippets.install"
+      activeTabCode="bash"
+    ></app-code-viewer>
+  </section>
+
   <!-- Example Section -->
-  <section id="example" class="scroll-mt-20">
-    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Examples</h2>
+  <section id="singleSelection" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">
+      Single Selection Examples
+    </h2>
     <div class="flex flex-col gap-6">
       <app-doc-preview
-        title="Select Field"
-        description="Select and multi select input fields"
-        [showCode]="false"
+        title="Basic Usage"
+        description="Select from a simple array of strings."
+        [htmlCode]="singleSnippets.basic.html"
       >
-        <div preview class="grid gap-6 w-full max-w-md">
-          <section class="space-y-4">
-            <h2 class="font-bold text-xl border-b pb-2">2. Template Driven (Simple Strings)</h2>
+        <div preview class="w-full max-w-xs">
+          <wdc-select
+            label="Favorite Fruit"
+            [options]="fruits"
+            [(ngModel)]="selectedFruit"
+            placeholder="Select a fruit"
+          />
+        </div>
+      </app-doc-preview>
 
-            <wdc-select
-              label="Favorite Fruit"
-              [options]="fruits"
-              [(ngModel)]="selectedFruit"
-              placeholder="Pick a fruit"
-            ></wdc-select>
+      <app-doc-preview
+        title="Binding Objects"
+        description="Bind to object properties using bindLabel and bindValue."
+        [htmlCode]="singleSnippets.objects.html"
+        [tsCode]="singleSnippets.objects.ts"
+      >
+        <div preview class="w-full max-w-xs">
+          <wdc-select
+            label="Assign User"
+            [options]="users"
+            bindLabel="name"
+            bindValue="id"
+            placeholder="Select user..."
+          />
 
-            <p class="text-sm">
-              Selected: <strong>{{ selectedFruit }}</strong>
-            </p>
-          </section>
-
-          <section class="space-y-4">
-            <h2 class="font-bold text-xl border-b pb-2">3. Signal Binding</h2>
-
+          <section class="mt-6">
             <wdc-select
               label="Signal Country"
               [options]="countries"
@@ -45,92 +63,105 @@
               hint="Binding directly to a WritableSignal"
             ></wdc-select>
 
-            <p class="text-sm">
+            <p class="text-sm mb-2">
               Signal Value: <strong>{{ countrySig() }}</strong>
             </p>
             <wdc-button (click)="countrySig.set('CA')" size="sm" variant="outline"
               >Set Canada</wdc-button
             >
           </section>
-
-          <form [formGroup]="form" class="space-y-4">
-            <wdc-select
-              label="Assign To (Searchable)"
-              placeholder="Search for a user..."
-              [options]="users"
-              bindLabel="name"
-              bindValue="id"
-              formControlName="userId"
-              [searchable]="true"
-              [error]="
-                form.get('userId')?.invalid && form.get('userId')?.touched
-                  ? 'Please select a user'
-                  : null
-              "
-            ></wdc-select>
-
-            <wdc-select
-              label="Priority"
-              [options]="priorities"
-              formControlName="priority"
-              [searchable]="false"
-            ></wdc-select>
-
-            <wdc-button type="submit" class="w-full" (click)="onSubmit()">Submit</wdc-button>
-          </form>
         </div>
       </app-doc-preview>
+
       <app-doc-preview
-        title="Multi Select Field"
-        description="Select and multi select input fields"
-        [showCode]="false"
+        title="States"
+        description="Error, success, and disabled states."
+        [htmlCode]="singleSnippets.validation.html"
       >
-        <div preview class="grid gap-6 w-full max-w-md">
-          <form [formGroup]="multSelectform" class="space-y-6">
-            <wdc-multi-select
-              label="Add Team Members"
-              placeholder="Search members..."
-              [options]="members"
-              bindLabel="name"
-              bindValue="id"
-              formControlName="team"
-              [error]="
-                multSelectform.get('team')?.invalid && multSelectform.get('team')?.touched
-                  ? 'Select at least 2 members'
-                  : null
-              "
-            ></wdc-multi-select>
+        <div preview class="w-full flex flex-col max-w-xs space-y-4">
+          <wdc-select
+            label="Country"
+            [options]="['USA', 'India', 'Canada']"
+            error="Please select your country."
+          />
+          <wdc-select label="Disabled" [options]="[]" disabled="true" placeholder="Cannot select" />
+        </div>
+      </app-doc-preview>
+    </div>
+  </section>
+  <!-- Example Section -->
+  <section id="multiSelection" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">
+      Multiple Selection Examples
+    </h2>
+    <div class="flex flex-col gap-6">
+      <app-doc-preview
+        title="Basic Usage"
+        description="Select multiple strings from a list."
+        [htmlCode]="multiSnippets.basic.html"
+      >
+        <div preview class="w-full max-w-sm">
+          <wdc-multi-select
+            label="Skills"
+            [options]="['Angular', 'React', 'Node.js', 'Python', 'Go']"
+            placeholder="Select skills..."
+          />
+        </div>
+      </app-doc-preview>
 
-            <wdc-multi-select
-              label="Skills Required"
-              [options]="skills"
-              formControlName="skills"
-              placeholder="Select skills"
-            ></wdc-multi-select>
-            <wdc-button type="submit" class="w-full" (click)="onTeamSubmit()"
-              >Create Team</wdc-button
-            >
-          </form>
+      <app-doc-preview
+        title="Object Binding"
+        description="Select multiple objects by binding ID."
+        [htmlCode]="multiSnippets.objects.html"
+        [tsCode]="multiSnippets.objects.ts"
+      >
+        <div preview class="w-full max-w-sm">
+          <wdc-multi-select
+            label="Team Members"
+            [options]="[
+              { id: 1, name: 'Kamal Kumar' },
+              { id: 2, name: 'Rahul Sharma' },
+              { id: 3, name: 'Priya Singh' },
+              { id: 4, name: 'Amit Verma' },
+            ]"
+            bindLabel="name"
+            bindValue="id"
+            placeholder="Add members..."
+          />
+        </div>
+      </app-doc-preview>
 
-          <div class="bg-gray-100 p-4 rounded text-xs">
-            <strong>Form Value:</strong>
-            <pre>{{ multSelectform.value | json }}</pre>
-          </div>
+      <app-doc-preview
+        title="Validation States"
+        description="Consistent error styling with single select and inputs."
+        [htmlCode]="multiSnippets.validation.html"
+      >
+        <div preview class="w-full max-w-sm space-y-4">
+          <wdc-multi-select
+            label="Required Tags"
+            [options]="['Bug', 'Feature', 'Enhancement']"
+            error="At least one tag is required."
+          />
+          <wdc-multi-select
+            label="Approved By"
+            [options]="['Manager', 'Director', 'VP']"
+            [success]="true"
+            [ngModel]="['Manager']"
+          />
         </div>
       </app-doc-preview>
     </div>
   </section>
 
-  <section id="code" class="scroll-mt-20">
-    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Code</h2>
-    <app-code-viewer [htmlCode]="snippets.html" [tsCode]="snippets.ts"></app-code-viewer>
-  </section>
-
   <!-- API Section -->
-  <section id="api" class="scroll-mt-20">
+  <section id="singleReferences" class="scroll-mt-20">
     <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">API Reference</h2>
     <div class="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
       <app-reference [data]="references"></app-reference>
     </div>
   </section>
+
+  <wdc-note-block type="success" title="SEO & Accessibility">
+    <wdc-markdown [content]="noteContent"></wdc-markdown>
+  </wdc-note-block>
 </div>

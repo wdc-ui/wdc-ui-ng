@@ -60,3 +60,19 @@ code {
     background-color: hsl(var(--muted-foreground) / 0.5);
   }
 }
+
+.markdown-container ul {
+  list-style-type: disc !important;
+  margin-left: 1.5rem !important;
+  margin-bottom: 1rem;
+}
+
+.markdown-container ol {
+  list-style-type: decimal !important;
+  margin-left: 1.5rem !important;
+  margin-bottom: 1rem;
+}
+
+.markdown-container li {
+  margin-bottom: 0.25rem;
+}
