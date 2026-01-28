@@ -6,10 +6,78 @@
     </p>
   </div>
 
+  <section id="installation" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Installation</h2>
+    <app-code-viewer
+      title="Bash"
+      [bashCode]="snippets.install"
+      activeTabCode="bash"
+    ></app-code-viewer>
+  </section>
+
   <!-- Example Section -->
-  <section id="example" class="scroll-mt-20">
+  <section id="examples" class="scroll-mt-20">
     <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Examples</h2>
     <div class="flex flex-col gap-6">
+      <app-doc-preview
+        title="Basic Card"
+        description="Displays a header, content, and footer."
+        [htmlCode]="snippets.basic.html"
+      >
+        <div preview class="w-full max-w-sm">
+          <wdc-card>
+            <wdc-card-header>
+              <wdc-card-title>Notifications</wdc-card-title>
+              <wdc-card-description>You have 3 unread messages.</wdc-card-description>
+            </wdc-card-header>
+
+            <wdc-card-content>
+              <div class="flex items-center gap-4 rounded-md border border-border p-4 bg-muted/10">
+                <wdc-icon name="notifications" size="24" />
+                <div class="flex-1 space-y-1">
+                  <p class="text-sm font-medium leading-none">Push Notifications</p>
+                  <p class="text-sm text-muted-foreground">Send notifications to device.</p>
+                </div>
+              </div>
+            </wdc-card-content>
+
+            <wdc-card-footer>
+              <wdc-button class="w-full">
+                <wdc-icon name="check" size="16" class="mr-2" />
+                Mark all as read
+              </wdc-button>
+            </wdc-card-footer>
+          </wdc-card>
+        </div>
+      </app-doc-preview>
+
+      <app-doc-preview
+        title="Form Layout"
+        description="Using card to group form inputs and actions."
+        [htmlCode]="snippets.login.html"
+      >
+        <div preview class="w-full max-w-md">
+          <wdc-card>
+            <wdc-card-header>
+              <wdc-card-title class="text-2xl">Login</wdc-card-title>
+              <wdc-card-description
+                >Enter your email below to login to your account.</wdc-card-description
+              >
+            </wdc-card-header>
+
+            <wdc-card-content class="flex flex-col space-y-4">
+              <wdc-input label="Email" type="email" placeholder="m@example.com" />
+              <wdc-input label="Password" type="password" placeholder="••••••••" />
+            </wdc-card-content>
+
+            <wdc-card-footer class="flex justify-between gap-2">
+              <wdc-button variant="ghost">Cancel</wdc-button>
+              <wdc-button>Sign In</wdc-button>
+            </wdc-card-footer>
+          </wdc-card>
+        </div>
+      </app-doc-preview>
+
       <app-doc-preview
         title="Simple Card"
         description="Simple Card with header, body, and footer."
@@ -83,7 +151,7 @@
         [htmlCode]="snippets.image.html"
         [tsCode]="snippets.image.ts"
       >
-        <div preview class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div preview class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <wdc-card>
             <wdc-card-content class="p-0">
               <img
@@ -107,7 +175,7 @@
           <wdc-card>
             <wdc-card-content class="p-0">
               <img
-                src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
                 alt="Card Image"
                 class="w-full h-48 object-cover rounded-t-xl"
               />
@@ -121,39 +189,83 @@
                   asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
                   quas!
                 </p>
-                <div class="flex gap-2 mt-4">
-                  <wdc-button size="sm" variant="link">Read More</wdc-button>
-                </div>
+              </div>
+            </wdc-card-content>
+          </wdc-card>
+          <wdc-card>
+            <wdc-card-content class="p-0">
+              <img
+                src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                alt="Card Image"
+                class="w-full h-48 object-cover rounded-t-xl"
+              />
+              <div class="p-6">
+                <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                  Image Card
+                </h3>
+                <p class="text-slate-600 text-sm dark:text-slate-400">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed
+                  consequuntur error repudiandae numquam deserunt quisquam repellat libero
+                  asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
+                  quas!
+                </p>
               </div>
             </wdc-card-content>
           </wdc-card>
         </div>
       </app-doc-preview>
       <app-doc-preview
-        title="Stat Cards"
-        description="Cards designed to display key statistics with trends."
-        [htmlCode]="snippets.stat.html"
-        [tsCode]="snippets.stat.ts"
+        title="Dashboard Stats"
+        description="Example of using cards for high-level metrics."
+        [htmlCode]="snippets.dashboard.html"
       >
-        <div preview class="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <wdc-card>
-            <wdc-card-content>
-              <p class="text-sm text-slate-600 dark:text-slate-400">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur
-                error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam
-                nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
-              </p>
-            </wdc-card-content>
-          </wdc-card>
-          <!-- <wdc-stat-card
-            label="Total Revenue"
-            value="$128,450"
-            [trend]="12.5"
-            trendLabel="vs last month"
-            iconName="money_bag"
-          ></wdc-stat-card> -->
+        <div preview class="w-full">
+          <div class="grid gap-4 md:grid-cols-3">
+            <wdc-card>
+              <wdc-card-header
+                class="w-full flex flex-row items-center justify-between space-y-0 pb-2"
+              >
+                <wdc-card-title class="text-sm font-medium">Total Revenue</wdc-card-title>
+                <wdc-icon name="attach_money" size="20" class="text-muted-foreground" />
+              </wdc-card-header>
+              <wdc-card-content>
+                <div class="text-2xl font-bold">$45,231.89</div>
+                <p class="text-xs text-muted-foreground">+20.1% from last month</p>
+              </wdc-card-content>
+            </wdc-card>
+
+            <wdc-card>
+              <wdc-card-header
+                class="w-full flex flex-row items-center justify-between space-y-0 pb-2"
+              >
+                <wdc-card-title class="text-sm font-medium">Subscriptions</wdc-card-title>
+                <wdc-icon name="people" size="20" class="text-muted-foreground" />
+              </wdc-card-header>
+              <wdc-card-content>
+                <div class="text-2xl font-bold">+2350</div>
+                <p class="text-xs text-muted-foreground">+180.1% from last month</p>
+              </wdc-card-content>
+            </wdc-card>
+
+            <wdc-card>
+              <wdc-card-header
+                class="w-full flex flex-row items-center justify-between space-y-0 pb-2"
+              >
+                <wdc-card-title class="text-sm font-medium">Active Now</wdc-card-title>
+                <wdc-icon name="show_chart" size="20" class="text-muted-foreground" />
+              </wdc-card-header>
+              <wdc-card-content>
+                <div class="text-2xl font-bold">+573</div>
+                <p class="text-xs text-muted-foreground">+201 since last hour</p>
+              </wdc-card-content>
+            </wdc-card>
+          </div>
         </div>
       </app-doc-preview>
     </div>
   </section>
+
+  <wdc-note-block type="success" title="SEO & Accessibility">
+    <wdc-markdown [content]="markdownData"></wdc-markdown>
+  </wdc-note-block>
 </div>

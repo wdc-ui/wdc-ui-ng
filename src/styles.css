@@ -61,6 +61,28 @@ code {
   }
 }
 
+@layer base {
+  :root {
+    /* 1. New Primary Color (e.g., Orange) */
+    /* Format: H S L (No commas, just spaces) */
+    --primary: 24.6 95% 53.1%;
+    --primary-foreground: 60 9.1% 97.8%; /* Text color on top of primary */
+
+    /* 2. New Secondary Color (e.g., Teal) */
+    --secondary: 173 58% 39%;
+    --secondary-foreground: 0 0% 100%;
+  }
+
+  /* Optional: Override for Dark Mode too */
+  .dark {
+    --primary: 20.5 90.2% 48.2%;
+    --primary-foreground: 60 9.1% 97.8%;
+
+    --secondary: 173 58% 39%;
+    --secondary-foreground: 0 0% 100%;
+  }
+}
+
 .markdown-container ul {
   list-style-type: disc !important;
   margin-left: 1.5rem !important;
