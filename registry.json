@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-01-27T09:06:11.655Z",
+  "generatedAt": "2026-01-28T12:21:42.009Z",
   "items": [
     {
       "name": "utils",
@@ -302,6 +302,11 @@
         {
           "name": "checkbox",
           "path": "src/app/shared/components/ui/forms/checkbox",
+          "target": "src/app/shared/components/ui/forms"
+        },
+        {
+          "name": "date-picker",
+          "path": "src/app/shared/components/ui/forms/date-picker",
           "target": "src/app/shared/components/ui/forms"
         },
         {
@@ -622,6 +627,22 @@
           "name": "tooltip.directive.ts",
           "path": "src/app/shared/components/ui/tooltip/tooltip.directive.ts",
           "target": "src/app/shared/components/ui/tooltip"
+        }
+      ]
+    },
+    {
+      "name": "uxcalendar",
+      "type": "components:ui",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge",
+        "class-variance-authority"
+      ],
+      "files": [
+        {
+          "name": "calendar.component.ts",
+          "path": "src/app/shared/components/ui/uxcalendar/calendar.component.ts",
+          "target": "src/app/shared/components/ui/uxcalendar"
         }
       ]
     }
