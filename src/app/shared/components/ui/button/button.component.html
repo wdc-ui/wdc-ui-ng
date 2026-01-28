@@ -1,9 +1,20 @@
 @if (href()) {
-  <a [routerLink]="href()" [target]="target()" [class]="computedClasses()">
+  <a
+    [routerLink]="href()"
+    [target]="target()"
+    [rel]="computedRel()"
+    [attr.aria-label]="ariaLabel()"
+    [class]="computedClasses()"
+  >
     <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
   </a>
 } @else {
-  <button [type]="type()" [disabled]="disabled() || loading()" [class]="computedClasses()">
+  <button
+    [type]="type()"
+    [disabled]="disabled() || loading()"
+    [attr.aria-label]="ariaLabel()"
+    [class]="computedClasses()"
+  >
     @if (loading()) {
       <svg
         class="animate-spin -ml-1 mr-2 h-4 w-4"

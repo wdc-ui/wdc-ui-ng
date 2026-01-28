@@ -1,10 +1,10 @@
 import { Component, input, computed, booleanAttribute } from '@angular/core';
-import { CommonModule } from '@angular/common'; // For ngTemplateOutlet
+import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@shared/utils/cn';
 
-// --- CVA CONFIGURATION (Same as before, Logic doesn't change) ---
+// --- CVA CONFIGURATION ---
 const buttonVariants = cva(
   'inline-flex cursor-pointer items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98]',
   {
@@ -32,17 +32,26 @@ const buttonVariants = cva(
       size: {
         default: 'h-10 px-4 py-2',
         sm: 'h-9 rounded-md px-3',
-        lg: 'h-11 rounded-md px-8',
-        icon: 'h-10 w-10',
+        lg: 'h-12 rounded-md px-8 text-lg',
       },
       rounded: {
-        default: 'rounded-lg',
+        default: 'rounded-md',
         full: 'rounded-full',
         none: 'rounded-none',
       },
+      // Controls square aspect ratio for icons
+      icon: {
+        true: 'px-0 shrink-0',
+        false: '',
+      },
     },
     compoundVariants: [
-      // SOLID COLORS
+      // --- ICON SIZE MAPPING (Size + Icon = Square) ---
+      { size: 'default', icon: true, class: 'w-10' },
+      { size: 'sm', icon: true, class: 'w-9' },
+      { size: 'lg', icon: true, class: 'w-12' },
+
+      // --- SOLID COLORS ---
       {
         variant: 'solid',
         color: 'primary',
@@ -92,7 +101,7 @@ const buttonVariants = cva(
         class: 'bg-dark text-dark-foreground hover:bg-dark/90',
       },
 
-      // OUTLINE COLORS
+      // --- OUTLINE COLORS ---
       {
         variant: 'outline',
         color: 'primary',
@@ -134,7 +143,7 @@ const buttonVariants = cva(
         class: 'border-dark text-dark hover:bg-dark hover:text-dark-foreground',
       },
 
-      // GRADIENTS
+      // --- GRADIENTS ---
       {
         gradient: true,
         color: 'primary',
@@ -164,6 +173,7 @@ const buttonVariants = cva(
       size: 'default',
       rounded: 'default',
       gradient: false,
+      icon: false,
     },
   },
 );
@@ -177,25 +187,29 @@ export type ButtonProps = VariantProps<typeof buttonVariants>;
   templateUrl: './button.component.html',
 })
 export class ButtonComponent {
-  // Style Inputs
+  // --- Styling Inputs ---
   variant = input<ButtonProps['variant']>('solid');
   color = input<ButtonProps['color']>('primary');
   size = input<ButtonProps['size']>('default');
   rounded = input<ButtonProps['rounded']>('default');
 
-  // Boolean inputs with transform (so users can just write <wdc-button gradient>)
+  // --- Boolean Features ---
   gradient = input(false, { transform: booleanAttribute });
+  icon = input(false, { transform: booleanAttribute });
   loading = input(false, { transform: booleanAttribute });
   disabled = input(false, { transform: booleanAttribute });
 
-  // Functional Inputs
+  // --- Functional Inputs ---
   type = input<'button' | 'submit' | 'reset'>('button');
+  userClass = input<string>('', { alias: 'class' });
+
+  // --- SEO & Navigation Inputs ---
   href = input<string | undefined>(undefined);
   target = input<string>('_self');
-  userClass = input<string>('', { alias: 'class' }); // Alias 'class' to merge properly
+  rel = input<string | undefined>(undefined); // [SEO] For external links
+  ariaLabel = input<string | undefined>(undefined, { alias: 'aria-label' }); // [SEO/A11y] For icon buttons
 
-  // --- COMPUTED SIGNAL FOR CLASSES ---
-  // Automatic updates when any signal changes
+  // --- Computed Classes ---
   computedClasses = computed(() => {
     return cn(
       buttonVariants({
@@ -204,8 +218,16 @@ export class ButtonComponent {
         size: this.size(),
         rounded: this.rounded(),
         gradient: this.gradient(),
+        icon: this.icon(),
       }),
-      this.userClass(), // Merge user classes
+      this.userClass(),
     );
+  });
+
+  // --- Helper: Auto-calculate 'rel' for security ---
+  computedRel = computed(() => {
+    if (this.rel()) return this.rel();
+    // If opening in new tab, ensure security best practices
+    return this.target() === '_blank' ? 'noopener noreferrer' : undefined;
   });
 }

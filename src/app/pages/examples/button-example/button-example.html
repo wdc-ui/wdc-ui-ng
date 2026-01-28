@@ -6,189 +6,134 @@
     </p>
   </div>
 
-  <div class="flex flex-col gap-6">
-    <app-doc-preview
-      title="Solid Variants"
-      description="Various colors and solid variants"
-      [htmlCode]="snippets.variants.html"
-      [tsCode]="snippets.variants.ts"
-    >
-      <div preview class="flex flex-wrap gap-4 items-center justify-center">
-        <wdc-button color="primary">Primary</wdc-button>
-        <wdc-button color="secondary">Secondary</wdc-button>
-        <wdc-button color="success">Success</wdc-button>
-        <wdc-button color="danger">Danger</wdc-button>
-        <wdc-button color="warning">Warning</wdc-button>
-        <wdc-button color="info">Info</wdc-button>
-        <wdc-button color="light">Light</wdc-button>
-        <wdc-button color="dark">Dark</wdc-button>
-      </div>
-    </app-doc-preview>
+  <section id="installation" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Installation</h2>
+    <app-code-viewer
+      title="Bash"
+      [bashCode]="snippets.install"
+      activeTabCode="bash"
+    ></app-code-viewer>
+  </section>
 
-    <app-doc-preview
-      title="Outline Variants"
-      description="Various colors and outline variants"
-      [htmlCode]="snippets.outline.html"
-    >
-      <div preview class="flex flex-wrap gap-4 items-center justify-center">
-        <wdc-button variant="outline" color="primary">Primary</wdc-button>
-        <wdc-button variant="outline" color="secondary">Secondary</wdc-button>
-        <wdc-button variant="outline" color="success">Success</wdc-button>
-        <wdc-button variant="outline" color="danger">Danger</wdc-button>
-        <wdc-button variant="outline" color="warning">Warning</wdc-button>
-        <wdc-button variant="outline" color="info">Info</wdc-button>
-        <wdc-button variant="outline" color="light">Light</wdc-button>
-        <wdc-button variant="outline" color="dark">Dark</wdc-button>
-      </div>
-    </app-doc-preview>
+  <section id="examples" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Examples</h2>
+    <div class="flex flex-col gap-6">
+      <app-doc-preview
+        title="Solid Colors"
+        description="Standard solid color buttons."
+        [htmlCode]="snippets.variants.html"
+        [tsCode]="snippets.variants.ts"
+      >
+        <div preview class="flex flex-wrap gap-4 items-center justify-center">
+          <wdc-button color="primary">Primary</wdc-button>
+          <wdc-button color="secondary">Secondary</wdc-button>
+          <wdc-button color="success">Success</wdc-button>
+          <wdc-button color="danger">Danger</wdc-button>
+          <wdc-button color="warning">Warning</wdc-button>
+          <wdc-button color="info">Info</wdc-button>
+          <wdc-button color="light">Light</wdc-button>
+          <wdc-button color="dark">Dark</wdc-button>
+        </div>
+      </app-doc-preview>
 
-    <app-doc-preview
-      title="Gradient"
-      description="Gradient buttons with various colors"
-      [htmlCode]="snippets.gradient.html"
-    >
-      <div preview class="flex flex-wrap gap-4 items-center justify-center">
-        <wdc-button [gradient]="true" color="primary">Gradient Blue</wdc-button>
-        <wdc-button [gradient]="true" color="secondary">Gradient Purple</wdc-button>
-        <wdc-button [gradient]="true" color="success">Gradient Green</wdc-button>
-        <app-saparator></app-saparator>
-        <wdc-button [gradient]="true" color="primary" rounded="full">Gradient Blue</wdc-button>
-        <app-saparator></app-saparator>
-        <wdc-button [gradient]="true" size="icon" color="danger" rounded="full">
-          <wdc-icon name="favorite" size="16"></wdc-icon>
-        </wdc-button>
-      </div>
-    </app-doc-preview>
+      <app-doc-preview
+        title="Outline Variants"
+        description="Various colors and outline variants"
+        [htmlCode]="snippets.outline.html"
+      >
+        <div preview class="flex flex-wrap gap-4 items-center justify-center">
+          <wdc-button variant="outline" color="primary">Primary</wdc-button>
+          <wdc-button variant="outline" color="secondary">Secondary</wdc-button>
+          <wdc-button variant="outline" color="success">Success</wdc-button>
+          <wdc-button variant="outline" color="danger">Danger</wdc-button>
+          <wdc-button variant="outline" color="warning">Warning</wdc-button>
+          <wdc-button variant="outline" color="info">Info</wdc-button>
+          <wdc-button variant="outline" color="light">Light</wdc-button>
+          <wdc-button variant="outline" color="dark">Dark</wdc-button>
+        </div>
+      </app-doc-preview>
 
-    <app-doc-preview
-      title="Sizes"
-      description="Small, medium, and large buttons"
-      [htmlCode]="snippets.sizes.html"
-    >
-      <div preview class="flex flex-wrap gap-4 items-center justify-center">
-        <wdc-button size="sm">Small</wdc-button>
-        <wdc-button size="default">Default</wdc-button>
-        <wdc-button size="lg">Large</wdc-button>
-      </div>
-    </app-doc-preview>
+      <app-doc-preview
+        title="Gradient"
+        description="Gradient buttons with various colors"
+        [htmlCode]="snippets.gradient.html"
+      >
+        <div preview class="flex flex-wrap gap-4 items-center justify-center">
+          <wdc-button [gradient]="true" color="primary">Gradient Blue</wdc-button>
+          <wdc-button [gradient]="true" color="secondary">Gradient Purple</wdc-button>
+          <wdc-button [gradient]="true" color="success">Gradient Green</wdc-button>
+          <app-saparator></app-saparator>
+          <wdc-button [gradient]="true" color="primary" rounded="full">Gradient Blue</wdc-button>
+          <app-saparator></app-saparator>
+          <wdc-button [gradient]="true" [icon]="true" color="danger" rounded="full">
+            <wdc-icon name="favorite" size="16"></wdc-icon>
+          </wdc-button>
+        </div>
+      </app-doc-preview>
 
-    <app-doc-preview
-      title="Properties"
-      description="Rounded, Icon Only, Disabled, Loading"
-      [htmlCode]="snippets.properties.html"
-    >
-      <div preview class="flex flex-wrap gap-4 items-center justify-center">
-        <wdc-button rounded="full">Rounded Pill</wdc-button>
-        <wdc-button rounded="full" variant="outline">Rounded Outline</wdc-button>
-        <app-saparator></app-saparator>
-        <wdc-button size="icon">
-          <wdc-icon name="favorite" size="18"></wdc-icon>
-        </wdc-button>
-        <wdc-button size="icon" color="danger" variant="outline" rounded="full">
-          <wdc-icon name="delete" size="18"></wdc-icon>
-        </wdc-button>
-        <app-saparator></app-saparator>
-        <wdc-button>
-          <wdc-icon name="add"></wdc-icon>
-          Add New
-        </wdc-button>
-        <app-saparator></app-saparator>
-        <wdc-button [loading]="true">Loading</wdc-button>
-        <wdc-button [disabled]="true">Disabled</wdc-button>
-        <wdc-button variant="link" color="success">Link</wdc-button>
-      </div>
-    </app-doc-preview>
-  </div>
+      <app-doc-preview
+        title="Sizes"
+        description="Available in small, default, and large sizes."
+        [htmlCode]="snippets.sizes.html"
+      >
+        <div preview class="flex flex-wrap gap-4 items-center justify-center">
+          <wdc-button size="sm">Small</wdc-button>
+          <wdc-button size="default">Default</wdc-button>
+          <wdc-button size="lg">Large</wdc-button>
+        </div>
+      </app-doc-preview>
 
-  <!-- API Section -->
-  <section id="api" class="scroll-mt-20">
+      <app-doc-preview
+        title="Icon Buttons"
+        description="Use the icon input to create square buttons for icons. Works with all sizes."
+        [htmlCode]="snippets.icons.html"
+      >
+        <div preview class="flex flex-wrap gap-4 items-center justify-center">
+          <wdc-button size="sm" icon>
+            <wdc-icon name="add"></wdc-icon>
+          </wdc-button>
+          <wdc-button size="default" icon>
+            <wdc-icon name="add"></wdc-icon>
+          </wdc-button>
+          <wdc-button size="lg" icon>
+            <wdc-icon name="add"></wdc-icon>
+          </wdc-button>
+        </div>
+      </app-doc-preview>
+
+      <app-doc-preview
+        title="Properties"
+        description="Rounded, Icon Only, Disabled, Loading"
+        [htmlCode]="snippets.properties.html"
+      >
+        <div preview class="flex flex-wrap gap-4 items-center justify-center">
+          <wdc-button rounded="full">Rounded Pill</wdc-button>
+          <wdc-button rounded="full" variant="outline">Rounded Outline</wdc-button>
+          <app-saparator></app-saparator>
+          <wdc-button [icon]="true">
+            <wdc-icon name="favorite" size="18"></wdc-icon>
+          </wdc-button>
+          <wdc-button [icon]="true" color="danger" variant="outline" rounded="full">
+            <wdc-icon name="delete" size="18"></wdc-icon>
+          </wdc-button>
+          <app-saparator></app-saparator>
+          <wdc-button>
+            <wdc-icon name="add"></wdc-icon>
+            Add New
+          </wdc-button>
+          <app-saparator></app-saparator>
+          <wdc-button [loading]="true">Loading</wdc-button>
+          <wdc-button [disabled]="true">Disabled</wdc-button>
+          <wdc-button variant="link" color="success">Link</wdc-button>
+        </div>
+      </app-doc-preview>
+    </div>
+  </section>
+
+  <section id="references" class="scroll-mt-20">
     <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">API Reference</h2>
     <div class="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
       <app-reference [data]="references"></app-reference>
     </div>
   </section>
-
-  <!-- <section id="api" class="scroll-mt-24 space-y-6">
-    <div class="flex items-center gap-2">
-      <h2 class="text-xl font-semibold text-slate-900 dark:text-white">API Reference</h2>
-      <div class="h-px flex-1 bg-slate-200 dark:bg-slate-800"></div>
-    </div>
-
-    <div class="overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800">
-      <div class="overflow-x-auto">
-        <table class="w-full text-left text-sm">
-          <thead
-            class="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800"
-          >
-            <tr>
-              <th class="px-6 py-4 font-semibold text-slate-900 dark:text-white">Input</th>
-              <th class="px-6 py-4 font-semibold text-slate-900 dark:text-white">Type</th>
-              <th class="px-6 py-4 font-semibold text-slate-900 dark:text-white">Default</th>
-              <th class="px-6 py-4 font-semibold text-slate-900 dark:text-white">Description</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-200 dark:divide-slate-800 bg-white dark:bg-slate-950">
-            <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors">
-              <td class="px-6 py-4 font-mono text-indigo-600 dark:text-indigo-400">variant</td>
-              <td class="px-6 py-4 font-mono text-slate-600 dark:text-slate-400">
-                'primary' | 'secondary' | ...
-              </td>
-              <td class="px-6 py-4 font-mono text-slate-500">'primary'</td>
-              <td class="px-6 py-4 text-slate-600 dark:text-slate-400">
-                The visual style variant of the button.
-              </td>
-            </tr>
-            <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors">
-              <td class="px-6 py-4 font-mono text-indigo-600 dark:text-indigo-400">size</td>
-              <td class="px-6 py-4 font-mono text-slate-600 dark:text-slate-400">
-                'sm' | 'md' | 'lg'
-              </td>
-              <td class="px-6 py-4 font-mono text-slate-500">'md'</td>
-              <td class="px-6 py-4 text-slate-600 dark:text-slate-400">The size of the button.</td>
-            </tr>
-            <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors">
-              <td class="px-6 py-4 font-mono text-indigo-600 dark:text-indigo-400">loading</td>
-              <td class="px-6 py-4 font-mono text-slate-600 dark:text-slate-400">boolean</td>
-              <td class="px-6 py-4 font-mono text-slate-500">false</td>
-              <td class="px-6 py-4 text-slate-600 dark:text-slate-400">
-                Shows a spinner and disables the button.
-              </td>
-            </tr>
-            <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors">
-              <td class="px-6 py-4 font-mono text-indigo-600 dark:text-indigo-400">icon</td>
-              <td class="px-6 py-4 font-mono text-slate-600 dark:text-slate-400">
-                string | TemplateRef
-              </td>
-              <td class="px-6 py-4 font-mono text-slate-500">undefined</td>
-              <td class="px-6 py-4 text-slate-600 dark:text-slate-400">Icon content to display.</td>
-            </tr>
-            <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors">
-              <td class="px-6 py-4 font-mono text-indigo-600 dark:text-indigo-400">rounded</td>
-              <td class="px-6 py-4 font-mono text-slate-600 dark:text-slate-400">boolean</td>
-              <td class="px-6 py-4 font-mono text-slate-500">false</td>
-              <td class="px-6 py-4 text-slate-600 dark:text-slate-400">
-                Makes the button fully rounded (pill shape).
-              </td>
-            </tr>
-            <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors">
-              <td class="px-6 py-4 font-mono text-indigo-600 dark:text-indigo-400">iconOnly</td>
-              <td class="px-6 py-4 font-mono text-slate-600 dark:text-slate-400">boolean</td>
-              <td class="px-6 py-4 font-mono text-slate-500">false</td>
-              <td class="px-6 py-4 text-slate-600 dark:text-slate-400">
-                Optimizes padding for single icon buttons.
-              </td>
-            </tr>
-            <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors">
-              <td class="px-6 py-4 font-mono text-indigo-600 dark:text-indigo-400">disabled</td>
-              <td class="px-6 py-4 font-mono text-slate-600 dark:text-slate-400">boolean</td>
-              <td class="px-6 py-4 font-mono text-slate-500">false</td>
-              <td class="px-6 py-4 text-slate-600 dark:text-slate-400">
-                Disables the button interaction.
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section> -->
 </div>
