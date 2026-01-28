@@ -53,6 +53,7 @@ export class DocsLayout {
         { label: 'Checkbox Input', route: '/docs/checkbox-input', exact: false },
         { label: 'Radio Input', route: '/docs/radio-input', exact: false },
         { label: 'Select Input', route: '/docs/select-input', exact: false },
+        { label: 'Date Picker', route: '/docs/date-picker', exact: false },
         { label: 'Various Input', route: '/docs/various-input', exact: false },
       ],
     },

@@ -141,6 +141,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'date-picker',
+        loadComponent: () =>
+          import('./pages/examples/forms/datepicker-example/datepicker-example').then(
+            (m) => m.DatepickerExample,
+          ),
+      },
+      {
         path: 'select-input',
         loadComponent: () =>
           import('./pages/examples/forms/select-input-example/select-input-example').then(

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppSetting } from '@shared/constants/app.constant';
 import { ReferenceItem, UiConfig } from '@shared/components/ui.config';
@@ -13,6 +13,11 @@ import {
   CardDescriptionComponent,
 } from '@wdc-ui/ng/card/card.component';
 import { ButtonComponent } from '@wdc-ui/ng/button/button.component';
+import { InputComponent } from '@wdc-ui/ng/forms/input/input.component';
+import { IconComponent } from '@wdc-ui/ng/icon/icon.component';
+import { NoteBlockComponent } from '@shared/components/note-block/note-block.component';
+import { MarkdownViewerComponent } from '@shared/components/markdown-viewer/markdown-viewer.component';
+import { TocService } from 'src/app/core/services/toc.service';
 
 @Component({
   selector: 'app-card-example',
@@ -27,11 +32,25 @@ import { ButtonComponent } from '@wdc-ui/ng/button/button.component';
     UiConfig,
     CardDescriptionComponent,
     ButtonComponent,
+    InputComponent,
+    IconComponent,
+    NoteBlockComponent,
+    MarkdownViewerComponent,
   ],
   templateUrl: './card-example.html',
 })
 export class CardExample {
   AppSetting = AppSetting;
+  private tocService = inject(TocService);
+
+  ngOnInit() {
+    // Manually define the headings for this page
+    this.tocService.setToc([
+      { id: 'installation', title: 'Installation', level: 'h2' },
+      { id: 'examples', title: 'Examples', level: 'h2' },
+    ]);
+  }
+
   htmlCode = `<wdc-card [header]="true" title="Simple Card" subtitle="With a subheader">
             <ng-container card-body>
               <p class="text-slate-600 text-sm dark:text-slate-400">
@@ -87,6 +106,55 @@ export class CardExample {
   tsCode = `import { CardComponent, StatCardComponent } from '${AppSetting.importPath}';`;
 
   snippets = {
+    install: dedent(`${AppSetting.addComponentCmd} card`),
+    basic: {
+      html: dedent(`
+      <div class="w-full max-w-sm">
+        <wdc-card>
+          <wdc-card-header>
+            <wdc-card-title>Notifications</wdc-card-title>
+            <wdc-card-description>You have 3 unread messages.</wdc-card-description>
+          </wdc-card-header>
+          
+          <wdc-card-content>
+            <div class="flex items-center gap-4 rounded-md border p-4">
+              <wdc-icon name="bell" size="24" />
+              <div class="flex-1 space-y-1">
+                <p class="text-sm font-medium leading-none">Push Notifications</p>
+                <p class="text-sm text-muted-foreground">Send notifications to device.</p>
+              </div>
+            </div>
+          </wdc-card-content>
+          
+          <wdc-card-footer>
+             <wdc-button class="w-full">Mark all as read</wdc-button>
+          </wdc-card-footer>
+        </wdc-card>
+      </div>`),
+      ts: `import { CARD_COMPONENTS } from '@wdc-ui/components';`,
+    },
+    login: {
+      html: dedent(`
+      <div class="w-full max-w-md">
+        <wdc-card>
+          <wdc-card-header>
+            <wdc-card-title class="text-2xl">Login</wdc-card-title>
+            <wdc-card-description>Enter your credentials to access your account.</wdc-card-description>
+          </wdc-card-header>
+          
+          <wdc-card-content class="space-y-4">
+            <wdc-input label="Email" type="email" placeholder="m@example.com" />
+            <wdc-input label="Password" type="password" />
+          </wdc-card-content>
+          
+          <wdc-card-footer class="flex justify-between">
+            <wdc-button variant="ghost">Cancel</wdc-button>
+            <wdc-button>Sign In</wdc-button>
+          </wdc-card-footer>
+        </wdc-card>
+      </div>`),
+      ts: ``,
+    },
     simple: {
       html: dedent(`<wdc-card [header]="true" title="Simple Card" subtitle="With a subheader">
             <ng-container card-body>
@@ -161,37 +229,48 @@ export class CardExample {
           })
           export class ExampleComponent {}`),
     },
-    stat: {
-      html: dedent(`<wdc-stat-card
-            label="Total Revenue"
-            value="$128,450"
-            [trend]="12.5"
-            trendLabel="vs last month"
-            iconName="money_bag"
-          ></wdc-stat-card>
-          <wdc-stat-card
-            label="Total Orders"
-            value="1,245"
-            [trend]="8.2"
-            trendLabel="vs last month"
-            iconName="chart_data"
-          ></wdc-stat-card>
-          <wdc-stat-card
-            label="Active Users"
-            [value]="45"
-            [trend]="-2.5"
-            trendLabel="vs yesterday"
-            iconName="group"
-          ></wdc-stat-card>`),
-      ts: dedent(`
-          import { Component } from '@angular/core';
-          import { StatCardComponent } from '${AppSetting.libName}';
-          @Component({
-              selector: 'app-example',
-              standalone: true,
-              imports: [StatCardComponent],
-          })
-          export class ExampleComponent {}`),
+    dashboard: {
+      html: dedent(`
+      <div class="grid gap-4 md:grid-cols-3 w-full">
+        <wdc-card>
+          <wdc-card-header class="flex flex-row items-center justify-between space-y-0 pb-2">
+            <wdc-card-title class="text-sm font-medium">Total Revenue</wdc-card-title>
+            <wdc-icon name="dollar_sign" size="16" class="text-muted-foreground" />
+          </wdc-card-header>
+          <wdc-card-content>
+            <div class="text-2xl font-bold">$45,231.89</div>
+            <p class="text-xs text-muted-foreground">+20.1% from last month</p>
+          </wdc-card-content>
+        </wdc-card>
+
+        <wdc-card>
+          <wdc-card-header class="flex flex-row items-center justify-between space-y-0 pb-2">
+            <wdc-card-title class="text-sm font-medium">Subscriptions</wdc-card-title>
+            <wdc-icon name="users" size="16" class="text-muted-foreground" />
+          </wdc-card-header>
+          <wdc-card-content>
+            <div class="text-2xl font-bold">+2350</div>
+            <p class="text-xs text-muted-foreground">+180.1% from last month</p>
+          </wdc-card-content>
+        </wdc-card>
+
+        <wdc-card>
+          <wdc-card-header class="flex flex-row items-center justify-between space-y-0 pb-2">
+            <wdc-card-title class="text-sm font-medium">Active Now</wdc-card-title>
+            <wdc-icon name="activity" size="16" class="text-muted-foreground" />
+          </wdc-card-header>
+          <wdc-card-content>
+            <div class="text-2xl font-bold">+573</div>
+            <p class="text-xs text-muted-foreground">+201 since last hour</p>
+          </wdc-card-content>
+        </wdc-card>
+
+      </div>`),
+      ts: ``,
     },
   };
+
+  markdownData = `* **Structure:** Using \`wdc-card-title\` renders an \`<h3>\` by default, which creates a logical document structure for screen readers.
+* **Landmark:** If a card represents a major standalone widget (like a pricing tier or a dashboard widget), consider adding \`role="region"\` or \`aria-labelledby\` pointing to the title ID.
+* **Contrast:** The \`text-muted-foreground\` on the description ensures readability while establishing visual hierarchy without failing contrast ratios.`;
 }

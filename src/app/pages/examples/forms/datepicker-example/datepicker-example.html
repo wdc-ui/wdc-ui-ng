@@ -1,0 +1,74 @@
+<div class="space-y-12">
+  <div id="example">
+    <h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Datepicker</h1>
+    <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">A datepicker component.</p>
+  </div>
+
+  <section id="installation" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Installation</h2>
+    <app-code-viewer
+      title="Bash"
+      [bashCode]="snippets.install"
+      activeTabCode="bash"
+    ></app-code-viewer>
+  </section>
+
+  <!-- Example Section -->
+  <section id="examples" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Examples</h2>
+    <div class="flex flex-col gap-6">
+      <app-doc-preview
+        title="Basic Usage"
+        description="Simple date picker with default formatting."
+        [htmlCode]="snippets.basic.html"
+      >
+        <div preview class="w-full max-w-xs">
+          <wdc-date-picker label="Date of Birth" placeholder="Select DOB" />
+        </div>
+      </app-doc-preview>
+
+      <app-doc-preview
+        title="Custom Format"
+        description="Use any Angular DatePipe format (e.g., 'fullDate', 'dd/MM/yyyy')."
+        [htmlCode]="snippets.formatted.html"
+      >
+        <div preview class="w-full max-w-xs">
+          <wdc-date-picker label="Meeting Date" format="fullDate" placeholder="Select date..." />
+        </div>
+      </app-doc-preview>
+
+      <app-doc-preview
+        title="Validation States"
+        description="Consistent error and success styling."
+        [htmlCode]="snippets.validation.html"
+        [tsCode]="snippets.validation.ts"
+      >
+        <div preview class="w-full max-w-xs space-y-4">
+          <wdc-date-picker label="Deadline" error="Date is required." />
+          <!-- <wdc-date-picker
+            label="Start Date"
+            [success]="true"
+            [ngModel]="snippets.validation.context.today"
+          /> -->
+        </div>
+      </app-doc-preview>
+    </div>
+  </section>
+  <!-- 
+  <section id="code" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Code</h2>
+    <app-code-viewer [htmlCode]="snippets.html" [tsCode]="snippets.ts"></app-code-viewer>
+  </section> -->
+
+  <!-- API Section -->
+  <section id="references" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">API Reference</h2>
+    <div class="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
+      <app-reference [data]="references"></app-reference>
+    </div>
+  </section>
+
+  <wdc-note-block type="success" title="SEO & Accessibility">
+    <wdc-markdown [content]="markdownData"></wdc-markdown>
+  </wdc-note-block>
+</div>
