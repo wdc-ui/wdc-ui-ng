@@ -12,7 +12,7 @@ import { cn } from '@shared/utils/cn';
   template: `
     <wdc-button
       variant="ghost"
-      size="icon"
+      [icon]="true"
       (click)="themeService.toggle()"
       [class]="computedClass()"
       [attr.aria-label]="'Toggle theme'"

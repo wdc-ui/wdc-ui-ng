@@ -1,0 +1,18 @@
+<div [class]="getClass()">
+  <div class="flex-shrink-0 mr-4">
+    <span class="material-symbols-outlined opacity-80">
+      {{ getIcon() }}
+    </span>
+  </div>
+
+  <div class="flex flex-col gap-1">
+    @if (title()) {
+      <strong class="text-sm font-bold uppercase tracking-wide">
+        {{ title() }}
+      </strong>
+    }
+    <div class="text-sm leading-relaxed opacity-90">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

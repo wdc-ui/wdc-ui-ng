@@ -198,10 +198,10 @@ export class TableExample {
 
             <ng-template wdcCell="actions" let-row>
               <div class="flex items-center gap-2">
-                <wdc-button variant="ghost" size="icon" (click)="onEdit(row)">
+                <wdc-button variant="ghost" [icon]="true" (click)="onEdit(row)">
                   <wdc-icon name="edit" size="16" class="text-blue-600" />
                 </wdc-button>
-                <wdc-button variant="ghost" size="icon" (click)="onDelete(row)">
+                <wdc-button variant="ghost" [icon]="true" (click)="onDelete(row)">
                   <wdc-icon name="delete" size="16" class="text-red-600" />
                 </wdc-button>
               </div>

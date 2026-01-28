@@ -1,12 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MarkdownViewerComponent } from '@shared/components/markdown-viewer/markdown-viewer.component';
+import { NoteBlockComponent } from '@shared/components/note-block/note-block.component';
 import { ReferenceItem, UiConfig } from '@shared/components/ui.config';
 import { AppSetting } from '@shared/constants/app.constant';
 import { dedent } from '@shared/utils/dedent';
 import { ButtonComponent } from '@wdc-ui/ng/button/button.component';
 import { MultiSelectComponent } from '@wdc-ui/ng/multi-select/multi-select.component';
 import { SelectComponent } from '@wdc-ui/ng/select/select.component';
+import { TocService } from 'src/app/core/services/toc.service';
 
 @Component({
   selector: 'app-select-input-example',
@@ -19,11 +22,25 @@ import { SelectComponent } from '@wdc-ui/ng/select/select.component';
     ButtonComponent,
     ReactiveFormsModule,
     MultiSelectComponent,
+    NoteBlockComponent,
+    MarkdownViewerComponent,
   ],
   templateUrl: './select-input-example.html',
 })
 export class SelectInputExample {
   fb = inject(FormBuilder);
+  private tocService = inject(TocService);
+
+  ngOnInit() {
+    // Manually define the headings for this page
+    this.tocService.setToc([
+      { id: 'installation', title: 'Installation', level: 'h2' },
+      { id: 'examples', title: 'Examples', level: 'h2' },
+      { id: 'singleSelection', title: 'Single Select', level: 'h2' },
+      { id: 'multiSelection', title: 'Multi Select', level: 'h2' },
+      { id: 'multiReferences', title: 'API References', level: 'h2' },
+    ]);
+  }
 
   fruits = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry'];
   selectedFruit = '';
@@ -85,90 +102,169 @@ export class SelectInputExample {
   references: ReferenceItem[] = [
     {
       input: 'options',
-      type: '{ label: string; value: any }[]',
-      default: 'undefined',
-      description: 'Options for the select input field.',
+      type: 'any[]',
+      default: 'required',
+      description: 'Array of items to display in the dropdown.',
     },
     {
-      input: 'disabled',
-      type: 'boolean',
-      default: 'false',
-      description: 'Whether the select input field is disabled.',
+      input: 'bindLabel',
+      type: 'string',
+      default: "'label'",
+      description: 'Property name to display as the label (e.g., "name").',
     },
     {
-      input: 'multiple',
-      type: 'boolean',
-      default: 'false',
-      description: 'Whether the select input field supports multiple selection.',
+      input: 'bindValue',
+      type: 'string',
+      default: "'value'",
+      description: 'Property name to use as the value (e.g., "id").',
     },
     {
       input: 'searchable',
       type: 'boolean',
-      default: 'false',
-      description: 'Whether the select input field supports searching.',
+      default: 'true',
+      description: 'Enables a search input inside the dropdown.',
     },
     {
       input: 'label',
       type: 'string',
-      default: 'undefined',
-      description: 'Label text for the select input field.',
+      default: "''",
+      description: 'Label displayed above the select trigger.',
     },
     {
       input: 'placeholder',
       type: 'string',
-      default: 'Select an option',
-      description: 'Placeholder text for the select input field.',
-    },
-    {
-      input: 'error',
-      type: 'string | null',
-      default: 'null',
-      description: 'Error message to display when the select input field is invalid.',
-    },
-    {
-      input: 'onChange',
-      type: 'any',
-      default: 'undefined',
-      description: 'Callback function called when the value of the select input field changes.',
+      default: "'Select an option'",
+      description: 'Placeholder text when no value is selected.',
     },
   ];
 
-  snippets = {
-    html: dedent(`<wdc-select-input
-            [ngModel]="selectValue()"
-            (ngModelChange)="selectValue.set($event)"
-            label="Single Select"
-            [options]="selectOptions"
-          >
-          </wdc-select-input>
+  noteContent = `The select component uses a button trigger with aria-expanded and a proper label. While custom select menus are harder for crawlers than native <select>, this implementation follows accessibility guidelines (WAI-ARIA) ensuring screen readers can announce the label and state correctly.`;
 
-          <wdc-select-input
-            [ngModel]="multiSelectValue()"
-            (ngModelChange)="multiSelectValue.set($event)"
-            label="Multi Select (Searchable)"
-            [multiple]="true"
-            [searchable]="true"
-            [options]="selectOptions"
-          >
-          </wdc-select-input>`),
-    ts: dedent(`
-        import { Component } from '@angular/core';
-        import { SelectInputComponent, FormsModule } from '${AppSetting.libName}';
-        @Component({
-            selector: 'app-example',
-            standalone: true,
-            imports: [SelectInputComponent, FormsModule],
-        })
-        export class ExampleComponent {  
-          selectValue = signal('Option 1');
-          multiSelectValue = signal(['Option 2', 'Option 3']);
-          selectOptions = [
-            { label: 'Option 1', value: 'Option 1' },
-            { label: 'Option 2', value: 'Option 2' },
-            { label: 'Option 3', value: 'Option 3' },
-            { label: 'Option 4 - Long text example', value: 'Option 4' },
-            { label: 'Option 5', value: 'Option 5' },
-          ];
-        }`),
+  singleSnippets = {
+    install: dedent(`${AppSetting.addComponentCmd} select`),
+    basic: {
+      html: dedent(`<div class="w-full max-w-xs">
+        <wdc-select 
+          label="Favorite Fruit" 
+          [options]="['Apple', 'Banana', 'Orange', 'Mango']"
+          placeholder="Select a fruit"
+        />
+      </div>`),
+      ts: dedent(``),
+    },
+    objects: {
+      html: dedent(`
+      <div class="w-full max-w-xs">
+        <wdc-select
+          label="Assign User"
+          [options]="users"
+          bindLabel="name"
+          bindValue="id"
+          placeholder="Select user..."
+        />
+
+        <section class="mt-6">
+            <wdc-select
+              label="Signal Country"
+              [options]="countries"
+              bindLabel="label"
+              bindValue="code"
+              [ngModel]="countrySig()"
+              [searchable]="false"
+              (ngModelChange)="countrySig.set($event)"
+              hint="Binding directly to a WritableSignal"
+            ></wdc-select>
+
+            <p class="text-sm mb-2">
+              Signal Value: <strong>{{ countrySig() }}</strong>
+            </p>
+            <wdc-button (click)="countrySig.set('CA')" size="sm" variant="outline"
+              >Set Canada</wdc-button
+            >
+          </section>
+      </div>`),
+      ts: dedent(`
+      users = [
+        { id: 1, name: 'Alice Johnson', role: 'Admin' },
+        { id: 2, name: 'Bob Smith', role: 'Editor' },
+        { id: 3, name: 'Charlie Brown', role: 'Viewer' }
+      ];
+      countries = [
+        { code: 'US', label: 'United States' },
+        { code: 'IN', label: 'India' },
+        { code: 'CA', label: 'Canada' },
+      ];
+      countrySig = signal('IN');`),
+    },
+    validation: {
+      html: dedent(`
+      <div class="w-full max-w-xs space-y-4">
+        <wdc-select
+          label="Country"
+          [options]="['USA', 'India', 'Canada']"
+          error="Please select your country."
+        />
+
+        <wdc-select
+          label="Disabled Select"
+          [options]="[]"
+          [disabled]="true"
+          placeholder="Cannot select"
+        />
+      </div>`),
+      ts: ``,
+    },
+  };
+
+  multiSnippets = {
+    install: dedent(`${AppSetting.addComponentCmd} multi-select`),
+    basic: {
+      html: dedent(`
+      <div class="w-full max-w-sm">
+        <wdc-multi-select 
+          label="Skills" 
+          [options]="['Angular', 'React', 'Node.js', 'Python', 'Go']"
+          placeholder="Select skills..."
+        />
+      </div>`),
+      ts: ``,
+    },
+    objects: {
+      html: dedent(`
+      <div class="w-full max-w-sm">
+        <wdc-multi-select
+          label="Team Members"
+          [options]="team"
+          bindLabel="name"
+          bindValue="id"
+          placeholder="Add members..."
+        />
+      </div>`),
+      ts: dedent(`
+      team = [
+        { id: 1, name: 'Kamal Kumar', role: 'Dev' },
+        { id: 2, name: 'Rahul Sharma', role: 'Manager' },
+        { id: 3, name: 'Priya Singh', role: 'Designer' },
+        { id: 4, name: 'Amit Verma', role: 'QA' }
+      ];`),
+    },
+    validation: {
+      html: dedent(`
+      <div class="w-full max-w-sm space-y-4">
+        <wdc-multi-select
+          label="Required Tags"
+          [options]="['Bug', 'Feature', 'Enhancement']"
+          error="At least one tag is required."
+        />
+
+        <wdc-multi-select
+          label="Approved By"
+          [options]="['Manager', 'Director', 'VP']"
+          [success]="true"
+          [ngModel]="['Manager']"
+        />
+      </div>`),
+      ts: ``,
+    },
   };
 }

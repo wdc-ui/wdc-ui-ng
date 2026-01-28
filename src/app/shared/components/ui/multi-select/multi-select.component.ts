@@ -15,15 +15,15 @@ import { cva } from 'class-variance-authority';
 import { cn } from '@shared/utils/cn';
 import { IconComponent } from '../icon/icon.component';
 
-// --- STYLES ---
+// --- STYLES (Matches Input & Select exactly) ---
 const multiSelectTriggerVariants = cva(
-  'flex w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200 min-h-[40px] h-auto',
+  'flex w-full items-center justify-between rounded-md border-2 bg-background px-3 py-2 text-sm transition-colors placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 min-h-[40px] h-auto',
   {
     variants: {
       status: {
-        default: 'border-input focus:border-ring',
-        error: 'border-danger focus:ring-danger text-danger',
-        success: 'border-success focus:ring-success text-success',
+        default: 'border-input focus:border-primary',
+        error: 'border-danger text-danger focus:border-danger',
+        success: 'border-success text-success focus:border-success',
       },
     },
     defaultVariants: {
@@ -54,7 +54,7 @@ const multiSelectTriggerVariants = cva(
         >
           {{ label() }}
           @if (required()) {
-            <span class="text-danger">*</span>
+            <span class="text-danger ml-0.5">*</span>
           }
         </label>
       }
@@ -63,9 +63,12 @@ const multiSelectTriggerVariants = cva(
         (click)="toggle()"
         [class]="computedTriggerClass()"
         [attr.aria-expanded]="isOpen()"
-        class="cursor-pointer"
+        class="cursor-pointer group"
+        tabindex="0"
+        (keydown.enter)="toggle()"
+        (keydown.space)="toggle()"
       >
-        <div class="flex flex-wrap gap-1.5 w-full">
+        <div class="flex flex-wrap gap-1.5 w-full items-center">
           @for (val of value(); track $index) {
             <span
               class="inline-flex items-center gap-1 rounded bg-secondary px-2 py-0.5 text-xs font-medium text-secondary-foreground animate-in fade-in zoom-in-95"
@@ -76,7 +79,8 @@ const multiSelectTriggerVariants = cva(
               <button
                 type="button"
                 (click)="removeItem(val)"
-                class="ml-0.5 rounded-full outline-none hover:bg-secondary-foreground/20 focus:bg-secondary-foreground/20"
+                [disabled]="isDisabled()"
+                class="ml-0.5 rounded-full outline-none hover:bg-secondary-foreground/20 focus:bg-secondary-foreground/20 cursor-pointer flex items-center justify-center"
               >
                 <wdc-icon name="close" size="14" />
               </button>
@@ -84,15 +88,15 @@ const multiSelectTriggerVariants = cva(
           }
 
           @if (value().length === 0) {
-            <span class="text-muted-foreground py-0.5">{{ placeholder() }}</span>
+            <span class="text-muted-foreground">{{ placeholder() }}</span>
           }
         </div>
 
         <div class="shrink-0 ml-2 text-muted-foreground">
           <wdc-icon
             name="keyboard_arrow_down"
-            size="20"
-            class="transition-transform duration-200"
+            size="18"
+            class="transition-transform duration-200 opacity-50 group-hover:opacity-100"
             [class.rotate-180]="isOpen()"
           />
         </div>
@@ -100,47 +104,38 @@ const multiSelectTriggerVariants = cva(
 
       @if (isOpen()) {
         <div
-          class="absolute z-50 mt-1 max-h-60 w-full overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md animate-in fade-in zoom-in-95"
+          class="absolute z-50 w-full overflow-hidden rounded-md border border-border bg-popover text-popover-foreground shadow-md animate-in fade-in zoom-in-95"
         >
           @if (searchable()) {
-            <div class="sticky top-0 z-10 bg-popover p-2 border-b">
-              <div class="relative">
-                <wdc-icon
-                  name="search"
-                  size="16"
-                  class="absolute left-2 top-1/2 -translate-y-1/2 text-muted-foreground"
-                />
-                <input
-                  #searchInput
-                  type="text"
-                  [ngModel]="searchQuery()"
-                  (ngModelChange)="onSearch($event)"
-                  placeholder="Search options..."
-                  class="w-full rounded-sm border border-input bg-background py-1.5 pl-8 pr-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary"
-                  (click)="$event.stopPropagation()"
-                />
-              </div>
+            <div class="flex items-center border-b px-3 py-2 sticky top-0 bg-popover z-10">
+              <wdc-icon name="search" size="16" class="mr-2 opacity-50" />
+              <input
+                #searchInput
+                type="text"
+                [ngModel]="searchQuery()"
+                (ngModelChange)="onSearch($event)"
+                placeholder="Search options..."
+                class="flex h-4 w-full rounded-md bg-transparent text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+                (click)="$event.stopPropagation()"
+              />
             </div>
           }
 
-          <div class="max-h-52 overflow-y-auto p-1 space-y-0.5">
+          <div class="max-h-60 overflow-y-auto p-1">
             @for (item of filteredOptions(); track $index) {
               <div
                 (click)="toggleOption(item)"
-                class="relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none hover:bg-accent hover:text-accent-foreground data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground"
-                [attr.data-selected]="isSelected(item)"
+                class="relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground"
+                [class.bg-accent]="isSelected(item)"
+                [class.text-accent-foreground]="isSelected(item)"
               >
-                <div
-                  class="mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary"
-                  [class.bg-primary]="isSelected(item)"
-                  [class.text-primary-foreground]="isSelected(item)"
-                >
-                  @if (isSelected(item)) {
-                    <wdc-icon name="check" size="14" />
-                  }
-                </div>
+                <span class="truncate">{{ getOptionLabel(item) }}</span>
 
-                {{ getOptionLabel(item) }}
+                @if (isSelected(item)) {
+                  <span class="absolute right-2 flex h-3.5 w-3.5 items-center justify-center">
+                    <wdc-icon name="check" size="14" />
+                  </span>
+                }
               </div>
             }
 
@@ -181,13 +176,12 @@ export class MultiSelectComponent implements ControlValueAccessor {
   class = input<string>('');
 
   // --- STATE ---
-  value = signal<any[]>([]); // Array of selected values
+  value = signal<any[]>([]);
   isOpen = signal(false);
   isDisabled = signal(false);
   searchQuery = signal('');
 
   // --- COMPUTED ---
-
   filteredOptions = computed(() => {
     const query = this.searchQuery().toLowerCase();
     const allOptions = this.options();
@@ -205,7 +199,6 @@ export class MultiSelectComponent implements ControlValueAccessor {
   );
 
   // --- HELPERS ---
-
   getOptionLabel(item: any): string {
     if (item && typeof item === 'object') {
       return item[this.bindLabel()] || '';
@@ -220,13 +213,10 @@ export class MultiSelectComponent implements ControlValueAccessor {
     return item;
   }
 
-  // Used for Chips Display
   getDisplayLabel(val: any): string {
-    // Value could be an ID (if bindValue used) or Object
-    // Find the full object from options to get the label
     const found = this.options().find((opt) => {
-      // Loose equality for string/number match
-      return this.getOptionValue(opt) == (typeof val === 'object' ? this.getOptionValue(val) : val);
+      const optVal = this.getOptionValue(opt);
+      return optVal == val;
     });
     return found ? this.getOptionLabel(found) : String(val);
   }
@@ -237,7 +227,6 @@ export class MultiSelectComponent implements ControlValueAccessor {
   }
 
   // --- ACTIONS ---
-
   toggle() {
     if (this.isDisabled()) return;
     this.isOpen.update((v) => !v);
@@ -256,18 +245,18 @@ export class MultiSelectComponent implements ControlValueAccessor {
 
     let newValues;
     if (exists) {
-      // Remove
       newValues = currentValues.filter((v) => v != itemVal);
     } else {
-      // Add
       newValues = [...currentValues, itemVal];
     }
 
     this.value.set(newValues);
     this.onChange(newValues);
-    // Don't close dropdown on multi-select toggle
-    this.searchQuery.set('');
-    this.searchInput()?.nativeElement.focus(); // Keep focus
+
+    // Keep focus for multi-select
+    if (this.searchable()) {
+      this.searchInput()?.nativeElement.focus();
+    }
   }
 
   removeItem(val: any) {

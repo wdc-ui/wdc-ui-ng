@@ -105,17 +105,17 @@ export class ButtonExample {
         <wdc-button [gradient]="true" color="secondary">Gradient Purple</wdc-button>
         <wdc-button [gradient]="true" color="success">Gradient Green</wdc-button>
         <wdc-button [gradient]="true" color="primary" rounded="full">Gradient Blue</wdc-button>
-        <wdc-button [gradient]="true" size="icon" color="danger" rounded="full">
+        <wdc-button [gradient]="true" [icon]="true" color="danger" rounded="full">
           <wdc-icons name="favorite" size="16"></wdc-icons>
         </wdc-button>`),
     },
     properties: {
       html: dedent(`<wdc-button rounded="full">Rounded Pill</wdc-button>
         <wdc-button rounded="full" variant="outline">Rounded Outline</wdc-button>
-        <wdc-button size="icon">
+        <wdc-button [icon]="true">
           <wdc-icons name="favorite" size="16"></wdc-icons>
         </wdc-button>
-        <wdc-button size="icon" color="danger" variant="outline" rounded="full">
+        <wdc-button [icon]="true" color="danger" variant="outline" rounded="full">
           <wdc-icons name="delete" size="16"></wdc-icons>
         </wdc-button>
         <wdc-button>

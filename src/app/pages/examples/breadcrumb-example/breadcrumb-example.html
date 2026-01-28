@@ -4,51 +4,85 @@
     <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">A breadcrumb component.</p>
   </div>
 
+  <section id="installation" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Installation</h2>
+    <app-code-viewer
+      title="Bash"
+      [bashCode]="snippets.install"
+      activeTabCode="bash"
+    ></app-code-viewer>
+  </section>
+
   <!-- Example Section -->
-  <section id="example" class="scroll-mt-20">
+  <section id="examples" class="scroll-mt-20">
     <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Examples</h2>
     <div class="flex flex-col gap-6">
       <app-doc-preview
-        title="Breadcrumb"
-        description="A breadcrumb component examples"
-        [showCode]="false"
-        [htmlCode]="snippets.html"
+        title="Basic"
+        description="Standard breadcrumb using semantic list items."
+        [htmlCode]="snippets.basic.html"
+        [tsCode]="snippets.basic.ts"
       >
-        <div preview class="w-full">
-          <wdc-breadcrumb [items]="breadcrumbs"></wdc-breadcrumb>
-
-          <wdc-breadcrumb class="mt-5">
-            <wdc-breadcrumb-item url="/">
-              <wdc-icon name="home" size="14" />
-            </wdc-breadcrumb-item>
+        <div preview>
+          <wdc-breadcrumb>
+            <wdc-breadcrumb-item url="/">Home</wdc-breadcrumb-item>
             <wdc-breadcrumb-separator />
-
-            <wdc-breadcrumb-item url="/products">Products</wdc-breadcrumb-item>
+            <wdc-breadcrumb-item url="/components">Components</wdc-breadcrumb-item>
             <wdc-breadcrumb-separator />
-
-            <wdc-breadcrumb-item url="/products/electronics">Electronics</wdc-breadcrumb-item>
-
-            <wdc-breadcrumb-separator>
-              <span class="opacity-50">/</span>
-            </wdc-breadcrumb-separator>
-
-            <wdc-breadcrumb-item>Iphone 15 Pro</wdc-breadcrumb-item>
+            <wdc-breadcrumb-item>Breadcrumb</wdc-breadcrumb-item>
           </wdc-breadcrumb>
+        </div>
+      </app-doc-preview>
+
+      <app-doc-preview
+        title="Custom Separator"
+        description="You can replace the default chevron with a slash or any icon."
+        [htmlCode]="snippets.customSeparator.html"
+      >
+        <div preview>
+          <wdc-breadcrumb>
+            <wdc-breadcrumb-item url="/">Home</wdc-breadcrumb-item>
+            <wdc-breadcrumb-separator>/</wdc-breadcrumb-separator>
+            <wdc-breadcrumb-item url="/docs">Docs</wdc-breadcrumb-item>
+            <wdc-breadcrumb-separator>/</wdc-breadcrumb-separator>
+            <wdc-breadcrumb-item>Slash Style</wdc-breadcrumb-item>
+          </wdc-breadcrumb>
+        </div>
+      </app-doc-preview>
+
+      <app-doc-preview
+        title="Data Driven"
+        description="Generate breadcrumbs automatically from an array of objects."
+        [htmlCode]="snippets.dataDriven.html"
+        [tsCode]="snippets.dataDriven.ts"
+      >
+        <div preview>
+          <wdc-breadcrumb
+            [items]="[
+              { label: 'Home', url: '/' },
+              { label: 'Products', url: '/products' },
+              { label: 'Laptops' },
+            ]"
+          />
         </div>
       </app-doc-preview>
     </div>
   </section>
-
+  <!-- 
   <section id="code" class="scroll-mt-20">
     <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Code</h2>
     <app-code-viewer [htmlCode]="snippets.html" [tsCode]="snippets.ts"></app-code-viewer>
-  </section>
+  </section> -->
 
   <!-- API Section -->
-  <section id="api" class="scroll-mt-20">
+  <section id="references" class="scroll-mt-20">
     <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">API Reference</h2>
     <div class="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
       <app-reference [data]="references"></app-reference>
     </div>
   </section>
+
+  <wdc-note-block type="success" title="SEO & Accessibility">
+    <wdc-markdown [content]="markdownData"></wdc-markdown>
+  </wdc-note-block>
 </div>

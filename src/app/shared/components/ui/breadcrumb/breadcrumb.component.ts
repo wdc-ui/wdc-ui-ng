@@ -1,31 +1,44 @@
-import { Component, input, computed } from '@angular/core';
+import { Component, input, computed, booleanAttribute } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { IconComponent } from '../icon/icon.component'; // Ensure path is correct
 import { cn } from '@shared/utils/cn';
 
-// --- INTERFACE ---
+// --- INTERFACES ---
 export interface BreadcrumbItem {
   label: string;
-  url?: string; // If missing, it's considered the active/last item
+  url?: string;
 }
 
-// --- 1. SEPARATOR (Chevron) ---
+// --- 1. SEPARATOR (Customizable) ---
 @Component({
   selector: 'wdc-breadcrumb-separator',
   standalone: true,
-  imports: [IconComponent],
   template: `
-    <li role="presentation" aria-hidden="true" class="[&>svg]:size-3.5">
+    <li role="presentation" aria-hidden="true" [class]="classes()">
       <ng-content>
-        <wdc-icon name="chevron_right" size="16" class="text-muted-foreground/60" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m9 18 6-6-6-6" />
+        </svg>
       </ng-content>
     </li>
   `,
 })
-export class BreadcrumbSeparatorComponent {}
+export class BreadcrumbSeparatorComponent {
+  class = input<string>('');
+  classes = computed(() => cn('[&>svg]:size-3.5 text-muted-foreground/60', this.class()));
+}
 
-// --- 2. ITEM (Link or Text) ---
+// --- 2. ITEM (Link or Current Page) ---
 @Component({
   selector: 'wdc-breadcrumb-item',
   standalone: true,
@@ -33,7 +46,11 @@ export class BreadcrumbSeparatorComponent {}
   template: `
     <li class="inline-flex items-center gap-1.5">
       @if (url()) {
-        <a [routerLink]="url()" class="transition-colors text-foreground">
+        <a
+          [routerLink]="url()"
+          [target]="target()"
+          class="transition-colors text-muted-foreground hover:text-foreground flex items-center gap-2"
+        >
           <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
         </a>
       } @else {
@@ -41,22 +58,21 @@ export class BreadcrumbSeparatorComponent {}
           role="link"
           aria-disabled="true"
           aria-current="page"
-          class="font-normal text-muted-foreground"
+          class="font-normal text-foreground flex items-center gap-2"
         >
           <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
         </span>
       }
 
       <ng-template #contentTpl>
-        <span class="flex items-center gap-2">
-          <ng-content></ng-content>
-        </span>
+        <ng-content></ng-content>
       </ng-template>
     </li>
   `,
 })
 export class BreadcrumbItemComponent {
   url = input<string | undefined>(undefined);
+  target = input<string>('_self');
 }
 
 // --- 3. CONTAINER (Main) ---
@@ -66,9 +82,7 @@ export class BreadcrumbItemComponent {
   imports: [CommonModule, BreadcrumbItemComponent, BreadcrumbSeparatorComponent],
   template: `
     <nav aria-label="breadcrumb" [class]="computedClass()">
-      <ol
-        class="flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5"
-      >
+      <ol class="flex flex-wrap items-center gap-1.5 break-words text-sm sm:gap-2.5">
         <ng-content></ng-content>
 
         @for (item of items(); track $index; let last = $last) {
@@ -85,14 +99,12 @@ export class BreadcrumbItemComponent {
   `,
 })
 export class BreadcrumbComponent {
-  // Optional: Pass data array
   items = input<BreadcrumbItem[]>([]);
-
   class = input('');
+
   computedClass = computed(() => cn('w-full', this.class()));
 }
 
-// Export array for easy imports
 export const BREADCRUMB_COMPONENTS = [
   BreadcrumbComponent,
   BreadcrumbItemComponent,
