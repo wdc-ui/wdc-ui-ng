@@ -64,8 +64,19 @@
     </p>
 
     <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">
-      <a
-        routerLink="/components"
+      <wdc-button
+        href="/docs/introduction"
+        [gradient]="true"
+        size="lg"
+        color="primary"
+        class="rounded-2xl"
+      >
+        Explore Components
+        <wdc-icon name="arrow_forward"></wdc-icon>
+      </wdc-button>
+
+      <!-- <a
+        routerLink="/docs/introduction"
         class="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-200 bg-indigo-600 font-pj rounded-2xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900 shadow-xl shadow-indigo-500/25 hover:bg-indigo-500 hover:scale-[1.02] active:scale-95"
       >
         Explore Components
@@ -82,7 +93,7 @@
             d="M13 7l5 5m0 0l-5 5m5-5H6"
           />
         </svg>
-      </a>
+      </a> -->
       <div class="relative group">
         <div
           class="absolute -inset-0.5 bg-gradient-to-r from-slate-200 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-2xl blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"

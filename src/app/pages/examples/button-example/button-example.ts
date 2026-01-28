@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AppSetting } from '../../../shared/constants/app.constant';
 import { dedent } from '@shared/utils/dedent';
 import { ButtonComponent } from '@wdc-ui/ng/button/button.component';
 import { IconComponent } from '@wdc-ui/ng/icon/icon.component';
 import { ReferenceItem, UiConfig } from '@shared/components/ui.config';
+import { TocService } from 'src/app/core/services/toc.service';
 
 @Component({
   selector: 'app-button-example',
@@ -12,63 +13,76 @@ import { ReferenceItem, UiConfig } from '@shared/components/ui.config';
   templateUrl: './button-example.html',
 })
 export class ButtonExample {
+  private tocService = inject(TocService);
   AppSetting = AppSetting;
+
+  ngOnInit() {
+    // Manually define the headings for this page
+    this.tocService.setToc([
+      { id: 'installation', title: 'Installation', level: 'h2' },
+      { id: 'examples', title: 'Examples', level: 'h2' },
+      { id: 'references', title: 'API References', level: 'h2' },
+    ]);
+  }
 
   references: ReferenceItem[] = [
     {
       input: 'variant',
+      type: `'solid' | 'outline' | 'ghost' | 'link'`,
+      default: `'solid'`,
+      description: 'The visual style of the button.',
+    },
+    {
+      input: 'color',
       type: `'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark'`,
       default: `'primary'`,
-      description: 'Variant of the button.',
+      description: 'The color theme of the button.',
     },
     {
       input: 'size',
-      type: `'sm' | 'md' | 'lg'`,
-      default: `'md'`,
-      description: 'Size of the button.',
+      type: `'default' | 'sm' | 'lg'`,
+      default: `'default'`,
+      description: 'Controls the height and padding of the button.',
     },
     {
-      input: 'block',
-      type: 'boolean',
-      default: 'false',
-      description: 'Whether the button should take the full width of its container.',
+      input: 'icon',
+      type: `boolean`,
+      default: `false`,
+      description: 'If true, sets the button to a square shape for icon-only usage.',
     },
     {
-      input: 'outline',
-      type: 'boolean',
-      default: 'false',
-      description: 'Whether the button should have an outline style.',
+      input: 'rounded',
+      type: `'default' | 'full' | 'none'`,
+      default: `'default'`,
+      description: 'Controls the border radius.',
+    },
+    {
+      input: 'gradient',
+      type: `boolean`,
+      default: `false`,
+      description: 'Applies a gradient background (only works with solid variant).',
     },
     {
       input: 'loading',
-      type: 'boolean',
-      default: 'false',
-      description: 'Whether the button should show a loading indicator.',
-    },
-    {
-      input: 'disabled',
-      type: 'boolean',
-      default: 'false',
-      description: 'Whether the button should be disabled.',
-    },
-    {
-      input: 'clicked',
-      type: 'void',
-      default: 'undefined',
-      description: 'Callback function to be called when the button is clicked.',
+      type: `boolean`,
+      default: `false`,
+      description: 'Shows a spinner and disables the button.',
     },
   ];
 
   snippets = {
+    install: dedent(`${AppSetting.addComponentCmd} button`),
     variants: {
-      html: dedent(`<wdc-button color="primary">Primary</wdc-button>
-        <wdc-button color="secondary">Secondary</wdc-button>
-        <wdc-button color="success">Success</wdc-button>
-        <wdc-button color="danger">Danger</wdc-button>
-        <wdc-button color="warning">Warning</wdc-button>
-        <wdc-button color="info">Info</wdc-button>
-        <wdc-button color="light">Light</wdc-button>
-        <wdc-button color="dark">Dark</wdc-button>`),
+      html: dedent(`<div class="flex flex-wrap gap-4">
+          <wdc-button color="primary">Primary</wdc-button>
+          <wdc-button color="secondary">Secondary</wdc-button>
+          <wdc-button color="success">Success</wdc-button>
+          <wdc-button color="danger">Danger</wdc-button>
+          <wdc-button color="warning">Warning</wdc-button>
+          <wdc-button color="info">Info</wdc-button>
+          <wdc-button color="light">Light</wdc-button>
+          <wdc-button color="dark">Dark</wdc-button>
+        </div>`),
       ts: dedent(`import { ButtonComponent } from '${AppSetting.importPath}/button/button.component';
         @Component({  
           imports: [ButtonComponent],
@@ -113,9 +127,26 @@ export class ButtonExample {
         <wdc-button variant="link" color="success">Link</wdc-button>`),
     },
     sizes: {
-      html: dedent(`<wdc-button size="sm">Small</wdc-button>
-        <wdc-button size="default">Default</wdc-button>
-        <wdc-button size="lg">Large</wdc-button>`),
+      html: dedent(`<div class="flex flex-wrap items-center gap-4">
+          <wdc-button size="sm">Small</wdc-button>
+          <wdc-button size="default">Default</wdc-button>
+          <wdc-button size="lg">Large</wdc-button>
+        </div>`),
+    },
+    icons: {
+      html: dedent(`
+        <div preview class="flex flex-wrap gap-4 items-center justify-center">
+          <wdc-button size="sm" icon>
+            <wdc-icon name="add"></wdc-icon>
+          </wdc-button>
+          <wdc-button size="default" icon>
+            <wdc-icon name="add"></wdc-icon>
+          </wdc-button>
+          <wdc-button size="lg" icon>
+            <wdc-icon name="add"></wdc-icon>
+          </wdc-button>
+        </div>`),
+      ts: ``,
     },
   };
 }

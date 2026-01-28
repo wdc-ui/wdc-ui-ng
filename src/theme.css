@@ -6,28 +6,20 @@
   /* Branding Colors */
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
-
   --color-secondary: hsl(var(--secondary));
   --color-secondary-foreground: hsl(var(--secondary-foreground));
-
   --color-tertiary: hsl(var(--tertiary));
   --color-tertiary-foreground: hsl(var(--tertiary-foreground));
-
   --color-success: hsl(var(--success));
   --color-success-foreground: hsl(var(--success-foreground));
-
   --color-danger: hsl(var(--danger));
   --color-danger-foreground: hsl(var(--danger-foreground));
-
   --color-warning: hsl(var(--warning));
   --color-warning-foreground: hsl(var(--warning-foreground));
-
   --color-info: hsl(var(--info));
   --color-info-foreground: hsl(var(--info-foreground));
-
   --color-dark: hsl(var(--dark));
   --color-dark-foreground: hsl(var(--dark-foreground));
-
   --color-light: hsl(var(--light));
   --color-light-foreground: hsl(var(--light-foreground));
 

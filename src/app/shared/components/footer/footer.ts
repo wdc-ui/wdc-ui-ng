@@ -8,6 +8,7 @@ import { AppSetting } from '@shared/constants/app.constant';
 })
 export class Footer {
   AppSetting = AppSetting;
+  currentYear = new Date().getFullYear();
 
   constructor() {}
 }
