@@ -9,13 +9,11 @@ import { CheckboxComponent } from '@wdc-ui/ng/checkbox/checkbox.component';
 import { SwitchComponent } from '@wdc-ui/ng/switch/switch.component';
 import { RadioGroupComponent, RadioItemComponent } from '@wdc-ui/ng/radio/radio.component';
 import { TextareaComponent } from '@wdc-ui/ng/textarea/textarea.component';
-import {
-  ColorPickerComponent,
-  DatePickerComponent,
-} from '@wdc-ui/ng/native-pickers/pickers.component';
 import { FileUploadComponent } from '@wdc-ui/ng/file-upload/file-upload.component';
 import { ButtonComponent } from '@wdc-ui/ng/button/button.component';
 import { RichTextEditorComponent } from '@wdc-ui/ng/rich-text-editor/rich-text-editor.component';
+import { ColorPickerComponent } from '@wdc-ui/ng/color-picker/color-picker.component';
+import { TocService } from 'src/app/core/services/toc.service';
 
 @Component({
   selector: 'app-other-input-example',
@@ -31,18 +29,27 @@ import { RichTextEditorComponent } from '@wdc-ui/ng/rich-text-editor/rich-text-e
     RadioGroupComponent,
     RadioItemComponent,
     TextareaComponent,
-    DatePickerComponent,
-    ColorPickerComponent,
     FileUploadComponent,
     RichTextEditorComponent,
     ButtonComponent,
+    ColorPickerComponent,
   ],
   templateUrl: './other-input-example.html',
 })
 export class OtherInputExample {
   private fb = inject(FormBuilder);
+  private tocService = inject(TocService);
+  AppSetting = AppSetting;
 
-  // --- FORM INITIALIZATION ---
+  ngOnInit() {
+    this.tocService.setToc([
+      { id: 'installation', title: 'Installation', level: 'h2' },
+      { id: 'examples', title: 'Examples', level: 'h2' },
+      { id: 'Rich Textarea', title: 'richTextarea', level: 'h2' },
+      { id: 'uploadReferences', title: 'Upload API References', level: 'h2' },
+    ]);
+  }
+
   form: FormGroup = this.fb.group({
     terms: [false, Validators.requiredTrue], // Checkbox (Boolean)
     notifications: [true], // Switch (Boolean)
@@ -94,7 +101,27 @@ export class OtherInputExample {
 
   references: ReferenceItem[] = [];
 
+  uploadReferences: ReferenceItem[] = [
+    {
+      input: 'variant',
+      type: "'dropzone' | 'input'",
+      default: "'dropzone'",
+      description: 'The visual style of the upload component.',
+    },
+    {
+      input: 'placeholder',
+      type: 'string',
+      default: "'Choose file...'",
+      description: 'Text displayed when no file is selected (for input variant).',
+    },
+  ];
+
   snippets = {
+    install: dedent(`${AppSetting.addComponentCmd} rich-text-editor
+      ${AppSetting.addComponentCmd} color-picker
+      ${AppSetting.addComponentCmd} switch
+      ${AppSetting.addComponentCmd} file-upload
+      `),
     switch: {
       html: dedent(`<wdc-switch-input
             [ngModel]="switchValue()"
@@ -124,13 +151,19 @@ export class OtherInputExample {
         }`),
     },
     upload: {
-      html: dedent(`<wdc-file-input
-            [ngModel]="fileValue()"
-            (ngModelChange)="fileValue.set($event)"
-            label="Upload File"
-            accept="image/*"
-          >
-          </wdc-file-input>`),
+      html: dedent(`<div class="grid w-full max-w-sm gap-8">
+        <wdc-file-upload 
+          label="Profile Picture (Dropzone)" 
+          accept=".jpg" 
+        />
+
+        <wdc-file-upload 
+          variant="input"
+          label="Resume (Input Style)" 
+          accept=".pdf" 
+          placeholder="Upload CV..."
+        />
+      </div>`),
       ts: dedent(`
         import { Component } from '@angular/core';
         import { FileInputComponent, FormsModule } from '${AppSetting.libName}';
@@ -143,26 +176,13 @@ export class OtherInputExample {
           fileValue = signal(null);
         }`),
     },
-    textarea: {
-      html: dedent(`<wdc-textarea-input
-            [ngModel]="textareaValue()"
-            (ngModelChange)="textareaValue.set($event)"
-            label="Textarea"
-            [rows]="3"
-            hint="Supports multiple lines of text"
-          >
-          </wdc-textarea-input>`),
-      ts: dedent(`
-        import { Component } from '@angular/core';
-        import { TextareaInputComponent, FormsModule } from '${AppSetting.libName}';
-        @Component({
-            selector: 'app-example',
-            standalone: true,
-            imports: [TextareaInputComponent, FormsModule],
-        })
-        export class ExampleComponent {  
-          textareaValue = signal('');
-        }`),
+    colorpicker: {
+      html: dedent(`<div class="w-full max-w-xs">
+          <wdc-color-picker label="Brand Color" value="#3b82f6" />
+          <wdc-color-picker label="Background" error="Color is required." />
+          <wdc-color-picker label="Accent" [success]="true" value="#10b981" />
+      </div>`),
+      ts: dedent(``),
     },
     richText: {
       html: dedent(`<wdc-rich-text-editor

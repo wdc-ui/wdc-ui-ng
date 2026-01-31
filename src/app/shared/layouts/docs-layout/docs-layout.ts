@@ -52,6 +52,7 @@ export class DocsLayout {
         { label: 'Text Input', route: '/docs/text-input', exact: false },
         { label: 'Checkbox Input', route: '/docs/checkbox-input', exact: false },
         { label: 'Radio Input', route: '/docs/radio-input', exact: false },
+        { label: 'Textarea Input', route: '/docs/textarea-input', exact: false },
         { label: 'Select Input', route: '/docs/select-input', exact: false },
         { label: 'Date Picker', route: '/docs/date-picker', exact: false },
         { label: 'Various Input', route: '/docs/various-input', exact: false },
@@ -69,7 +70,7 @@ export class DocsLayout {
       items: [
         { label: 'Toast', route: '/docs/toast', exact: false },
         { label: 'Modal', route: '/docs/modal', exact: false },
-        { label: 'Sidebar', route: '/docs/sidebar', exact: false },
+        // { label: 'Sidebar', route: '/docs/sidebar', exact: false },
         { label: 'Drawer', route: '/docs/drawer', exact: false },
       ],
     },

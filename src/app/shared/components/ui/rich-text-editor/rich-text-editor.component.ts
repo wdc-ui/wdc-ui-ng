@@ -45,7 +45,7 @@ declare const Quill: any;
       }
 
       <div
-        class="group relative w-full rounded-md border bg-background transition-colors focus-within:ring-1 focus-within:ring-ring"
+        class="group relative w-full rounded-md border-2 bg-background transition-colors focus-within:border-primary"
         [class.border-input]="!error()"
         [class.border-danger]="error()"
         [class.focus-within:border-danger]="error()"

@@ -99,7 +99,7 @@ let nextId = 0;
           [type]="currentType()"
           [value]="value()"
           [placeholder]="placeholder()"
-          [disabled]="isDisabled()"
+          [disabled]="isEffectivelyDisabled()"
           [required]="required()"
           [attr.aria-invalid]="!!error()"
           [attr.aria-describedby]="hintId"
@@ -117,7 +117,6 @@ let nextId = 0;
             <button
               type="button"
               (click)="togglePassword()"
-              [disabled]="isDisabled()"
               tabindex="-1"
               [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'"
               class="text-muted-foreground hover:text-foreground focus:outline-none disabled:opacity-50 flex items-center cursor-pointer"
@@ -174,6 +173,9 @@ export class InputComponent implements ControlValueAccessor {
   successMessage = input<string>('Looks good!');
   required = input(false, { transform: booleanAttribute });
   disabled = input(false, { transform: booleanAttribute });
+
+  protected isDisabledSignal = signal(false);
+  isEffectivelyDisabled = computed(() => this.disabled() || this.isDisabledSignal());
 
   // Styling
   class = input<string>('');

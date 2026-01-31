@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ReferenceItem, UiConfig } from '@shared/components/ui.config';
 import { AppSetting } from '@shared/constants/app.constant';
 import { dedent } from '@shared/utils/dedent';
@@ -8,6 +8,7 @@ import { DROPDOWN_MENU_COMPONENTS } from '@wdc-ui/ng/dropdown-menu/dropdown-menu
 import { ButtonComponent } from '@wdc-ui/ng/button/button.component';
 import { IconComponent } from '@wdc-ui/ng/icon/icon.component';
 import { NAVBAR_COMPONENTS } from '@wdc-ui/ng/navbar/navbar.component';
+import { TocService } from 'src/app/core/services/toc.service';
 
 @Component({
   selector: 'wdc-navbar-example',
@@ -23,6 +24,18 @@ import { NAVBAR_COMPONENTS } from '@wdc-ui/ng/navbar/navbar.component';
   templateUrl: './navbar-example.html',
 })
 export class NavbarExample {
+  private tocService = inject(TocService);
+  AppSetting = AppSetting;
+
+  ngOnInit() {
+    // Manually define the headings for this page
+    this.tocService.setToc([
+      { id: 'installation', title: 'Installation', level: 'h2' },
+      { id: 'examples', title: 'Examples', level: 'h2' },
+      { id: 'references', title: 'API References', level: 'h2' },
+    ]);
+  }
+
   references: ReferenceItem[] = [
     {
       input: 'src',
@@ -57,6 +70,7 @@ export class NavbarExample {
   ];
 
   snippets = {
+    install: dedent(`${AppSetting.addComponentCmd} navbar`),
     html: dedent(`<wdc-dropdown>
             <wdc-avatar-profile
               wdcDropdownTrigger

@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UiConfig } from '@shared/components/ui.config';
 import { AppSetting } from '@shared/constants/app.constant';
 import { dedent } from '@shared/utils/dedent';
 import { ReferenceItem } from '@shared/components/ui.config';
 import { RadioGroupComponent, RadioItemComponent } from '@wdc-ui/ng/radio/radio.component';
+import { TocService } from 'src/app/core/services/toc.service';
 
 @Component({
   selector: 'app-radio-input-example',
@@ -13,6 +14,18 @@ import { RadioGroupComponent, RadioItemComponent } from '@wdc-ui/ng/radio/radio.
   templateUrl: './radio-input-example.html',
 })
 export class RadioInputExample {
+  private tocService = inject(TocService);
+  AppSetting = AppSetting;
+
+  ngOnInit() {
+    // Manually define the headings for this page
+    this.tocService.setToc([
+      { id: 'installation', title: 'Installation', level: 'h2' },
+      { id: 'examples', title: 'Examples', level: 'h2' },
+      { id: 'references', title: 'API References', level: 'h2' },
+    ]);
+  }
+
   radioValue = 'free';
   radioOptions = [
     { label: 'Radio Option 1', value: 'opt1' },

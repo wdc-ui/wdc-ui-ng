@@ -12,12 +12,12 @@ import { TocService } from 'src/app/core/services/toc.service';
 })
 export class AccordionExample {
   private tocService = inject(TocService);
+  AppSetting = AppSetting;
 
   ngOnInit() {
     // Manually define the headings for this page
     this.tocService.setToc([
       { id: 'installation', title: 'Installation', level: 'h2' },
-      { id: 'usage', title: 'Usage', level: 'h2' },
       { id: 'examples', title: 'Examples', level: 'h2' },
       { id: 'api', title: 'API Reference', level: 'h2' },
     ]);
@@ -45,6 +45,7 @@ export class AccordionExample {
   ];
 
   snippets = {
+    install: dedent(`${AppSetting.addComponentCmd} accordion`),
     html: dedent(`<wdc-accordion>
             <wdc-accordion-item [open]="true">
               <div accordion-header>Accordion Item #1</div>

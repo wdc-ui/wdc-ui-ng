@@ -13,6 +13,8 @@ import { Dialog, DialogModule, DialogRef } from '@angular/cdk/dialog';
 import { CommonModule } from '@angular/common';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@shared/utils/cn'; // Check path
+import { ButtonComponent } from '../button/button.component';
+import { IconComponent } from '../icon/icon.component';
 
 // --- 1. NATIVE TAILWIND V4 ANIMATIONS ---
 // No plugins required. We toggle translate/opacity based on data-state.
@@ -40,17 +42,17 @@ export type DrawerProps = VariantProps<typeof drawerVariants>;
 @Component({
   selector: 'wdc-drawer',
   standalone: true,
-  imports: [DialogModule, CommonModule],
+  imports: [DialogModule, CommonModule, ButtonComponent, IconComponent],
   template: `
     <ng-template #drawerTemplate>
       <div
-        (click)="close()"
+        (click)="backdropClose() && close()"
         class="fixed inset-0 z-50 bg-black/80 cursor-pointer transition-opacity duration-300 ease-in-out data-[state=closed]:opacity-0 data-[state=open]:opacity-100"
         [attr.data-state]="animationState()"
       ></div>
 
       <div [class]="computedClasses()" [attr.data-state]="animationState()">
-        <button
+        <!-- <button
           (click)="close()"
           class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none"
         >
@@ -70,7 +72,11 @@ export type DrawerProps = VariantProps<typeof drawerVariants>;
             <path d="m6 6 12 12" />
           </svg>
           <span class="sr-only">Close</span>
-        </button>
+        </button> -->
+
+        <wdc-button class="absolute right-2 top-2" variant="ghost" [icon]="true" (click)="close()">
+          <wdc-icon name="close"></wdc-icon>
+        </wdc-button>
 
         <div class="flex flex-col h-full pointer-events-auto">
           <ng-content></ng-content>
@@ -86,6 +92,7 @@ export class DrawerComponent {
   open = input<boolean>(false);
   side = input<DrawerProps['side']>('right');
   openChange = output<boolean>();
+  backdropClose = input<boolean>(false);
 
   @ViewChild('drawerTemplate') template!: TemplateRef<any>;
 

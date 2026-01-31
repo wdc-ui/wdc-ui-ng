@@ -84,7 +84,12 @@
             [options]="['USA', 'India', 'Canada']"
             error="Please select your country."
           />
-          <wdc-select label="Disabled" [options]="[]" disabled="true" placeholder="Cannot select" />
+          <wdc-select
+            label="Disabled"
+            [options]="[]"
+            [disabled]="true"
+            placeholder="Cannot select"
+          />
         </div>
       </app-doc-preview>
     </div>

@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppSetting } from '@shared/constants/app.constant';
 import { ReferenceItem, UiConfig } from '@shared/components/ui.config';
 import { dedent } from '@shared/utils/dedent';
 import { TABS_COMPONENTS } from '@wdc-ui/ng/tabs/tabs.component';
 import { CARD_COMPONENTS } from '@wdc-ui/ng/card/card.component';
+import { TocService } from 'src/app/core/services/toc.service';
 
 @Component({
   selector: 'app-tabs-example',
@@ -13,6 +14,18 @@ import { CARD_COMPONENTS } from '@wdc-ui/ng/card/card.component';
   templateUrl: './tabs-example.html',
 })
 export class TabsExample {
+  private tocService = inject(TocService);
+  AppSetting = AppSetting;
+
+  ngOnInit() {
+    // Manually define the headings for this page
+    this.tocService.setToc([
+      { id: 'installation', title: 'Installation', level: 'h2' },
+      { id: 'examples', title: 'Examples', level: 'h2' },
+      { id: 'references', title: 'API References', level: 'h2' },
+    ]);
+  }
+
   activeTabIndex = 0;
   htmlCode = `
 <wdc-tabs>
@@ -37,6 +50,7 @@ import { TabsComponent, TabPanelComponent } from 'wdc';
   references: ReferenceItem[] = [];
 
   snippets = {
+    install: dedent(`${AppSetting.addComponentCmd} tabs`),
     html: dedent(`<wdc-tabs>
             <wdc-tab
               [active]="true"

@@ -6,8 +6,17 @@
     </p>
   </div>
 
+  <section id="bash" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Installation</h2>
+    <app-code-viewer
+      title="Bash"
+      [bashCode]="snippets.install"
+      activeTabCode="bash"
+    ></app-code-viewer>
+  </section>
+
   <!-- Example Section -->
-  <section id="example" class="scroll-mt-20">
+  <section id="examples" class="scroll-mt-20">
     <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Examples</h2>
     <div class="flex flex-col gap-6">
       <app-doc-preview title="Checkbox Fields" description="Basic form controls" [showCode]="false">
@@ -20,22 +29,13 @@
     </div>
   </section>
 
-  <section id="bash" class="scroll-mt-20">
-    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Installation</h2>
-    <app-code-viewer
-      title="Bash"
-      [bashCode]="snippets.install"
-      activeTabCode="bash"
-    ></app-code-viewer>
-  </section>
-
   <section id="code" class="scroll-mt-20">
     <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Code</h2>
     <app-code-viewer [htmlCode]="snippets.html" [tsCode]="snippets.ts"></app-code-viewer>
   </section>
 
   <!-- API Section -->
-  <section id="api" class="scroll-mt-20">
+  <section id="references" class="scroll-mt-20">
     <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">API Reference</h2>
     <div class="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
       <app-reference [data]="references"></app-reference>

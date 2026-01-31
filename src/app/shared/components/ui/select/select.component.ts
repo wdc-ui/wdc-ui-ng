@@ -8,6 +8,7 @@ import {
   HostListener,
   inject,
   viewChild,
+  booleanAttribute,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
@@ -67,7 +68,7 @@ const selectTriggerVariants = cva(
 
       <button
         type="button"
-        [disabled]="isDisabled()"
+        [disabled]="isEffectivelyDisabled()"
         (click)="toggle()"
         [class]="computedTriggerClass()"
         [attr.aria-expanded]="isOpen()"
@@ -170,6 +171,11 @@ export class SelectComponent implements ControlValueAccessor {
   isOpen = signal(false);
   isDisabled = signal(false);
   searchQuery = signal('');
+
+  disabled = input(false, { transform: booleanAttribute });
+
+  protected isDisabledSignal = signal(false);
+  isEffectivelyDisabled = computed(() => this.disabled() || this.isDisabledSignal());
 
   // --- COMPUTED ---
   filteredOptions = computed(() => {

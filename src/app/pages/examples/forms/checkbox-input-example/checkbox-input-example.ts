@@ -1,17 +1,39 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { dedent } from '@shared/utils/dedent';
 import { ReferenceItem, UiConfig } from '@shared/components/ui.config';
 import { CheckboxComponent } from '@wdc-ui/ng/checkbox/checkbox.component';
 import { AppSetting } from '@shared/constants/app.constant';
+import { TocService } from 'src/app/core/services/toc.service';
+import { NoteBlockComponent } from '@shared/components/note-block/note-block.component';
+import { MarkdownViewerComponent } from '@shared/components/markdown-viewer/markdown-viewer.component';
 
 @Component({
   selector: 'app-checkbox-input-example',
-  imports: [UiConfig, CheckboxComponent, FormsModule, CommonModule],
+  imports: [
+    UiConfig,
+    CheckboxComponent,
+    FormsModule,
+    CommonModule,
+    NoteBlockComponent,
+    MarkdownViewerComponent,
+  ],
   templateUrl: './checkbox-input-example.html',
 })
 export class CheckboxInputExample {
+  private tocService = inject(TocService);
+  AppSetting = AppSetting;
+
+  ngOnInit() {
+    // Manually define the headings for this page
+    this.tocService.setToc([
+      { id: 'installation', title: 'Installation', level: 'h2' },
+      { id: 'examples', title: 'Examples', level: 'h2' },
+      { id: 'references', title: 'API References', level: 'h2' },
+    ]);
+  }
+
   appleVal = false;
   orangeVal = true;
   bananaVal = true;
