@@ -13,6 +13,8 @@ import { CommonModule } from '@angular/common';
 import { Dialog, DialogModule, DialogRef } from '@angular/cdk/dialog';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@shared/utils/cn';
+import { IconComponent } from '../icon/icon.component';
+import { ButtonComponent } from '../button/button.component';
 
 // --- STYLES CONFIGURATION ---
 // Removed 'fixed' positioning so Flexbox (CDK) can center it
@@ -40,13 +42,13 @@ export type DialogProps = VariantProps<typeof dialogVariants>;
 @Component({
   selector: 'wdc-dialog',
   standalone: true,
-  imports: [DialogModule, CommonModule],
+  imports: [DialogModule, CommonModule, IconComponent, ButtonComponent],
   template: `
     <ng-template #dialogTemplate>
       <div
         class="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in-dialog-overlay data-[state=closed]:animate-out-dialog-overlay cursor-pointer"
         [attr.data-state]="animationState()"
-        (click)="close()"
+        (click)="backdropClose() && close()"
       ></div>
 
       <div
@@ -54,27 +56,16 @@ export type DialogProps = VariantProps<typeof dialogVariants>;
         [attr.data-state]="animationState()"
         (click)="$event.stopPropagation()"
       >
-        <button
+        <!-- <button
           (click)="close()"
           class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="h-4 w-4"
-          >
-            <path d="M18 6 6 18" />
-            <path d="m6 6 12 12" />
-          </svg>
-          <span class="sr-only">Close</span>
-        </button>
+          <wdc-icon name="close"></wdc-icon>
+        </button> -->
+
+        <wdc-button class="absolute right-2 top-2" variant="ghost" [icon]="true" (click)="close()">
+          <wdc-icon name="close"></wdc-icon>
+        </wdc-button>
 
         <ng-content></ng-content>
       </div>
@@ -90,6 +81,7 @@ export class DialogComponent {
   open = input<boolean>(false);
   size = input<DialogProps['size']>('md');
   openChange = output<boolean>();
+  backdropClose = input<boolean>(false);
 
   // Internal signal to control CSS classes independently of the 'open' input
   animationState = signal<'open' | 'closed'>('closed');

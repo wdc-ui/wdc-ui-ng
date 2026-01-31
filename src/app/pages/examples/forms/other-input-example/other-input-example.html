@@ -6,8 +6,17 @@
     </p>
   </div>
 
+  <section id="installation" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Installation</h2>
+    <app-code-viewer
+      title="Bash"
+      [bashCode]="snippets.install"
+      activeTabCode="bash"
+    ></app-code-viewer>
+  </section>
+
   <!-- Example Section -->
-  <section id="example" class="scroll-mt-20">
+  <section id="examples" class="scroll-mt-20">
     <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Examples</h2>
     <div class="flex flex-col gap-6">
       <app-doc-preview
@@ -18,79 +27,52 @@
       >
         <div preview class="grid gap-6 w-full max-w-md">
           <form class="p-10 max-w-2xl mx-auto space-y-8" [formGroup]="form">
-            <h2 class="text-2xl font-bold">New Form Components</h2>
-
-            <wdc-checkbox
-              formControlName="terms"
-              label="Accept Terms and Conditions"
-              description="You agree to our privacy policy."
-            ></wdc-checkbox>
-
             <wdc-switch
               formControlName="notifications"
               label="Enable Push Notifications"
             ></wdc-switch>
-
-            <div class="space-y-2">
-              <label class="text-sm font-medium">Choose Plan</label>
-              <wdc-radio-group formControlName="plan">
-                <wdc-radio-item value="free">Free Plan</wdc-radio-item>
-                <wdc-radio-item value="pro">Pro Plan - $10</wdc-radio-item>
-                <wdc-radio-item value="enterprise">Enterprise</wdc-radio-item>
-              </wdc-radio-group>
-            </div>
-
-            <wdc-textarea
-              label="Bio"
-              placeholder="Tell us about yourself"
-              formControlName="bio"
-            ></wdc-textarea>
-
-            <div class="grid grid-cols-2 gap-6">
-              <wdc-date-picker label="Birth Date" formControlName="dob"></wdc-date-picker>
-              <wdc-color-picker label="Theme Color" formControlName="themeColor"></wdc-color-picker>
-            </div>
-
-            <wdc-file-upload
-              label="Profile Picture"
-              accept=".png, .jpg, .jpeg"
-              formControlName="avatar"
-            ></wdc-file-upload>
-
-            <pre class="bg-gray-100 p-4 rounded text-xs">{{ form.value | json }}</pre>
           </form>
         </div>
       </app-doc-preview>
 
       <app-doc-preview
-        title="Upload Field"
-        description="Upload file input field"
-        [htmlCode]="snippets.upload.html"
-        [tsCode]="snippets.upload.ts"
+        title="Basic Usage"
+        description="Color picker with default presets and manual hex input."
+        [htmlCode]="snippets.colorpicker.html"
       >
-        <div preview class="w-full max-w-md">
-          <!-- <wdc-file-upload
-            label="Profile Picture"
-            accept=".png, .jpg, .jpeg"
-            formControlName="avatar"
-          ></wdc-file-upload> -->
+        <div preview class="w-full flex flex-col space-y-2 max-w-xs">
+          <wdc-color-picker label="Brand Color" value="#3b82f6" />
+          <wdc-color-picker label="Background" error="Color is required." />
+          <wdc-color-picker label="Accent" [success]="true" value="#10b981" />
         </div>
       </app-doc-preview>
 
       <app-doc-preview
+        title="Upload Variants"
+        description="Choose between a large dropzone or a compact input style."
+        [htmlCode]="snippets.upload.html"
+      >
+        <div preview class="grid w-full max-w-sm gap-8">
+          <wdc-file-upload label="Profile Picture" accept=".jpg" />
+
+          <wdc-file-upload
+            variant="input"
+            label="Resume"
+            accept=".pdf"
+            placeholder="Upload CV..."
+          />
+        </div>
+      </app-doc-preview>
+
+      <!-- <app-doc-preview
         title="Textarea Field"
         description="Textarea input field"
         [htmlCode]="snippets.textarea.html"
         [tsCode]="snippets.textarea.ts"
       >
         <div preview class="w-full max-w-md">
-          <!-- <wdc-textarea
-            label="Bio"
-            placeholder="Tell us about yourself"
-            formControlName="bio"
-          ></wdc-textarea> -->
         </div>
-      </app-doc-preview>
+      </app-doc-preview> -->
 
       <app-doc-preview
         title="Rich Textarea Field"
@@ -98,7 +80,7 @@
         [htmlCode]="snippets.richText.html"
         [tsCode]="snippets.richText.ts"
       >
-        <div preview class="w-full max-w-md">
+        <div preview class="w-full max-w-md" id="richTextarea">
           <form [formGroup]="richTextareaForm" (ngSubmit)="submitReactive()">
             <wdc-rich-text-editor
               label="Product Description"
@@ -125,53 +107,35 @@
         </div>
       </app-doc-preview>
 
-      <app-doc-preview
+      <!-- <app-doc-preview
         title="Markdown Editor Field"
         description="Markdown editor field"
         [htmlCode]="snippets.markdown.html"
         [tsCode]="snippets.markdown.ts"
       >
         <div preview class="w-full">
-          <!-- <wdc-markdown-editor
-            [ngModel]="markDownEditor()"
-            (ngModelChange)="markDownEditor.set($event)"
-            label="Markdown Content"
-          >
-          </wdc-markdown-editor> -->
         </div>
-      </app-doc-preview>
+      </app-doc-preview> -->
 
-      <app-doc-preview
+      <!-- <app-doc-preview
         title="Color Picker & Date Picker"
         description="Color Picker & Date Picker field"
         [htmlCode]="snippets.cd.html"
         [tsCode]="snippets.cd.ts"
       >
         <div preview class="grid gap-6 w-full max-w-md">
-          <!-- <wdc-date-picker label="Birth Date" formControlName="dob"></wdc-date-picker>
-          <wdc-color-picker label="Theme Color" formControlName="themeColor"></wdc-color-picker> -->
         </div>
-      </app-doc-preview>
+      </app-doc-preview> -->
 
-      <app-doc-preview
+      <!-- <app-doc-preview
         title="Range Input"
         description="Range Input field"
         [htmlCode]="snippets.range.html"
         [tsCode]="snippets.range.ts"
       >
         <div preview class="grid gap-6 w-full max-w-md">
-          <!-- <wdc-range-input
-            [ngModel]="rangeValue()"
-            (ngModelChange)="rangeValue.set($event)"
-            label="Volume Control"
-            unit="%"
-            [min]="0"
-            [max]="100"
-            [step]="1"
-          >
-          </wdc-range-input> -->
         </div>
-      </app-doc-preview>
+      </app-doc-preview> -->
     </div>
   </section>
 
@@ -187,4 +151,11 @@
       <app-reference [data]="references"></app-reference>
     </div>
   </section> -->
+
+  <section id="uploadReferences" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Upload API Reference</h2>
+    <div class="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
+      <app-reference [data]="uploadReferences"></app-reference>
+    </div>
+  </section>
 </div>

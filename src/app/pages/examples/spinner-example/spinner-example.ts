@@ -7,6 +7,7 @@ import { AppSetting } from '@shared/constants/app.constant';
 import { ReferenceItem, UiConfig } from '@shared/components/ui.config';
 import { dedent } from '@shared/utils/dedent';
 import { PageLoaderService } from '@wdc-ui/ng/page-loader/page-loader.service';
+import { TocService } from 'src/app/core/services/toc.service';
 
 @Component({
   selector: 'app-spinner-example',
@@ -15,6 +16,18 @@ import { PageLoaderService } from '@wdc-ui/ng/page-loader/page-loader.service';
   templateUrl: './spinner-example.html',
 })
 export class SpinnerExample {
+  private tocService = inject(TocService);
+  AppSetting = AppSetting;
+
+  ngOnInit() {
+    // Manually define the headings for this page
+    this.tocService.setToc([
+      { id: 'installation', title: 'Installation', level: 'h2' },
+      { id: 'examples', title: 'Examples', level: 'h2' },
+      { id: 'references', title: 'API References', level: 'h2' },
+    ]);
+  }
+
   showPageLoader = signal(false);
   loader = inject(PageLoaderService);
   loaderMessage = signal('Loading your workspace...');
@@ -47,6 +60,8 @@ export class SpinnerExample {
   ];
 
   snippets = {
+    install: dedent(`${AppSetting.addComponentCmd} spinner
+      ${AppSetting.addComponentCmd} page-loader`),
     html: dedent(`<wdc-spinner size="sm"></wdc-spinner>
           <wdc-spinner size="md"></wdc-spinner>
           <wdc-spinner size="lg"></wdc-spinner>

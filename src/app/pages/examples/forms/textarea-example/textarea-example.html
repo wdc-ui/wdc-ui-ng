@@ -1,0 +1,80 @@
+<div class="space-y-12">
+  <div id="example">
+    <h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Textarea Input</h1>
+    <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">
+      Commonly used textarea input component.
+    </p>
+  </div>
+
+  <section id="bash" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Installation</h2>
+    <app-code-viewer
+      title="Bash"
+      [bashCode]="snippets.install"
+      activeTabCode="bash"
+    ></app-code-viewer>
+  </section>
+
+  <!-- Example Section -->
+  <section id="examples" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Examples</h2>
+    <div class="flex flex-col gap-6">
+      <app-doc-preview
+        title="Basic Usage"
+        description="Standard multiline text input."
+        [htmlCode]="snippets.basic.html"
+      >
+        <div preview class="w-full max-w-sm">
+          <wdc-textarea label="Bio" placeholder="Tell us a little bit about yourself" />
+        </div>
+      </app-doc-preview>
+
+      <app-doc-preview
+        title="Validation States"
+        description="Visual feedback for error and success states."
+        [htmlCode]="snippets.validation.html"
+      >
+        <div preview class="w-full max-w-sm space-y-4">
+          <wdc-textarea
+            label="Message"
+            [rows]="4"
+            error="Message must be at least 10 characters."
+            value="Hi"
+          />
+          <wdc-textarea
+            label="Feedback"
+            [success]="true"
+            successMessage="Thanks for your feedback!"
+            value="Great service!"
+          />
+        </div>
+      </app-doc-preview>
+
+      <app-doc-preview
+        title="Disabled"
+        description="Prevents user interaction."
+        [htmlCode]="snippets.disabled.html"
+      >
+        <div preview class="w-full max-w-sm">
+          <wdc-textarea
+            label="Read Only"
+            [disabled]="true"
+            value="This content cannot be edited."
+          />
+        </div>
+      </app-doc-preview>
+    </div>
+  </section>
+
+  <!-- API Section -->
+  <section id="references" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">API Reference</h2>
+    <div class="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
+      <app-reference [data]="references"></app-reference>
+    </div>
+  </section>
+
+  <wdc-note-block type="success" title="SEO & Accessibility">
+    <wdc-markdown [content]="markdownData"></wdc-markdown>
+  </wdc-note-block>
+</div>

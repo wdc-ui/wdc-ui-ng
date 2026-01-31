@@ -17,7 +17,7 @@ let nextId = 0;
     },
   ],
   template: `
-    <div class="flex items-start gap-3">
+    <div class="flex items-center gap-3">
       <button
         type="button"
         role="checkbox"
@@ -77,7 +77,7 @@ export class CheckboxComponent implements ControlValueAccessor {
 
   computedClass = computed(() =>
     cn(
-      'peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground',
+      'peer h-5 w-5 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground',
       this.class(),
     ),
   );

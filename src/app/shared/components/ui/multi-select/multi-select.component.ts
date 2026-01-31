@@ -44,7 +44,7 @@ const multiSelectTriggerVariants = cva(
     },
   ],
   template: `
-    <div class="w-full space-y-1.5 relative" #container>
+    <div class="w-full space-y-0.5 relative" #container>
       @if (label()) {
         <label
           class="text-sm font-medium leading-none cursor-pointer"

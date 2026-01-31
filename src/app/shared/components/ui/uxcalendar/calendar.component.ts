@@ -16,7 +16,7 @@ import { cn } from '@shared/utils/cn';
             <select
               [ngModel]="currentMonthIndex()"
               (ngModelChange)="setMonth($event)"
-              class="appearance-none h-8 w-[110px] bg-transparent pl-2 pr-6 text-sm font-medium hover:bg-accent hover:text-accent-foreground rounded-md focus:outline-none focus:ring-2 focus:ring-ring cursor-pointer"
+              class="appearance-none h-8 bg-transparent pl-2 pr-6 text-sm font-medium hover:bg-accent hover:text-accent-foreground rounded-md focus:outline-none focus:ring-2 focus:ring-ring cursor-pointer"
             >
               @for (month of months; track $index) {
                 <option [value]="$index" class="bg-popover text-popover-foreground">
@@ -69,9 +69,9 @@ import { cn } from '@shared/utils/cn';
         </div>
       </div>
 
-      <div class="mt-4 flex w-full">
+      <div class="mt-4 grid grid-cols-7 w-full">
         @for (day of weekDays; track day) {
-          <span class="text-muted-foreground rounded-md w-9 font-normal text-[0.8rem] text-center">
+          <span class="text-muted-foreground rounded-md font-normal text-[0.8rem] text-center">
             {{ day }}
           </span>
         }
@@ -79,7 +79,7 @@ import { cn } from '@shared/utils/cn';
 
       <div class="flex w-full mt-2 flex-col space-y-2">
         @for (week of calendarGrid(); track $index) {
-          <div class="flex w-full">
+          <div class="grid grid-cols-7 w-full">
             @for (dateObj of week; track $index) {
               @if (dateObj) {
                 <button type="button" (click)="selectDate(dateObj)" [class]="getDayClass(dateObj)">

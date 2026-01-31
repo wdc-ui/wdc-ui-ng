@@ -10,7 +10,7 @@ import {
 import { AppSetting } from '@shared/constants/app.constant';
 import { ReferenceItem, UiConfig } from '@shared/components/ui.config';
 import { dedent } from '@shared/utils/dedent';
-import { INPUT_COMPONENTS } from '@wdc-ui/ng/forms/input/input.component';
+import { INPUT_COMPONENTS } from '@wdc-ui/ng/input/input.component';
 import {
   CardComponent,
   CardContentComponent,

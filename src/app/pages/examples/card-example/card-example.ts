@@ -13,7 +13,7 @@ import {
   CardDescriptionComponent,
 } from '@wdc-ui/ng/card/card.component';
 import { ButtonComponent } from '@wdc-ui/ng/button/button.component';
-import { InputComponent } from '@wdc-ui/ng/forms/input/input.component';
+import { InputComponent } from '@wdc-ui/ng/input/input.component';
 import { IconComponent } from '@wdc-ui/ng/icon/icon.component';
 import { NoteBlockComponent } from '@shared/components/note-block/note-block.component';
 import { MarkdownViewerComponent } from '@shared/components/markdown-viewer/markdown-viewer.component';

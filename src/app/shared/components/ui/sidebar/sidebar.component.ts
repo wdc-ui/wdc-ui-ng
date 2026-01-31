@@ -149,10 +149,25 @@ export class SidebarTriggerComponent {
     <div>
       <button
         (click)="toggle()"
-        class="flex w-full items-center justify-between rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+        class="flex w-full items-center justify-between rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
         [class.text-foreground]="isOpen()"
       >
-        <span class="flex items-center gap-3">{{ label() }}</span>
+        <div class="flex items-center gap-3">
+          @if (icon()) {
+            <wdc-icon [name]="icon()!" size="18" />
+          } @else {
+            <ng-content select="[wdc-sidebar-icon]" />
+          }
+
+          <span class="flex-1 text-left">
+            @if (label()) {
+              {{ label() }}
+            } @else {
+              <ng-content select="[wdc-sidebar-label]" />
+            }
+          </span>
+        </div>
+
         <wdc-icon
           name="chevron_right"
           size="16"
@@ -173,6 +188,7 @@ export class SidebarTriggerComponent {
 })
 export class SidebarCollapsibleComponent {
   label = input.required<string>();
+  icon = input<string>();
   startOpen = input(false);
   isOpen = signal(false);
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BadgeComponent } from '@wdc-ui/ng/badge/badge.component';
 import { UiConfig, ReferenceItem } from '../../../shared/components/ui.config';
@@ -6,6 +6,7 @@ import { AppSetting } from '@shared/constants/app.constant';
 import { dedent } from '@shared/utils/dedent';
 import { ButtonComponent } from '@wdc-ui/ng/button/button.component';
 import { IconComponent } from '@wdc-ui/ng/icon/icon.component';
+import { TocService } from 'src/app/core/services/toc.service';
 
 @Component({
   selector: 'app-badge-example',
@@ -14,7 +15,17 @@ import { IconComponent } from '@wdc-ui/ng/icon/icon.component';
   templateUrl: './badge-example.html',
 })
 export class BadgeExample {
+  private tocService = inject(TocService);
   AppSetting = AppSetting;
+
+  ngOnInit() {
+    // Manually define the headings for this page
+    this.tocService.setToc([
+      { id: 'installation', title: 'Installation', level: 'h2' },
+      { id: 'examples', title: 'Examples', level: 'h2' },
+      { id: 'references', title: 'API References', level: 'h2' },
+    ]);
+  }
 
   references: ReferenceItem[] = [
     {
@@ -44,6 +55,7 @@ export class BadgeExample {
   ];
 
   snippets = {
+    install: dedent(`${AppSetting.addComponentCmd} badge`),
     html: dedent(`<div class="flex gap-4 items-center">
           <wdc-badge>Primary</wdc-badge>
           <wdc-badge variant="secondary">Secondary</wdc-badge>

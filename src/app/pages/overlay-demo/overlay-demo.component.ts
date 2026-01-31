@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CollapsibleDirective } from '@shared/directives/collapsible.directive';
 import { CopyClipboardDirective } from '@shared/directives/copy-clipboard.directive';
 import { ButtonComponent } from '@wdc-ui/ng/button/button.component';
-import { InputComponent } from '@wdc-ui/ng/forms/input/input.component';
+import { InputComponent } from '@wdc-ui/ng/input/input.component';
 import { IconComponent } from '@wdc-ui/ng/icon/icon.component';
 import { ScrollTopComponent } from '@wdc-ui/ng/scroll-top/scroll-top.component';
 import { PopoverComponent, PopoverTriggerDirective } from '@wdc-ui/ng/tooltip/popover.component';

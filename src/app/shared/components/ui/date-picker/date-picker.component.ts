@@ -12,8 +12,8 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import { cva } from 'class-variance-authority';
 import { cn } from '@shared/utils/cn';
-import { IconComponent } from '../../icon/icon.component';
-import { UxCalendarComponent } from '../../uxcalendar/calendar.component';
+import { IconComponent } from '../icon/icon.component';
+import { UxCalendarComponent } from '../uxcalendar/calendar.component';
 
 // --- STYLES (Match Input & Select exactly) ---
 const dateTriggerVariants = cva(
@@ -44,7 +44,7 @@ const dateTriggerVariants = cva(
     },
   ],
   template: `
-    <div class="w-full space-y-1.5 relative" #container>
+    <div class="w-full space-y-0.5 relative" #container>
       @if (label()) {
         <label
           class="text-sm font-medium leading-none cursor-pointer"
@@ -78,7 +78,7 @@ const dateTriggerVariants = cva(
 
       @if (isOpen()) {
         <div
-          class="absolute z-50 mt-1 w-auto rounded-md border border-border bg-popover p-0 text-popover-foreground shadow-md animate-in fade-in zoom-in-95"
+          class="absolute z-50 w-full rounded-md border border-border bg-popover p-0 text-popover-foreground shadow-md animate-in fade-in zoom-in-95"
           (click)="$event.stopPropagation()"
         >
           <wdc-calendar [selectedDate]="value()" (onSelect)="onDateSelected($event)" />

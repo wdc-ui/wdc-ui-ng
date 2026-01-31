@@ -148,6 +148,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'textarea-input',
+        loadComponent: () =>
+          import('./pages/examples/forms/textarea-example/textarea-example').then(
+            (m) => m.TextareaExample,
+          ),
+      },
+      {
         path: 'select-input',
         loadComponent: () =>
           import('./pages/examples/forms/select-input-example/select-input-example').then(

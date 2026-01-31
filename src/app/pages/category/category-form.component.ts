@@ -1,10 +1,10 @@
 import { Component, input, output, effect, inject } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { InputComponent } from '@wdc-ui/ng/forms/input/input.component';
+import { InputComponent } from '@wdc-ui/ng/input/input.component';
 import { ButtonComponent } from '@wdc-ui/ng/button/button.component';
 import { SelectComponent } from '@wdc-ui/ng/select/select.component';
-import { RichTextEditorComponent } from '@wdc-ui/ng/forms/rich-text-editor/rich-text-editor.component';
+import { RichTextEditorComponent } from '@wdc-ui/ng/rich-text-editor/rich-text-editor.component';
 import { Category } from 'src/app/core/models/category.model';
 
 @Component({
