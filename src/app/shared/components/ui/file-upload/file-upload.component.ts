@@ -10,7 +10,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { cn } from '@shared/utils/cn';
-import { SpinnerComponent } from '../../spinner/spinner.component'; // Ensure you have this
+import { SpinnerComponent } from '../spinner/spinner.component'; // Ensure you have this
 
 @Component({
   selector: 'wdc-file-upload',

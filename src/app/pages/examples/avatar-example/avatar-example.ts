@@ -1,10 +1,11 @@
 import { AppSetting } from './../../../shared/constants/app.constant';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { dedent } from '../../../shared/utils/dedent';
 import { UiConfig, ReferenceItem } from '../../../shared/components/ui.config';
 import { AVATAR_COMPONENTS } from '@wdc-ui/ng/avatar/avatar.component';
 import { AvatarProfileComponent } from '@wdc-ui/ng/avatar/avatar-profile.component';
 import { BadgeComponent } from '@wdc-ui/ng/badge/badge.component';
+import { TocService } from 'src/app/core/services/toc.service';
 
 @Component({
   selector: 'app-avatar-example',
@@ -13,8 +14,18 @@ import { BadgeComponent } from '@wdc-ui/ng/badge/badge.component';
   templateUrl: './avatar-example.html',
 })
 export class AvatarExample {
+  private tocService = inject(TocService);
   imgUrl =
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80';
+
+  ngOnInit() {
+    // Manually define the headings for this page
+    this.tocService.setToc([
+      { id: 'installation', title: 'Installation', level: 'h2' },
+      { id: 'examples', title: 'Examples', level: 'h2' },
+      { id: 'references', title: 'API References', level: 'h2' },
+    ]);
+  }
   references: ReferenceItem[] = [
     {
       input: 'src',
@@ -49,6 +60,7 @@ export class AvatarExample {
   ];
 
   snippets = {
+    install: dedent(`${AppSetting.addComponentCmd} avatar`),
     html: dedent(`<wdc-avatar size="sm" fallback="S"></wdc-avatar>
         <wdc-avatar size="md" fallback="M"></wdc-avatar>
         <wdc-avatar size="lg" fallback="L"></wdc-avatar>

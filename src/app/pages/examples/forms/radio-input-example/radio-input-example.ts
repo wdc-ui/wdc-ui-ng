@@ -5,7 +5,7 @@ import { UiConfig } from '@shared/components/ui.config';
 import { AppSetting } from '@shared/constants/app.constant';
 import { dedent } from '@shared/utils/dedent';
 import { ReferenceItem } from '@shared/components/ui.config';
-import { RadioGroupComponent, RadioItemComponent } from '@wdc-ui/ng/forms/radio/radio.component';
+import { RadioGroupComponent, RadioItemComponent } from '@wdc-ui/ng/radio/radio.component';
 
 @Component({
   selector: 'app-radio-input-example',

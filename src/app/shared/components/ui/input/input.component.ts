@@ -18,7 +18,7 @@ import {
 } from '@angular/forms';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@shared/utils/cn';
-import { IconComponent } from '../../icon/icon.component';
+import { IconComponent } from '../icon/icon.component';
 
 // --- DIRECTIVES (Keep these simple) ---
 @Directive({ selector: '[wdcPrefix]', standalone: true })

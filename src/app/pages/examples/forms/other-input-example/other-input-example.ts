@@ -5,17 +5,17 @@ import { AppSetting } from '@shared/constants/app.constant';
 import { ReferenceItem, UiConfig } from '@shared/components/ui.config';
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { dedent } from '@shared/utils/dedent';
-import { CheckboxComponent } from '@wdc-ui/ng/forms/checkbox/checkbox.component';
-import { SwitchComponent } from '@wdc-ui/ng/forms/switch/switch.component';
-import { RadioGroupComponent, RadioItemComponent } from '@wdc-ui/ng/forms/radio/radio.component';
-import { TextareaComponent } from '@wdc-ui/ng/forms/textarea/textarea.component';
+import { CheckboxComponent } from '@wdc-ui/ng/checkbox/checkbox.component';
+import { SwitchComponent } from '@wdc-ui/ng/switch/switch.component';
+import { RadioGroupComponent, RadioItemComponent } from '@wdc-ui/ng/radio/radio.component';
+import { TextareaComponent } from '@wdc-ui/ng/textarea/textarea.component';
 import {
   ColorPickerComponent,
   DatePickerComponent,
-} from '@wdc-ui/ng/forms/native-pickers/pickers.component';
-import { FileUploadComponent } from '@wdc-ui/ng/forms/file-upload/file-upload.component';
+} from '@wdc-ui/ng/native-pickers/pickers.component';
+import { FileUploadComponent } from '@wdc-ui/ng/file-upload/file-upload.component';
 import { ButtonComponent } from '@wdc-ui/ng/button/button.component';
-import { RichTextEditorComponent } from '@wdc-ui/ng/forms/rich-text-editor/rich-text-editor.component';
+import { RichTextEditorComponent } from '@wdc-ui/ng/rich-text-editor/rich-text-editor.component';
 
 @Component({
   selector: 'app-other-input-example',

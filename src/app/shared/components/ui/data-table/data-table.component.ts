@@ -14,7 +14,7 @@ import { TableColumn, SortEvent, TableCellContext } from './table.models';
 
 // UI Components (Adjust paths)
 import { PaginationComponent } from '../pagination/pagination.component';
-import { InputComponent, InputPrefixDirective } from '../forms/input/input.component';
+import { InputComponent, InputPrefixDirective } from '../input/input.component';
 import { IconComponent } from '../icon/icon.component';
 
 // --- DIRECTIVE ---

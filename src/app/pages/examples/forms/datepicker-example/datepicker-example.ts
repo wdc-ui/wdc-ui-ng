@@ -5,7 +5,7 @@ import { NoteBlockComponent } from '@shared/components/note-block/note-block.com
 import { ReferenceItem, UiConfig } from '@shared/components/ui.config';
 import { AppSetting } from '@shared/constants/app.constant';
 import { dedent } from '@shared/utils/dedent';
-import { DatePickerComponent } from '@wdc-ui/ng/forms/date-picker/date-picker.component';
+import { DatePickerComponent } from '@wdc-ui/ng/date-picker/date-picker.component';
 import { TocService } from 'src/app/core/services/toc.service';
 
 @Component({

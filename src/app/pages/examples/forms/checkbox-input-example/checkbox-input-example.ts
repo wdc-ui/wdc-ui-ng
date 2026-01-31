@@ -3,7 +3,7 @@ import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { dedent } from '@shared/utils/dedent';
 import { ReferenceItem, UiConfig } from '@shared/components/ui.config';
-import { CheckboxComponent } from '@wdc-ui/ng/forms/checkbox/checkbox.component';
+import { CheckboxComponent } from '@wdc-ui/ng/checkbox/checkbox.component';
 import { AppSetting } from '@shared/constants/app.constant';
 
 @Component({

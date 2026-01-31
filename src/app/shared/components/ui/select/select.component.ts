@@ -50,7 +50,7 @@ const selectTriggerVariants = cva(
     },
   ],
   template: `
-    <div class="w-full space-y-1.5 relative" #container>
+    <div class="w-full space-y-0.5 relative" #container>
       @if (label()) {
         <label
           class="text-sm font-medium leading-none cursor-pointer"
@@ -87,7 +87,7 @@ const selectTriggerVariants = cva(
 
       @if (isOpen()) {
         <div
-          class="absolute z-50 mt-1 w-full overflow-hidden rounded-md border border-border bg-popover text-popover-foreground shadow-md animate-in fade-in zoom-in-95"
+          class="absolute z-50 w-full overflow-hidden rounded-md border border-border bg-popover text-popover-foreground shadow-md animate-in fade-in zoom-in-95"
         >
           @if (searchable()) {
             <div class="flex items-center border-b px-3 py-2 sticky top-0 bg-popover z-10">
