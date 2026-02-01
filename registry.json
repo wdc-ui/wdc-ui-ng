@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-01-28T12:21:42.009Z",
+  "generatedAt": "2026-02-01T16:19:41.621Z",
   "items": [
     {
       "name": "utils",
@@ -216,6 +216,38 @@
       ]
     },
     {
+      "name": "checkbox",
+      "type": "components:ui",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge",
+        "class-variance-authority"
+      ],
+      "files": [
+        {
+          "name": "checkbox.component.ts",
+          "path": "src/app/shared/components/ui/checkbox/checkbox.component.ts",
+          "target": "src/app/shared/components/ui/checkbox"
+        }
+      ]
+    },
+    {
+      "name": "color-picker",
+      "type": "components:ui",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge",
+        "class-variance-authority"
+      ],
+      "files": [
+        {
+          "name": "color-picker.component.ts",
+          "path": "src/app/shared/components/ui/color-picker/color-picker.component.ts",
+          "target": "src/app/shared/components/ui/color-picker"
+        }
+      ]
+    },
+    {
       "name": "data-table",
       "type": "components:ui",
       "dependencies": [
@@ -233,6 +265,22 @@
           "name": "table.models.ts",
           "path": "src/app/shared/components/ui/data-table/table.models.ts",
           "target": "src/app/shared/components/ui/data-table"
+        }
+      ]
+    },
+    {
+      "name": "date-picker",
+      "type": "components:ui",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge",
+        "class-variance-authority"
+      ],
+      "files": [
+        {
+          "name": "date-picker.component.ts",
+          "path": "src/app/shared/components/ui/date-picker/date-picker.component.ts",
+          "target": "src/app/shared/components/ui/date-picker"
         }
       ]
     },
@@ -291,7 +339,7 @@
       ]
     },
     {
-      "name": "forms",
+      "name": "file-upload",
       "type": "components:ui",
       "dependencies": [
         "clsx",
@@ -300,51 +348,21 @@
       ],
       "files": [
         {
-          "name": "checkbox",
-          "path": "src/app/shared/components/ui/forms/checkbox",
-          "target": "src/app/shared/components/ui/forms"
-        },
-        {
-          "name": "date-picker",
-          "path": "src/app/shared/components/ui/forms/date-picker",
-          "target": "src/app/shared/components/ui/forms"
-        },
-        {
-          "name": "file-upload",
-          "path": "src/app/shared/components/ui/forms/file-upload",
-          "target": "src/app/shared/components/ui/forms"
-        },
-        {
-          "name": "input",
-          "path": "src/app/shared/components/ui/forms/input",
-          "target": "src/app/shared/components/ui/forms"
-        },
-        {
-          "name": "native-pickers",
-          "path": "src/app/shared/components/ui/forms/native-pickers",
-          "target": "src/app/shared/components/ui/forms"
-        },
-        {
-          "name": "radio",
-          "path": "src/app/shared/components/ui/forms/radio",
-          "target": "src/app/shared/components/ui/forms"
-        },
-        {
-          "name": "rich-text-editor",
-          "path": "src/app/shared/components/ui/forms/rich-text-editor",
-          "target": "src/app/shared/components/ui/forms"
-        },
-        {
-          "name": "switch",
-          "path": "src/app/shared/components/ui/forms/switch",
-          "target": "src/app/shared/components/ui/forms"
-        },
-        {
-          "name": "textarea",
-          "path": "src/app/shared/components/ui/forms/textarea",
-          "target": "src/app/shared/components/ui/forms"
+          "name": "file-upload.component.ts",
+          "path": "src/app/shared/components/ui/file-upload/file-upload.component.ts",
+          "target": "src/app/shared/components/ui/file-upload"
         }
       ]
+    },
+    {
+      "name": "forms",
+      "type": "components:ui",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge",
+        "class-variance-authority"
+      ],
+      "files": []
     },
     {
       "name": "icon",
@@ -401,6 +419,27 @@
           "name": "image-viewer.component.ts",
           "path": "src/app/shared/components/ui/image-viewer/image-viewer.component.ts",
           "target": "src/app/shared/components/ui/image-viewer"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "components:ui",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge",
+        "class-variance-authority"
+      ],
+      "files": [
+        {
+          "name": "input.component.ts",
+          "path": "src/app/shared/components/ui/input/input.component.ts",
+          "target": "src/app/shared/components/ui/input"
+        },
+        {
+          "name": "input.directives.ts",
+          "path": "src/app/shared/components/ui/input/input.directives.ts",
+          "target": "src/app/shared/components/ui/input"
         }
       ]
     },
@@ -470,6 +509,38 @@
           "name": "pagination.component.ts",
           "path": "src/app/shared/components/ui/pagination/pagination.component.ts",
           "target": "src/app/shared/components/ui/pagination"
+        }
+      ]
+    },
+    {
+      "name": "radio",
+      "type": "components:ui",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge",
+        "class-variance-authority"
+      ],
+      "files": [
+        {
+          "name": "radio.component.ts",
+          "path": "src/app/shared/components/ui/radio/radio.component.ts",
+          "target": "src/app/shared/components/ui/radio"
+        }
+      ]
+    },
+    {
+      "name": "rich-text-editor",
+      "type": "components:ui",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge",
+        "class-variance-authority"
+      ],
+      "files": [
+        {
+          "name": "rich-text-editor.component.ts",
+          "path": "src/app/shared/components/ui/rich-text-editor/rich-text-editor.component.ts",
+          "target": "src/app/shared/components/ui/rich-text-editor"
         }
       ]
     },
@@ -545,6 +616,22 @@
       ]
     },
     {
+      "name": "switch",
+      "type": "components:ui",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge",
+        "class-variance-authority"
+      ],
+      "files": [
+        {
+          "name": "switch.component.ts",
+          "path": "src/app/shared/components/ui/switch/switch.component.ts",
+          "target": "src/app/shared/components/ui/switch"
+        }
+      ]
+    },
+    {
       "name": "tabs",
       "type": "components:ui",
       "dependencies": [
@@ -558,6 +645,22 @@
           "name": "tabs.component.ts",
           "path": "src/app/shared/components/ui/tabs/tabs.component.ts",
           "target": "src/app/shared/components/ui/tabs"
+        }
+      ]
+    },
+    {
+      "name": "textarea",
+      "type": "components:ui",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge",
+        "class-variance-authority"
+      ],
+      "files": [
+        {
+          "name": "textarea.component.ts",
+          "path": "src/app/shared/components/ui/textarea/textarea.component.ts",
+          "target": "src/app/shared/components/ui/textarea"
         }
       ]
     },
