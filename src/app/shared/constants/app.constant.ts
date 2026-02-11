@@ -1,5 +1,5 @@
 export const AppSetting = {
-  title: 'WDC UI',
+  title: 'wdc-ui',
   installCommand: 'npx @wdc-ui/ng@latest init',
   importPath: '@wdc-ui/ng',
   addComponentCmd: 'npx wdc add',
