@@ -37,6 +37,7 @@ import { Category } from 'src/app/core/models/category.model';
       />
 
       <wdc-select
+        [searchable]="false"
         label="Status"
         formControlName="status"
         [options]="statusOptions"
@@ -50,7 +51,7 @@ import { Category } from 'src/app/core/models/category.model';
       />
 
       <div class="flex items-center justify-end gap-3 pt-4 border-t mt-4">
-        <wdc-button type="button" variant="outline" (click)="onCancel.emit()"> Cancel </wdc-button>
+        <wdc-button type="button" variant="outline" (click)="cancelSave()"> Cancel </wdc-button>
         <wdc-button type="submit" [disabled]="form.invalid || form.pristine">
           {{ isEditMode() ? 'Update Category' : 'Create Category' }}
         </wdc-button>
@@ -109,5 +110,10 @@ export class CategoryFormComponent {
       // Emit data back to parent list
       this.onSave.emit(this.form.value as Category);
     }
+  }
+
+  cancelSave() {
+    this.form.reset();
+    this.onCancel.emit();
   }
 }

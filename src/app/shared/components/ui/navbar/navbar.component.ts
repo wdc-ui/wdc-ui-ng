@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
 import { cn } from '@shared/utils/cn';
 import { IconComponent } from '../icon/icon.component';
 import { ButtonComponent } from '../button/button.component';

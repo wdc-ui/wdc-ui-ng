@@ -63,9 +63,16 @@ export type DialogProps = VariantProps<typeof dialogVariants>;
           <wdc-icon name="close"></wdc-icon>
         </button> -->
 
-        <wdc-button class="absolute right-2 top-2" variant="ghost" [icon]="true" (click)="close()">
-          <wdc-icon name="close"></wdc-icon>
-        </wdc-button>
+        @if (showCloseIcon()) {
+          <wdc-button
+            class="absolute right-2 top-2"
+            variant="ghost"
+            [icon]="true"
+            (click)="close()"
+          >
+            <wdc-icon name="close"></wdc-icon>
+          </wdc-button>
+        }
 
         <ng-content></ng-content>
       </div>
@@ -82,6 +89,7 @@ export class DialogComponent {
   size = input<DialogProps['size']>('md');
   openChange = output<boolean>();
   backdropClose = input<boolean>(false);
+  showCloseIcon = input<boolean>(false);
 
   // Internal signal to control CSS classes independently of the 'open' input
   animationState = signal<'open' | 'closed'>('closed');
