@@ -23,8 +23,8 @@ export class DrawerExample implements OnInit {
   ngOnInit() {
     this.seoSevice.updateMeta(
       'Angular Drawer Component',
-      'High-performance, accessible side drawer for Angular 21. Fully customizable with SSR support.',
-      'Angular Drawer, Sidebar, wdc-ui, Angular 21 SSR, Web Development',
+      'High-performance, accessible side drawer for Angular. Fully customizable.',
+      'Angular Drawer, Sidebar, wdc-ui, Angular 21, Web Development',
     );
     this.tocService.setToc([
       { id: 'installation', title: 'Installation', level: 'h2' },
