@@ -1,0 +1,21 @@
+<wdc-data-list [items]="tasks" key="id" (reorder)="onReorder($event)">
+  <ng-template #itemTemplate let-task>
+    <div class="flex items-center gap-3 w-full">
+      <span
+        class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider"
+        [class.bg-warning-10]="task.status === 'pending'"
+        [class.text-warning]="task.status === 'pending'"
+        [class.bg-success-10]="task.status === 'done'"
+        [class.text-success]="task.status === 'done'"
+      >
+        {{ task.status }}
+      </span>
+
+      <span class="text-sm font-medium">{{ task.title }}</span>
+
+      <span class="ml-auto text-xs text-muted-foreground">{{ task.date }}</span>
+    </div>
+  </ng-template>
+</wdc-data-list>
+
+<!-- <wdc-data-list [items]="simpleList" (reorder)="onReorder($event)"></wdc-data-list> -->

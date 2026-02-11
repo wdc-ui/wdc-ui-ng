@@ -1,35 +1,40 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ReferenceItem, UiConfig } from '@shared/components/ui.config';
 import { AppSetting } from '@shared/constants/app.constant';
 import { dedent } from '@shared/utils/dedent';
 import { ButtonComponent } from '@wdc-ui/ng/button/button.component';
-import {
-  DrawerComponent,
-  DrawerDescriptionComponent,
-  DrawerFooterComponent,
-  DrawerHeaderComponent,
-  DrawerTitleComponent,
-} from '@wdc-ui/ng/drawer/drawer.component';
+import { DRAWER_COMPONENTS } from '@wdc-ui/ng/drawer/drawer.component';
+import { InputComponent } from '@wdc-ui/ng/input/input.component';
+import { SeoService } from 'src/app/core/services/seo.service';
+import { TocService } from 'src/app/core/services/toc.service';
 
 @Component({
   selector: 'app-drawer-example',
   standalone: true,
-  imports: [
-    DrawerComponent,
-    ButtonComponent,
-    UiConfig,
-    DrawerHeaderComponent,
-    DrawerFooterComponent,
-    DrawerTitleComponent,
-    DrawerDescriptionComponent,
-  ],
+  imports: [ButtonComponent, UiConfig, DRAWER_COMPONENTS, InputComponent],
   templateUrl: './drawer-example.html',
 })
-export class DrawerExample {
+export class DrawerExample implements OnInit {
+  private seoSevice = inject(SeoService);
+  private tocService = inject(TocService);
   isOpen = signal(false);
-  activeSide = signal<'left' | 'right' | 'top' | 'bottom'>('right');
+  activeSide = signal<'left' | 'right'>('right');
 
-  openDrawer(side: 'left' | 'right' | 'top' | 'bottom') {
+  ngOnInit() {
+    this.seoSevice.updateMeta(
+      'Angular Drawer Component',
+      'High-performance, accessible side drawer for Angular 21. Fully customizable with SSR support.',
+      'Angular Drawer, Sidebar, wdc-ui, Angular 21 SSR, Web Development',
+    );
+    this.tocService.setToc([
+      { id: 'installation', title: 'Installation', level: 'h2' },
+      { id: 'examples', title: 'Examples', level: 'h2' },
+      { id: 'code', title: 'Code', level: 'h2' },
+      { id: 'api', title: 'API Reference', level: 'h2' },
+    ]);
+  }
+
+  openDrawer(side: 'left' | 'right') {
     this.activeSide.set(side);
     this.isOpen.set(true);
   }
@@ -66,19 +71,44 @@ export class DrawerExample {
   ];
 
   snippets = {
-    html: dedent(`<wdc-button (click)="isLeftDrawerOpen = true">Left Drawer</wdc-button>
-          <wdc-button (click)="isRightDrawerOpen = true">Right Drawer</wdc-button>`),
+    install: dedent(`${AppSetting.addComponentCmd} drawer`),
+    html: dedent(`<wdc-button (click)="openDrawer('right')" variant="outline">Open Right</wdc-button>
+          <wdc-button (click)="openDrawer('left')" variant="outline">Open Left</wdc-button>
+          
+          <wdc-drawer [open]="isOpen()" [side]="activeSide()" (openChange)="isOpen.set(false)">
+            <wdc-drawer-header>
+              <wdc-drawer-title>Edit Profile</wdc-drawer-title>
+              <wdc-drawer-description>Make changes to your profile here.</wdc-drawer-description>
+            </wdc-drawer-header>
+
+            <wdc-drawer-content>
+              <div class="space-y-4">
+                <wdc-input label="Name" value="Kamal Kumar" />
+                <wdc-input label="Email" value="kamal@example.com" />
+              </div>
+            </wdc-drawer-content>
+
+            <wdc-drawer-footer>
+              <wdc-button variant="outline" (click)="isOpen.set(false)">Cancel</wdc-button>
+              <wdc-button (click)="saveChanges()">Save Changes</wdc-button>
+            </wdc-drawer-footer>
+          </wdc-drawer>`),
     ts: dedent(`
         import { Component } from '@angular/core';
-        import { ButtonComponent, DrawerComponent } from '${AppSetting.libName}';
+        import { ButtonComponent } from '${AppSetting.libName}/button/button.component';
+        import { DRAWER_COMPONENTS } from '${AppSetting.libName}/drawer/drawer.component';
         @Component({
             selector: 'app-example',
             standalone: true,
             imports: [ButtonComponent, DrawerComponent],
         })
         export class ExampleComponent {
-          isLeftDrawerOpen = false;
-          isRightDrawerOpen = false;
+          isOpen = signal(false);
+          activeSide = signal<'left' | 'right'>('right');
+          openDrawer(side: 'left' | 'right') {
+            this.activeSide.set(side);
+            this.isOpen.set(true);
+          }
         }`),
   };
 }

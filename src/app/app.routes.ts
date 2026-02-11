@@ -20,6 +20,16 @@ export const routes: Routes = [
           import('./pages/category/category-list.component').then((m) => m.CategoryListComponent),
       },
       {
+        path: 'data-list',
+        loadComponent: () =>
+          import('./pages/data-list/data-list.example').then((m) => m.DataListExample),
+      },
+      {
+        path: 'todo-list',
+        loadComponent: () =>
+          import('./pages/todo-list/todo-list.component').then((m) => m.TodoListComponent),
+      },
+      {
         path: 'gallery',
         loadComponent: () =>
           import('./pages/gallery-demo/gallery-demo.component').then((m) => m.GalleryDemoComponent),

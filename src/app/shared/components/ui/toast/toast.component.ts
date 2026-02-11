@@ -41,7 +41,7 @@ const toastVariants = cva(
         }
       </div>
 
-      <button
+      <!-- <button
         (click)="close.emit()"
         class="absolute right-2 top-2 rounded-md p-1 opacity-50 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100"
       >
@@ -59,7 +59,7 @@ const toastVariants = cva(
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
-      </button>
+      </button> -->
     </div>
   `,
 })

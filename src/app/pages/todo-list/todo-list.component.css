@@ -1,0 +1,6 @@
+/* :host ::ng-deep wdc-data-list .group {
+  @apply border-0 shadow-none rounded-none p-0;
+}
+:host ::ng-deep wdc-data-list .group.dragging {
+  @apply bg-accent/50;
+} */

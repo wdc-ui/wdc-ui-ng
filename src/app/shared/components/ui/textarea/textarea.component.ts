@@ -16,8 +16,6 @@ import {
 } from '@angular/forms';
 import { cva } from 'class-variance-authority';
 import { cn } from '@shared/utils/cn';
-import { NoteBlockComponent } from '@shared/components/note-block/note-block.component';
-import { MarkdownViewerComponent } from '@shared/components/markdown-viewer/markdown-viewer.component';
 
 const textareaVariants = cva(
   'flex min-h-[80px] w-full rounded-md border-2 bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 transition-colors',
