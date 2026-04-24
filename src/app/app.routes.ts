@@ -98,6 +98,11 @@ export const routes: Routes = [
           import('./pages/examples/drawer-example/drawer-example').then((m) => m.DrawerExample),
       },
       {
+        path: 'alerts',
+        loadComponent: () =>
+          import('./pages/examples/alert-example/alert-example').then((m) => m.AlertExample),
+      },
+      {
         path: 'avatars',
         loadComponent: () =>
           import('./pages/examples/avatar-example/avatar-example').then((m) => m.AvatarExample),

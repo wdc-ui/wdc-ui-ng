@@ -6,6 +6,7 @@ import { ButtonComponent } from '@wdc-ui/ng/button/button.component';
 import { SelectComponent } from '@wdc-ui/ng/select/select.component';
 import { RichTextEditorComponent } from '@wdc-ui/ng/rich-text-editor/rich-text-editor.component';
 import { Category } from 'src/app/core/models/category.model';
+import { DatePickerComponent } from '@wdc-ui/ng/date-picker/date-picker.component';
 
 @Component({
   selector: 'app-category-form',
@@ -17,6 +18,7 @@ import { Category } from 'src/app/core/models/category.model';
     ButtonComponent,
     SelectComponent,
     RichTextEditorComponent,
+    DatePickerComponent,
   ],
   template: `
     <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-6">
@@ -42,6 +44,16 @@ import { Category } from 'src/app/core/models/category.model';
         formControlName="status"
         [options]="statusOptions"
         [required]="true"
+        [error]="getError('status')"
+      />
+
+      <wdc-date-picker
+        label="Meeting Date"
+        format="fullDate"
+        placeholder="Select date..."
+        formControlName="dueDate"
+        [required]="true"
+        [error]="getError('dueDate')"
       />
 
       <wdc-rich-text-editor
@@ -72,7 +84,8 @@ export class CategoryFormComponent {
     id: [null as number | null],
     name: ['', [Validators.required, Validators.minLength(3)]],
     slug: ['', [Validators.required, Validators.pattern('^[a-z0-9-]+$')]],
-    status: ['Active', Validators.required],
+    status: ['', [Validators.required]],
+    dueDate: ['', [Validators.required]],
     description: [''],
   });
 

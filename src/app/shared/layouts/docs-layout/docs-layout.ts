@@ -35,6 +35,7 @@ export class DocsLayout {
       label: 'Components',
       items: [
         { label: 'Avatars', route: '/docs/avatars', exact: false },
+        { label: 'Alert', route: '/docs/alerts', exact: false },
         { label: 'Buttons', route: '/docs/buttons', exact: false },
         { label: 'Breadcrumb', route: '/docs/breadcrumb', exact: false },
         { label: 'Badges', route: '/docs/badges', exact: false },

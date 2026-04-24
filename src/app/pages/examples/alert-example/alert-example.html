@@ -1,0 +1,79 @@
+<div class="space-y-8">
+  <div>
+    <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">Badge</h1>
+    <p class="text-slate-600 dark:text-slate-400 text-lg">
+      Badges are used to highlight status, numbers, or tags.
+    </p>
+  </div>
+
+  <section id="installation" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Installation</h2>
+    <app-code-viewer
+      title="Bash"
+      [bashCode]="snippets.install"
+      activeTabCode="bash"
+    ></app-code-viewer>
+  </section>
+
+  <!-- Example Section -->
+  <section id="examples" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">Examples</h2>
+
+    <div class="flex flex-col gap-6">
+      <app-doc-preview
+        title="Basic Usage"
+        description="A default alert for general information."
+        [htmlCode]="snippets.basic.html"
+        [tsCode]="snippets.basic.ts"
+      >
+        <div preview class="w-full max-w-lg">
+          <wdc-alert icon="terminal">
+            <wdc-alert-title>Heads up!</wdc-alert-title>
+            <wdc-alert-description>
+              You can add components to your app using the CLI.
+            </wdc-alert-description>
+          </wdc-alert>
+        </div>
+      </app-doc-preview>
+
+      <app-doc-preview
+        title="Status Variants"
+        description="Use different variants to convey specific states like success, warning, or errors."
+        [htmlCode]="snippets.variants.html"
+      >
+        <div preview class="w-full max-w-lg">
+          <div class="flex flex-col gap-4 w-full">
+            <wdc-alert variant="danger" icon="error">
+              <wdc-alert-title>Error</wdc-alert-title>
+              <wdc-alert-description>
+                Your session has expired. Please log in again.
+              </wdc-alert-description>
+            </wdc-alert>
+
+            <wdc-alert variant="success" icon="check_circle">
+              <wdc-alert-title>Payment Successful</wdc-alert-title>
+              <wdc-alert-description>
+                Your order #12345 has been processed successfully.
+              </wdc-alert-description>
+            </wdc-alert>
+
+            <wdc-alert variant="warning" icon="warning">
+              <wdc-alert-title>Storage Almost Full</wdc-alert-title>
+              <wdc-alert-description>
+                You have used 95% of your storage quota. Delete old files to free up space.
+              </wdc-alert-description>
+            </wdc-alert>
+          </div>
+        </div>
+      </app-doc-preview>
+    </div>
+  </section>
+
+  <!-- API Section -->
+  <section id="references" class="scroll-mt-20">
+    <h2 class="text-xl font-semibold text-slate-900 dark:text-white mb-4">API Reference</h2>
+    <div class="overflow-x-auto border border-slate-200 dark:border-slate-800 rounded-xl">
+      <app-reference [data]="references"></app-reference>
+    </div>
+  </section>
+</div>

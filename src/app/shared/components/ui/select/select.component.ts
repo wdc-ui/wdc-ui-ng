@@ -171,6 +171,7 @@ export class SelectComponent implements ControlValueAccessor {
   isOpen = signal(false);
   isDisabled = signal(false);
   searchQuery = signal('');
+  isTouched = signal(false); // Internal touched state
 
   disabled = input(false, { transform: booleanAttribute });
 
@@ -185,15 +186,22 @@ export class SelectComponent implements ControlValueAccessor {
     return allOptions.filter((item) => this.getOptionLabel(item).toLowerCase().includes(query));
   });
 
-  computedTriggerClass = computed(() =>
-    cn(
+  computedTriggerClass = computed(() => {
+    let currentStatus: 'default' | 'error' | 'success' = 'default';
+
+    if (this.isTouched()) {
+      if (this.error()) currentStatus = 'error';
+      else if (this.success()) currentStatus = 'success';
+    }
+
+    return cn(
       selectTriggerVariants({
         status: this.error() ? 'error' : this.success() ? 'success' : 'default',
         size: this.size(),
       }),
       this.class(),
-    ),
-  );
+    );
+  });
 
   displayLabel = computed(() => {
     const val = this.value();
@@ -226,6 +234,13 @@ export class SelectComponent implements ControlValueAccessor {
     return this.getOptionValue(item) === this.value();
   }
 
+  markAsTouched() {
+    if (!this.isTouched()) {
+      this.isTouched.set(true);
+      this.onTouched();
+    }
+  }
+
   // --- ACTIONS ---
   toggle() {
     if (this.isDisabled()) return;
@@ -244,6 +259,7 @@ export class SelectComponent implements ControlValueAccessor {
     this.onChange(val);
     this.isOpen.set(false);
     this.searchQuery.set('');
+    this.markAsTouched();
   }
 
   onSearch(query: string) {
@@ -254,7 +270,7 @@ export class SelectComponent implements ControlValueAccessor {
   onClickOutside(event: Event) {
     if (!this.elementRef.nativeElement.contains(event.target)) {
       this.isOpen.set(false);
-      this.onTouched();
+      this.markAsTouched();
     }
   }
 
